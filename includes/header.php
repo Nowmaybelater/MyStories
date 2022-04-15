@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include("includes/head.php");?>
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container-fluid">
@@ -21,7 +22,20 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
+            <?php 
+              if(isset($_SESSION['login']))
+              {
+                ?>
+                <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-fill"></i> Se déconnecter</a>
+                <?php
+              }
+              else
+              {
+                  ?>
+                  <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
+                  <?php
+              }
+              ?>
           </li>
         </ul>
       </div>
