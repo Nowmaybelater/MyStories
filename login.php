@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-<?php include("includes/header.php") ?>
-<?php include("includes/connect.php") ?>
-<?php include("includes/head.php"); ?>
-=======
 <?php include("includes/header.php")?>
 <?php include("includes/connect.php")?>
 
->>>>>>> Stashed changes
 <?php
 if (!empty($_POST['login']) && !empty($_POST['password'])) {
     $login = $_POST['login'];

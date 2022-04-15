@@ -1,10 +1,5 @@
 <?php include("includes/header.php") ?>
-<<<<<<< Updated upstream
-<?php include("includes/head.php");?>
-
-=======
 <?php include("includes/connect.php")?>
->>>>>>> Stashed changes
   <div class="accueil">
     <main>
       <div id="background">
