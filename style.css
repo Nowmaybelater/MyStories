@@ -1,32 +1,31 @@
 /*Image de fond en page d'accueil*/
-.accueil {
+.accueil 
+{
     background-image: url("fondBois.jpg");
 }
 
-body {
+body 
+{
     background-color: black;
     color: white;
 }
 
-.titre {
-    font-size: 3cm;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
-}
-
-.sous-titre {
+.titre 
+{
     font-size: 2cm;
-    font-family: 'Times New Roman', Times, serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
 
 /*pour avoir une couleur différente au survol dans la barre de recherche*/
-li a:hover {
+li a:hover 
+{
     background-color: grey;
 }
 
-main {
+main 
+{
     margin: 20px 10%;
     color: black;
     padding: 25px 25px;
@@ -35,10 +34,11 @@ main {
     min-height: 80vh;
     text-align: left;
     font-size: 0.6cm;
-    font-family: 'Times New Roman', Times, serif;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#blackground {
+#background 
+{
     position: absolute;
     top: 0;
     left: 0;
@@ -49,11 +49,13 @@ main {
     z-index: 1;
 }
 
-#btn-lecture {
+#btn-lecture
+{
     display: flex;
     justify-content: flex-end;
 }
 
-#navbarDropdown {
+#navbarDropdown 
+{
     color: white;
 }

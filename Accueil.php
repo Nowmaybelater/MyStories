@@ -14,12 +14,13 @@
 <body class="accueil">
   <?php include("includes/header.php") ?>
   <main>
-    <div id="blackground">
-      <p class="sous-titre"> Bienvenue sur MyStories !</p>
+    <div id="background">
+      <p class="titre"> Bienvenue sur MyStories ! </p>
       <br />
       <p>Vous trouverez sur ce site de nombreuses histoires interactives : des histoires dont vous êtes le héro ou l'héroïne ! Sélectionnez une histoire parmi celles écrites par nos membres, et plongez dans un récit sur-mesure, dont l'issue dépend de vos décisions.</p>
       </p>
       <div id="btn-lecture">
+        <!--J'ai appelé Liste.php dans le href pour renvoyer vers une page comme dans le TP MyMovies où on voit la liste des histoires. La page liste n'existe pas encore du coup, il faudra la créer et changer son nom si besoin-->
         <a class="btn btn-outline-dark" href="Liste.php" role="button">Commencer la lecture !</a>
       </div>
       <br />
