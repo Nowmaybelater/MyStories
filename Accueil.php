@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <?= ffghjk?>
+<?=hcbgdshc?>
 <body class="accueil">
   <?php include("header.php") ?>
   <main>
