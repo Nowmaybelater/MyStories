@@ -12,15 +12,15 @@
 </head>
 
 <body class="accueil">
-  <?php include("header.php") ?>
+  <?php include("includes/header.php") ?>
   <main>
     <div id="blackground">
-      <p class="sous-titre"> sur MyStories !</p>
+      <p class="sous-titre"> Bienvenue sur MyStories !</p>
       <br />
       <p>Vous trouverez sur ce site de nombreuses histoires interactives : des histoires dont vous êtes le héro ou l'héroïne ! Sélectionnez une histoire parmi celles écrites par nos membres, et plongez dans un récit sur-mesure, dont l'issue dépend de vos décisions.</p>
       </p>
       <div id="btn-lecture">
-        <a class="btn btn-outline-dark" href="PageAccueil.php" role="button">Commencer la lecture !</a>
+        <a class="btn btn-outline-dark" href="Liste.php" role="button">Commencer la lecture !</a>
       </div>
       <br />
     </div>

@@ -23,10 +23,6 @@
             <a class="nav-link active" aria-current="page" href="connexion.php"><i class="bi bi-person-fill"></i> Se connecter</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-dark" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
