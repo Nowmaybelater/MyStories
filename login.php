@@ -1,25 +1,28 @@
 <?php include("includes/header.php")?>
 <?php include("includes/connect.php")?>
 
-<?php
-if (!empty($_POST['login']) && !empty($_POST['password'])) {
-    $login = $_POST['login'];
-    $mdp = $_POST['password'];
-    $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND password_usr=?');
-    $requete->execute(array($login, $mdp));
-    if ($requete->rowCount() == 1) {
-        $_SESSION['login'] = $login;
-        header("Location: Accueil.php");
-    } else {
-        echo "Mot de passe ou nom d'utilisateur incorrect";
-    }
-}
-
-
-?>
 <main>
-    <div id=backgroundConnexion>
+    <div id=backgroundConnexion> 
         <h2 class="connexion">Connexion</h2>
+        <?php
+        if (!empty($_POST['login']) && !empty($_POST['password'])) {
+            $login = $_POST['login'];
+            $mdp = $_POST['password'];
+            $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND password_usr=?');
+            $requete->execute(array($login, $mdp));
+            if ($requete->rowCount() == 1) {
+                $_SESSION['login'] = $login;
+                header("Location: Accueil.php");
+            } else {
+                echo "Mot de passe ou nom d'utilisateur incorrect";
+            }
+        }
+
+
+        ?>
+
+
+        
         <br />
         <div class="well" id="connect"></div>
         <form class="form-signin form-horizontal" role="form" action="login.php" method="post" pb-autologin="true" autocomplete="off" id="formul">
