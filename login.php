@@ -37,8 +37,8 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
                 </div>
             </div>
             <br />
-            <div>
-                <a href = "Inscription.php"> Pas de compte ? Inscrivez-vous !</a>
+            <div id ="centre">
+                <a href = "Inscription.php"  style = "font-size : 0.5cm"> Pas de compte ? Inscrivez-vous !</a>
 
             </div>
             <br /> 

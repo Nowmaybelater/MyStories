@@ -58,3 +58,29 @@ main
 {
     color: white;
 }
+
+.connexion
+{
+    font-size: 1.5cm;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+#backgroundConnexion 
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: white;
+    border-radius:20px;
+    padding: 1cm;
+    z-index: 1;
+}
+
+#centre
+{
+    display: flex;
+    justify-content: center;
+}
