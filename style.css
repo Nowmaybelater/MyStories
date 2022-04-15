@@ -1,7 +1,12 @@
 /*Image de fond en page d'accueil*/
+<<<<<<< Updated upstream
 .accueil 
 {
     background-image: url("fondBois.jpg");
+=======
+.accueil {
+    background-image: url("images/fondBois.jpg");
+>>>>>>> Stashed changes
 }
 
 body 
