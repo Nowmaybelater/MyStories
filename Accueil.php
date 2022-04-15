@@ -10,7 +10,7 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
 </head>
-
+<?=hcbgdshc?>
 <body class="accueil">
   <?php include("header.php") ?>
   <main>
