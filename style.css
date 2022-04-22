@@ -80,3 +80,9 @@ main {
     font-size: small;
     text-align: center;
 }
+
+#donneesHistoire
+{
+    color:grey;
+    text-align: center;
+}
