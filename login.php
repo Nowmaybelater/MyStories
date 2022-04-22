@@ -12,7 +12,7 @@
             $requete->execute(array($login, $mdp));
             if ($requete->rowCount() == 1) {
                 $_SESSION['login'] = $login;
-                header("Location: Accueil.php");
+                header("Location: Index.php");
             } else {
                 echo "Mot de passe ou nom d'utilisateur incorrect";
             }
