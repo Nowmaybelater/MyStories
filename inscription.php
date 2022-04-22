@@ -5,30 +5,30 @@
     <div id=backgroundConnexion> 
         <h2 class="connexion">Inscription à My Stories</h2>
         <?php
-        if(isset($_POST["submit"])){
-            if (!empty($_POST['login']) && !empty($_POST['password'])) {
-                $login = $_POST['login'];
-                $mdp = $_POST['password'];
-                $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=?');
-                $requete->execute(array($login));
-                if ($requete->rowCount() == 1) {
-                    ?><p style="color:red"><?php echo "Le nom d'utilisateur est déjà assigné";?></p>
+        if (!empty($_POST['login']) && !empty($_POST['password'])) {
+            $login = $_POST['login'];
+            $mdp = $_POST['password'];
+            $acces="classique";
+            $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=?');
+            $requete->execute(array($login));
+            if ($requete->rowCount() == 1) {
+                ?><p style="color:red"><?php echo "Le nom d'utilisateur est déjà assigné";?></p>
+                <?php
+            }
+            else{
+                if (strlen($mdp)<8 ) {
+                    ?><p style="color:red"><?php echo "Le mot de passe ne respecte pas le critère";?></p>
                     <?php
                 }
                 else{
-                    if (strlen($mdp)<8 ) {
-                        ?><p style="color:red"><?php echo "Le mot de passe ne respecte pas le critère";?></p>
-                        <?php
-                    }
-                    else{
-                        $req = $bdd->prepare('INSERT INTO user (login_usr, password_usr) VALUES (:usr, :mdp)');
-                        $req->execute(array(
-                            'usr'=>$login,
-                            'msp'=>$mdp,                                
-                        ));
-                        $_SESSION['login'] = $login;
-                        header("Location: Index.php");
-                    }
+                    $req = $bdd->prepare('INSERT INTO user (login_usr, password_usr, acces) VALUES (:usr, :mdp, :acces)');
+                    $req->execute(array(
+                        'usr'=>$login,
+                        'mdp'=>$mdp, 
+                        'acces'=>$acces,                               
+                    ));
+                    $_SESSION['login'] = $login;
+                    header("Location: Index.php");
                 }
             }
         }

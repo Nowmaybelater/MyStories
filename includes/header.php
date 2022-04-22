@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include("includes/head.php"); ?>
+<?php include("includes/connect.php"); ?>
 
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
@@ -21,8 +22,8 @@
               <li><a class="dropdown-item" href="StorySummary.php">Histoire 2</a></li>
               <li><a class="dropdown-item" href="StorySummary.php">Histoire 3</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
+          </li>          
+              <li class="nav-item">
             <?php
             if (isset($_SESSION['login'])) {
             ?>
