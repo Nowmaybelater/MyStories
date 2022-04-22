@@ -1,5 +1,6 @@
 <?php session_start(); ?>
-<?php include("includes/head.php");?>
+<?php include("includes/head.php"); ?>
+
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container-fluid">
@@ -16,26 +17,23 @@
               <i class="bi bi-book"></i> Histoires
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Histoire 1</a></li>
-              <li><a class="dropdown-item" href="#">Histoire 2</a></li>
-              <li><a class="dropdown-item" href="#">Histoire 3</a></li>
+              <li><a class="dropdown-item" href="StorySummary.php">Histoire 1</a></li>
+              <li><a class="dropdown-item" href="StorySummary.php">Histoire 2</a></li>
+              <li><a class="dropdown-item" href="StorySummary.php">Histoire 3</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <?php 
-              if(isset($_SESSION['login']))
-              {
-                ?>
-                <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-fill"></i> Se déconnecter</a>
-                <?php
-              }
-              else
-              {
-                  ?>
-                  <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
-                  <?php
-              }
-              ?>
+            <?php
+            if (isset($_SESSION['login'])) {
+            ?>
+              <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-fill"></i> Se déconnecter</a>
+            <?php
+            } else {
+            ?>
+              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
+            <?php
+            }
+            ?>
           </li>
         </ul>
       </div>
