@@ -26,16 +26,37 @@
                 <li><a class="dropdown-item" href="StorySummary.php?id=<?=$valeur?>"><?= $ligne['title'] ?></a></li>
               <?php } ?>
             </ul>
-          </li>          
+          </li>  
+          <?php
+            if (isset($_SESSION['login'])) {
+              $login=$_SESSION['login'];
+              $access="admin";
+              $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND acces=?');
+              $requete->execute(array($login,$access));
+              if($requete->rowCount() == 1)
+              {
+                ?>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-plus-circle"></i> Édition
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
+                    <li><a class="dropdown-item" href="story_add.php">Créer</a></li>
+                    <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
+                  </ul>
+                </li>
+              <?php 
+              }
+            } ?>        
               <li class="nav-item">
             <?php
             if (isset($_SESSION['login'])) {
             ?>
-              <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-fill"></i> Se déconnecter</a>
+              <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-x-fill"></i> Se déconnecter</a>
             <?php
             } else {
             ?>
-              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
+              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-check-fill"></i> Se connecter</a>
             <?php
             }
             ?>
