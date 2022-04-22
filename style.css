@@ -32,17 +32,6 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    padding: 1cm;
-    z-index: 1;
-}
-
 #btn-lecture {
     display: flex;
     justify-content: flex-end;
