@@ -37,7 +37,7 @@
               {
                 ?>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white">
                   <i class="bi bi-plus-circle"></i> Édition
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
