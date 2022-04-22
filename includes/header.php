@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php include("includes/head.php"); ?>
-<?php include("includes/connect.php"); ?>
+<?php include("includes/connect.php") ?>
 
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
@@ -18,9 +18,13 @@
               <i class="bi bi-book"></i> Histoires
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="StorySummary.php">Histoire 1</a></li>
-              <li><a class="dropdown-item" href="StorySummary.php">Histoire 2</a></li>
-              <li><a class="dropdown-item" href="StorySummary.php">Histoire 3</a></li>
+              <?php $requete = "SELECT id_story, title FROM stories";
+              $resultat = $bdd->query($requete);
+              while ($ligne = $resultat->fetch()) {
+                $valeur = $ligne['id_story'];
+              ?>
+                <li><a class="dropdown-item" href="StorySummary.php?id=<?=$valeur?>"><?= $ligne['title'] ?></a></li>
+              <?php } ?>
             </ul>
           </li>          
               <li class="nav-item">
