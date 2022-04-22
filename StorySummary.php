@@ -2,7 +2,7 @@
 <?php include("includes/connect.php") ?>
 
 <main>
-    <div id=background>
+    <div id=backgroundConnexion>
         <?php
         $requete = "SELECT * FROM stories WHERE id_story = :id";
         $req = $bdd->prepare($requete);
