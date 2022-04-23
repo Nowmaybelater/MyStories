@@ -22,8 +22,17 @@
               $resultat = $bdd->query($requete);
               while ($ligne = $resultat->fetch()) {
                 $valeur = $ligne['id_story'];
+              if(isset($_SESSION['login']))
+              {
+                $link="StorySummary.php?id=<?=$valeur?>";
+              }
+              else
+              {
+                $link="NonConnecte.php";
+              }
+              
               ?>
-                <li><a class="dropdown-item" href="StorySummary.php?id=<?=$valeur?>"><?= $ligne['title'] ?></a></li>
+                <li><a class="dropdown-item" href=<?=$link?>><?= $ligne['title'] ?></a></li>
               <?php } ?>
             </ul>
           </li>  
