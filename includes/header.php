@@ -8,7 +8,7 @@
       <a class="navbar-brand" href="Index.php">
         <h2><i class="bi bi-vector-pen"></i> MyStories</h2>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style = "background-color:black">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -22,42 +22,38 @@
               $resultat = $bdd->query($requete);
               while ($ligne = $resultat->fetch()) {
                 $valeur = $ligne['id_story'];
-              if(isset($_SESSION['login']))
-              {
-                $link="StorySummary.php?id=$valeur";
-              }
-              else
-              {
-                $link="NonConnecte.php";
-              }
-              
+                if (isset($_SESSION['login'])) {
+                  $link = "StorySummary.php?id=$valeur";
+                } else {
+                  $link = "NonConnecte.php";
+                }
+
               ?>
-                <li><a class="dropdown-item" href=<?=$link?>><?= $ligne['title'] ?></a></li>
+                <li><a class="dropdown-item" href=<?= $link ?>><?= $ligne['title'] ?></a></li>
               <?php } ?>
             </ul>
-          </li>  
+          </li>
           <?php
-            if (isset($_SESSION['login'])) {
-              $login=$_SESSION['login'];
-              $access="admin";
-              $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND acces=?');
-              $requete->execute(array($login,$access));
-              if($requete->rowCount() == 1)
-              {
-                ?>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white">
+          if (isset($_SESSION['login'])) {
+            $login = $_SESSION['login'];
+            $access = "admin";
+            $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND acces=?');
+            $requete->execute(array($login, $access));
+            if ($requete->rowCount() == 1) {
+          ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white">
                   <i class="bi bi-plus-circle"></i> Édition
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
-                    <li><a class="dropdown-item" href="story_add.php">Créer</a></li>
-                    <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
-                  </ul>
-                </li>
-              <?php 
-              }
-            } ?>        
-              <li class="nav-item">
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
+                  <li><a class="dropdown-item" href="story_add_info.php">Créer</a></li>
+                  <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
+                </ul>
+              </li>
+          <?php
+            }
+          } ?>
+          <li class="nav-item">
             <?php
             if (isset($_SESSION['login'])) {
             ?>
