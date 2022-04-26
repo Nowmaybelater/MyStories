@@ -5,14 +5,14 @@
     <div id="backgroundConnexion">
       <p class="titre"> Vous n'êtes pas connecté ! </p>
       <br />
-      <p>Pour pouvoir accéder aux différentes histoires, il est nécessaire que vous soyez connecté.</p>
+      <p id="centre">Pour pouvoir accéder aux différentes histoires, il est nécessaire que vous soyez connecté.</p>
       </p>
-      <div id="btn-lecture">
-        <a class="btn btn-outline-dark" href="login.php" role="button">Se connecter</a>
-      </div>
       <br />
       <div id="btn-lecture">
-        <a class="btn btn-outline-dark" href="inscription.php" role="button">S'inscrire</a>
+        <a class="btn btn-outline-dark" href="login.php" role="button">Se connecter</a>
+        &nbsp;
+        <!--cette instruction permet d'ajouter un espace entre les deux boutons-->
+        <a class="btn btn-outline-secondary" href="inscription.php" role="button">S'inscrire</a>
       </div>
       <br />
     </div>
