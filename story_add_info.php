@@ -35,6 +35,10 @@ if (isset($_SESSION['login'])) {
         //on récupère les données du formulaire
         $title = escape($_POST['title']);
         $summary = escape($_POST['summary']);
+        $author = $_SESSION['login'];
+        $nbChapters =0;
+        $status ="En cours";
+        //rajouter la date
 
         //insérer l'histoire à la base de données
         $stmt = getDb()->prepare('insert into stories
