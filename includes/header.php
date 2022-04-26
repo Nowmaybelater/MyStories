@@ -24,7 +24,7 @@
                 $valeur = $ligne['id_story'];
               if(isset($_SESSION['login']))
               {
-                $link="StorySummary.php?id=<?=$valeur?>";
+                $link="StorySummary.php?id=$valeur";
               }
               else
               {
