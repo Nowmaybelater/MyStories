@@ -14,7 +14,9 @@
             <h6 id="donneesHistoire">Statut : <?php echo $histoire['status']; ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <h4> <?php echo $histoire['summary']; ?> </h4>
             <div id="btn-lecture">
-                <a class="btn btn-outline-dark" href="Index.php" role="button">Commencer la lecture !</a>
+                <a class="btn btn-outline-secondary" href="ListeHistoires.php" role="button">Retour à la liste</a>
+                &nbsp;
+                <a class="btn btn-outline-dark" href="#" role="button">Commencer la lecture !</a>
             </div>
 
     </div>
