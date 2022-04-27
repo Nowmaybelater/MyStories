@@ -48,6 +48,8 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
                   <li><a class="dropdown-item" href="story_add_info.php">Créer</a></li>
                   <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
+                  <li><a class="dropdown-item" href="story_delete.php">Supprimer</a></li>
+                  <li><a class="dropdown-item" href="story_hide.php">Cacher</a></li>
                 </ul>
               </li>
           <?php
