@@ -50,6 +50,7 @@
                   <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
                   <li><a class="dropdown-item" href="story_delete.php">Supprimer</a></li>
                   <li><a class="dropdown-item" href="story_hide.php">Cacher</a></li>
+                  <li><a class="dropdown-item" href="story_stat.php">Statistiques</a></li>
                 </ul>
               </li>
           <?php
