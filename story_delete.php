@@ -8,24 +8,27 @@
         $delete = filter_input(INPUT_POST, 'delete');
         if ($delete) {
             $story=$_POST['delete'];
-            $requete = $bdd->prepare('SELECT * FROM stories WHERE title=?');
-            $requete->execute(array($story));
-            $id = $requete->fetch();
-            echo $id['id_story'];
+            $req="SELECT * FROM stories WHERE title=:t";
+            $requete = $bdd->prepare($req);
+            $requete->execute(array("t"=>$story));
+            $ligne = $requete->fetch();
+            echo $ligne['title'];
+
             //on suprime toutes les lignes faisant référence à cette histoire
             $requete2 = $bdd->prepare('SELECT * FROM chapters WHERE id_story=?');
+            $requete2->execute(array($ligne['id_story']));
             $requete3 = $bdd->prepare('DELETE FROM chapters WHERE id_story=?');
-            $requete3->execute(array($id));
+            $requete3->execute(array($ligne['id_story']));
             $requete4 = $bdd->prepare('DELETE FROM links WHERE id_story=?');
-            $requete4->execute(array($id));
+            $requete4->execute(array($ligne['id_story']));
             $requete5 = $bdd->prepare('DELETE FROM points WHERE id_story=?');
-            $requete5->execute(array($id));
+            $requete5->execute(array($ligne['id_story']));
             $requete6 = $bdd->prepare('DELETE FROM advancement WHERE id_story=?');
-            $requete6->execute(array($id));
+            $requete6->execute(array($ligne['id_story']));
             $requete7 = $bdd->prepare('DELETE FROM stats WHERE id_story=?');
-            $requete7->execute(array($id));
+            $requete7->execute(array($ligne['id_story']));
             $requete8 = $bdd->prepare('DELETE FROM stories WHERE id_story=?');
-            $requete8->execute(array($id));
+            $requete8->execute(array($ligne['id_story']));
         }
 
 

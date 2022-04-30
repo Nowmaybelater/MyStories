@@ -24,22 +24,42 @@
                 ?>
                 <div id="collapse" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordion">
                     <div class="accordion-body">
-                        Nombre de fois que l'histoire a été jouée : <?= $ligne2['played']?>
+                        Nombre de fois que l'histoire a été jouée : 
+                        <?php 
+                        if(!empty($ligne2['played'])){
+                            echo $ligne2['played'];
+                        }
+                        else{
+                            echo 0;
+                        }
+                        ?>
                     </div>
                 </div>
                 <div id="collapse" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordion">
                     <div class="accordion-body">
-                        Nombre de points moyen par parties : <?= $ligne2['points']?>
+                        Nombre de points moyen par parties : 
+                        <?php 
+                        if(!empty($ligne2['points'])){
+                            echo $ligne2['points'];
+                        }
+                        else{
+                            echo 0;
+                        }
+                        ?>
                     </div>
                 </div>    
                 <div id="collapse" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordion">
                     <div class="accordion-body">
                         <?php 
                         $pourcentageMort=0;
-                        if($ligne2['played']!=0){
+                        if(!empty($ligne2['played']) && $ligne2['played']!=0){
                             $pourcentageMort = $ligne2['death']*100/$ligne2['played'];
-                        }?>
-                        Pourcentage de morts : <?= $pourcentageMort?>
+                        }
+                        else{
+                            $pourcentageMort = 0;
+                        }
+                        ?>
+                        Pourcentage de morts : <?= $pourcentageMort?> %
                     </div>
                 </div>  
             </div>
