@@ -26,7 +26,7 @@
                 $valeur = $histoire["id_story"];
             ?>
                 <div>
-                    <h2><a href="StorySummary.php?id=<?= $valeur ?>" class="listeHistoires"><em><?= $histoire['title'] ?></em> par <?= $histoire['author'] ?></a></h2>
+                    <h2><a href="StorySummary.php?id=<?= $valeur ?>" class="listeHistoires"><em><?= $histoire['title'] ?></em></a></h2>
                 </div>
             <?php
             }
