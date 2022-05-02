@@ -88,3 +88,9 @@ main {
 a:hover{
     color:grey;
 }
+
+#btnHautPage{
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+}

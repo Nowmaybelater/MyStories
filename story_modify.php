@@ -20,11 +20,14 @@
 
             </form>
             <?php
-            $requete = "SELECT * FROM stories"; //rajouter de quoi faire que l'utilisateur peut modifier uniquement les histoires que lui a écrites
+            $requete = "SELECT * FROM stories";
             $resultat = $bdd->query($requete);
             while ($histoire = $resultat->fetch()) {
                 $valeur = $histoire["id_story"];
-            ?> <h2><a href="StorySummary.php?id=<?= $valeur ?>"><?= $histoire['title'] ?></a></h2>
+            ?>
+                <div>
+                    <h2><a href="StorySummary.php?id=<?= $valeur ?>" class="listeHistoires"><em><?= $histoire['title'] ?></em> par <?= $histoire['author'] ?></a></h2>
+                </div>
             <?php
             }
             ?>
