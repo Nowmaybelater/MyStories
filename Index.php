@@ -10,7 +10,7 @@
     <hr />
     <div>
       <?php
-      $requete = "SELECT * FROM stories";
+      $requete = "SELECT * FROM stories WHERE hide='0'";
       $resultat = $bdd->query($requete);
       while ($histoire = $resultat->fetch()) {
         $valeur = $histoire["id_story"];

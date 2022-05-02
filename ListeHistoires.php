@@ -17,13 +17,19 @@
                     <p><?= $histoire['summary'] ?></p>
                 </div>
                 <div id="btn-lecture">
-                    <a class="btn btn-outline-dark" href="story_modify.php" role="button">Modifier</a>
+                    <a class="btn btn-outline-dark" href="story_modify.php?id=<?= $histoire['id_story']?>" role="button">Modifier</a>
                     &nbsp;
-                    <a class="btn btn-outline-dark" href="story_delete.php" role="button">Supprimer</a>
+                    <a class="btn btn-outline-dark" href="story_delete.php?id=<?= $histoire['id_story']?>" role="button">Supprimer</a>
                     &nbsp;
-                    <a class="btn btn-outline-dark" href="story_hide.php" role="button">Cacher</a>
+                    <?php
+                    if($histoire['hide']=='0'){?>
+                        <a class="btn btn-outline-dark" href="story_hide.php?id=<?= $histoire['id_story']?>" role="button">Cacher</a>
+                    <?php }
+                    else{?>
+                        <a class="btn btn-outline-dark" href="story_reveal.php?id=<?= $histoire['id_story']?>" role="button">Révéler</a>
+                    <?php } ?>
                     &nbsp;
-                    <a class="btn btn-outline-dark" href="#" role="button">Statistiques</a>
+                    <a class="btn btn-outline-dark" href="story_stat.php?id=<?= $histoire['id_story']?>" role="button">Statistiques</a>
                 </div>
                 <hr />
             <?php

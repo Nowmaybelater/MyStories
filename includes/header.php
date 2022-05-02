@@ -18,7 +18,7 @@
               <i class="bi bi-book"></i> Histoires
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <?php $requete = "SELECT id_story, title FROM stories";
+              <?php $requete = "SELECT id_story, title FROM stories  WHERE hide='0'";
               $resultat = $bdd->query($requete);
               while ($ligne = $resultat->fetch()) {
                 $valeur = $ligne['id_story'];
@@ -41,18 +41,8 @@
             $requete->execute(array($login, $access));
             if ($requete->rowCount() == 1) {
           ?>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreate" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white">
-                  <i class="bi bi-plus-circle"></i> Édition
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCreate">
-                  <li><a class="dropdown-item" href="story_add_info.php">Créer</a></li>
-                  <li><a class="dropdown-item" href="story_modify.php">Modifier</a></li>
-                  <li><a class="dropdown-item" href="story_delete.php">Supprimer</a></li>
-                  <li><a class="dropdown-item" href="story_hide.php">Cacher</a></li>
-                  <li><a class="dropdown-item" href="story_stat.php">Statistiques</a></li>
-                </ul>
-              </li>
+              <a class="nav-link active" aria-current="page" href="ListeHistoires.php"><i class="bi bi-plus-circle"></i> Édition</a>
+              
           <?php
             }
           } ?>
