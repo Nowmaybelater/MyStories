@@ -29,7 +29,7 @@ function escape($value)
 {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
 }
-
+//FAIRE EN SORTE QUE LE CHAPITRE SOIT AJOUTE A L'HISTOIRE SELECTIONNEE
 if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
         //on récupère les données du formulaire
@@ -46,31 +46,58 @@ if (isset($_SESSION['login'])) {
 }
 
 ?>
-<!--CETTE PAGE NE FONCTIONNE PAS ENCORE !!! -->
+
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Ajoutez un chapitre</p>
-        <!--formulaire à compléter : il faudra faire en sorte que les données id_story, author, nbChapters, status et date s'auto-remplissent 
-        dans la base de données (en plus des données saisies dans le formulaire) une fois que l'utilisateur appuie sur le bouton Sauvegarder -->
-        <div class="well">
-            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="story_add_info.php" method="post">
-                <input type="hidden" name="id" value="<?= $chapterId ?>"><!-- essayer de compendre ça-->
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Numéro chapitre</label>
+        <div>
+            <form action="story_add_info.php" method="post">
+                <input type="hidden" name="id" value="<?= $chapterId ?>">
+                <div>
+                    <label>Numéro chapitre</label>
                     <div class="col-sm-6">
                         <input type="number" name="numero" class="form-control" placeholder="Entrez le numéro du chapitre" required autofocus>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Contenu</label>
+                <br />
+                <div>
+                    <label>Contenu</label>
                     <div class="col-sm-6">
                         <textarea name="contenu" class="form-control" placeholder="Entrez le contenu du chapitre" required></textarea>
                     </div>
                 </div>
-                <br/>
-                <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                <br />
+                <div>
+                    Choix proposés au lecteur
+                    <br />
+                    <ul>
+                        <li>Choix 1</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choix1" class="form-control" placeholder="Intitulé du choix 1" required autofocus>
+                            <br/>
+                            <input type="number" name="numero" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                        <br />
+                        <li>Choix 2</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choix2" class="form-control" placeholder="Intitulé du choix 2" required autofocus>
+                            <br/>
+                            <input type="number" name="numero" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                        <br />
+                        <li>Choix 3</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choix3" class="form-control" placeholder="Intitulé du choix 3" required autofocus>
+                            <br/>
+                            <input type="number" name="numero" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <button type="submit" class="btn btn-default btn-primary" href="story_add_chapter.php"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                        &nbsp;
+                        <button type="submit" class="btn btn-default btn-primary" href="#"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
                     </div>
                 </div>
             </form>

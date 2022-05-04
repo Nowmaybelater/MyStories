@@ -36,15 +36,15 @@ if (isset($_SESSION['login'])) {
         $title = escape($_POST['title']);
         $summary = escape($_POST['summary']);
         $author = $_SESSION['login'];
-        $nbChapters =0;
-        $status ="En cours";
-        //rajouter la date
+        $nbChapters = 0;
+        $finished = 0;
+        $date = date('y-m-d');
 
         //insérer l'histoire à la base de données
         $stmt = getDb()->prepare('insert into stories
-        (title, summary)
-        values (?, ?)');
-        $stmt->execute(array($title, $summary));
+        (title, summary, author, nbChapters, finished, date)
+        values (?, ?, ?, ?, ?, ?)');
+        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date));
         redirect("story_add_chapter.php");
     }
 }
@@ -54,8 +54,6 @@ if (isset($_SESSION['login'])) {
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Informations générales</p>
-        <!--formulaire à compléter : il faudra faire en sorte que les données id_story, author, nbChapters, status et date s'auto-remplissent 
-        dans la base de données (en plus des données saisies dans le formulaire) une fois que l'utilisateur appuie sur le bouton Sauvegarder -->
         <div class="well">
             <form class="form-horizontal" role="form" enctype="multipart/form-data" action="story_add_info.php" method="post">
                 <input type="hidden" name="id" value="<?= $storyId ?>">
@@ -65,14 +63,14 @@ if (isset($_SESSION['login'])) {
                         <input type="text" name="title" class="form-control" placeholder="Entrez le titre de l'histoire" required autofocus>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Résumé</label>
                     <div class="col-sm-6">
                         <textarea name="summary" class="form-control" placeholder="Entrez le résumé de l'histoire" required></textarea>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>

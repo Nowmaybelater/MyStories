@@ -36,7 +36,7 @@
     </div>
 
     <br />
-    <a class="btn btn-success" id="btnHautPage" href="#top" role="button"> <i class="bi bi-caret-up-fill"></i> </a>
+    <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
   </div>
 </main>
 </body>
