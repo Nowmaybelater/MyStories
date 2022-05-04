@@ -7,8 +7,8 @@
         <div id="centre">
             <a class="btn btn-primary" href="story_add_info.php" role="button"> <i class="bi bi-plus-circle"></i> Nouvelle Histoire</a>
         </div>
-        <br/>
-        <hr/>
+        <br />
+        <hr />
         <div>
             <?php
             $requete = "SELECT * FROM stories";
@@ -18,6 +18,11 @@
             ?>
                 <div>
                     <h2><em><?= $histoire['title'] ?></em> par <?= $histoire['author'] ?></h2>
+                    <h6>Statut : <?php if ($histoire['finished'] = 0) {
+                                        echo "En cours";
+                                    } else {
+                                        echo "Terminée";
+                                    } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
                     <p><?= $histoire['summary'] ?></p>
                 </div>
                 <div id="btn-lecture">

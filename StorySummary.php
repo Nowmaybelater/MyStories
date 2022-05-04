@@ -11,7 +11,11 @@
         $histoire = $req->fetch();
         ?> <h1 id="centre"><?php echo $histoire['title']; ?></h2>
             <h3 id="centre"><?php echo $histoire['author']; ?></h3>
-            <h6 id="donneesHistoire">Statut : <?php echo $histoire['finished']; ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
+            <h6 id="donneesHistoire">Statut : <?php if ($histoire['finished'] = 0) {
+                                                    echo "En cours";
+                                                } else {
+                                                    echo "Terminée";
+                                                } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <h4> <?php echo $histoire['summary']; ?> </h4>
             <div id="btn-lecture">
                 <a class="btn btn-outline-secondary" href="ListeHistoires.php" role="button">Retour à la liste</a>
