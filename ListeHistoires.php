@@ -5,20 +5,21 @@
     <div id="backgroundConnexion">
         <p class="titre"> Mes Histoires </p>
         <div id="centre">
-            <a class="btn btn-primary" href="story_add_info.php" role="button"> <i class="bi bi-plus-circle"></i> Nouvelle Histoire</a>
+            <a class="btn btn-primary" href="story_add_info.php" role="button"> <i class="bi bi-plus-circle"></i> Nouvelle Histoire </a>
         </div>
         <br />
         <hr />
         <div>
             <?php
-            $requete = "SELECT * FROM stories";
+            $login = $_SESSION['login'];
+            $requete = "SELECT * FROM stories WHERE author='$login'";
             $resultat = $bdd->query($requete);
             while ($histoire = $resultat->fetch()) {
                 $valeur = $histoire["id_story"];
             ?>
                 <div>
-                    <h2><em><?= $histoire['title'] ?></em> par <?= $histoire['author'] ?></h2>
-                    <h6>Statut : <?php if ($histoire['finished'] = 0) {
+                    <h2><em><?= $histoire['title'] ?></em></h2>
+                    <h6 style="color:grey">Statut : <?php if ($histoire['finished'] = 0) {
                                         echo "En cours";
                                     } else {
                                         echo "Terminée";

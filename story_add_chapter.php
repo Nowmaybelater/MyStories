@@ -17,7 +17,7 @@ function escape($value)
 
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
-        //on récupère les données du formulaire
+        //on récupère les données du formulaire 
         $id_story = $_POST['id'];
         $num = escape($_POST['numero']);
         $contenu = escape($_POST['contenu']);
@@ -26,11 +26,31 @@ if (isset($_SESSION['login'])) {
         $choice3 = escape($POST_['choice3']);
         echo $choice3;
         echo $id_story;
-        //insérer le chapitre à la base de données
+        //insérer le chapitre à la table chapters de la base de données
         $stmt = $bdd->prepare('insert into chapters
         (id_story,numChapter, chapterContent, choice1, choice2, choice3)
         values (?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2, $choice3));
+        
+        //compléter la table links de la base de données
+        $refChoice1 = escape($_POST['refChoice1']);
+        $stmt = $bdd->prepare('insert into links
+        (id_story,Chapter, Previous_Chapter, Previous_Choice)
+        values (?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $refChoice1, $num, 1));
+
+        $refChoice2 = escape($_POST['refChoice2']);
+        $stmt = $bdd->prepare('insert into links
+        (id_story,Chapter, Previous_Chapter, Previous_Choice)
+        values (?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $refChoice2, $num, 2));
+
+        $refChoice3 = escape($_POST['refChoice3']);
+        $stmt = $bdd->prepare('insert into links
+        (id_story,Chapter, Previous_Chapter, Previous_Choice)
+        values (?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $refChoice3, $num, 3));
+
         redirect("story_add_chapter.php?id=$id_story");
     }
 }

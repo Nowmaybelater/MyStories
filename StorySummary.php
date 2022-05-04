@@ -18,7 +18,7 @@
                                                 } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <h4> <?php echo $histoire['summary']; ?> </h4>
             <div id="btn-lecture">
-                <a class="btn btn-outline-secondary" href="ListeHistoires.php" role="button">Retour à la liste</a>
+                <a class="btn btn-outline-secondary" href="Index.php" role="button">Retour à l'accueil</a>
                 &nbsp;
                 <a class="btn btn-outline-dark" href="chapter.php?story_id=1&chapter_num=1 " role="button">Commencer la lecture !</a>
             </div>
