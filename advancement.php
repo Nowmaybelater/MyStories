@@ -17,18 +17,23 @@
         'usr_id' => $id_user,
         'story_id'=> $_GET['story_id']
     ));
-    if ($req->rowCount() == 1){
-        $chap=$_GET['chapter_num'];
-        $req3="UPDATE advancement SET numChapter=$chap AND jour=date('y-m-d') WHERE id_usr = :usr_id AND id_story = :story_id";
+    $chap=$_GET['chapter_num'];
+    if ($req2->rowCount() == 1){
+        $req3="UPDATE advancement SET numChapter=$chap WHERE id_usr = :usr_id AND id_story = :story_id";
         $requete3 = $bdd->prepare($req3);
         $requete3->execute(array(
             'usr_id' => $id_user,
             'story_id'=> $_GET['story_id']
         ));
+        $req5="UPDATE advancement SET jour=NOW() WHERE id_usr = :usr_id AND id_story = :story_id";
+        $requete5 = $bdd->prepare($req5);
+        $requete5->execute(array(
+            'usr_id' => $id_user,
+            'story_id'=> $_GET['story_id']
+        ));
     }
     else{
-        $chap=$_GET['chapter_num'];
-        echo 3;
+        echo 2;
         $req4 = $bdd->prepare('INSERT INTO advancement (id_usr, id_story, numChapter,jour) VALUES (:usr_id, :id_story, :numChap, :jour)');
         $req4->execute(array(
             'usr_id' => $id_user,
@@ -37,3 +42,5 @@
             'jour'=>date('y-m-d')
         ));
     }
+
+    header("Location: Index.php");?>
