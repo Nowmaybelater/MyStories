@@ -8,7 +8,7 @@
       <a class="navbar-brand" href="Index.php">
         <h2><i class="bi bi-vector-pen"></i> MyStories</h2>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style = "background-color:black">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color:black">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,19 +42,23 @@
             if ($requete->rowCount() == 1) {
           ?>
               <a class="nav-link active" aria-current="page" href="ListeHistoires.php"><i class="bi bi-plus-circle"></i> Édition</a>
-              
+
           <?php
             }
           } ?>
-          <li class="nav-item">
+          <li class="nav-item dropdown">
             <?php
             if (isset($_SESSION['login'])) {
             ?>
-              <a class="nav-link active" aria-current="page" href="logout.php"><i class="bi bi-person-x-fill"></i> Se déconnecter</a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-check-fill"></i> Mon profil </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Bibliothèque</a></li>
+                <li><a class="dropdown-item" href="logout.php">Se déconnecter</a></li>
+              </ul>
             <?php
             } else {
             ?>
-              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-check-fill"></i> Se connecter</a>
+              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
             <?php
             }
             ?>
