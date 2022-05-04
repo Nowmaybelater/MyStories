@@ -8,8 +8,6 @@
     ));
     $ligne = $req->fetch();  
     $id_user = $ligne['id_usr'];
-    echo $id_user;
-
 
     $requete2 = "SELECT * FROM advancement WHERE id_usr = :usr_id AND id_story = :story_id";
     $req2 = $bdd->prepare($requete2);
@@ -33,7 +31,6 @@
         ));
     }
     else{
-        echo 2;
         $req4 = $bdd->prepare('INSERT INTO advancement (id_usr, id_story, numChapter,jour) VALUES (:usr_id, :id_story, :numChap, :jour)');
         $req4->execute(array(
             'usr_id' => $id_user,

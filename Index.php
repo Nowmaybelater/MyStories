@@ -25,9 +25,8 @@
             $link = "StorySummary.php?id=$valeur.php";
           } else {
             $link = "NonConnecte.php";
-          }
-          ?>
-          <a class="btn btn-outline-dark" href="<?= $link ?>" role="button">Commencer la lecture !</a>
+          }?>
+          <a class="btn btn-outline-dark" href="<?= $link ?>" role="button">Découvrir l'histoire</a>
         </div>
         <hr />
       <?php
