@@ -3,21 +3,6 @@
 
 <?php
 
-//Se connecte à la base de données
-function getDb()
-{
-    $server = "localhost";
-    $username = "ClaraValentine";
-    $password = "ensc*2024";
-    $db = "mystories";
-
-    return new PDO(
-        "mysql:host=$server;dbname=$db;charset=utf8",
-        "$username",
-        "$password",
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-}
 // Rediriger vers un URL
 function redirect($url)
 {
@@ -31,46 +16,78 @@ function escape($value)
 }
 
 if (isset($_SESSION['login'])) {
-    if (isset($_POST['title'])) {
+    if (isset($_POST['numero'])) {
         //on récupère les données du formulaire
+        $id_story = $_POST['id'];
         $num = escape($_POST['numero']);
         $contenu = escape($_POST['contenu']);
-
+        $choice1 = escape($POST_['choice1']);
+        $choice2 = escape($POST_['choice2']);
+        $choice3 = escape($POST_['choice3']);
+        echo $choice3;
+        echo $id_story;
         //insérer le chapitre à la base de données
-        $stmt = getDb()->prepare('insert into chapters
-        (numChapter, chapterContent)
-        values (?, ?)');
-        $stmt->execute(array($num, $contenu));
-        redirect("story_add_chapter.php");
+        $stmt = $bdd->prepare('insert into chapters
+        (id_story,numChapter, chapterContent, choice1, choice2, choice3)
+        values (?, ?, ?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2, $choice3));
+        redirect("story_add_chapter.php?id=$id_story");
     }
 }
 
 ?>
-<!--CETTE PAGE NE FONCTIONNE PAS ENCORE !!! -->
+
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Ajoutez un chapitre</p>
-        <!--formulaire à compléter : il faudra faire en sorte que les données id_story, author, nbChapters, status et date s'auto-remplissent 
-        dans la base de données (en plus des données saisies dans le formulaire) une fois que l'utilisateur appuie sur le bouton Sauvegarder -->
-        <div class="well">
-            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="story_add_info.php" method="post">
-                <input type="hidden" name="id" value="<?= $chapterId ?>"><!-- essayer de compendre ça-->
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Numéro chapitre</label>
+        <div>
+            <form action="story_add_chapter.php" method="post">
+                <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
+                <div>
+                    <label>Numéro chapitre</label>
                     <div class="col-sm-6">
                         <input type="number" name="numero" class="form-control" placeholder="Entrez le numéro du chapitre" required autofocus>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Contenu</label>
+                <br />
+                <div>
+                    <label>Contenu</label>
                     <div class="col-sm-6">
                         <textarea name="contenu" class="form-control" placeholder="Entrez le contenu du chapitre" required></textarea>
                     </div>
                 </div>
-                <br/>
-                <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-4">
+                <br />
+                <div>
+                    Choix proposés au lecteur
+                    <br />
+                    <ul>
+                        <li>Choix 1</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choice1" class="form-control" placeholder="Intitulé du choix 1" required autofocus>
+                            <br />
+                            <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                        <br />
+                        <li>Choix 2</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choice2" class="form-control" placeholder="Intitulé du choix 2" required autofocus>
+                            <br />
+                            <input type="number" name="refChoice2" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                        <br />
+                        <li>Choix 3</li>
+                        <div class="col-sm-6">
+                            <input type="text" name="choice3" class="form-control" placeholder="Intitulé du choix 3" required autofocus>
+                            <br />
+                            <input type="number" name="refChoice3" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                        </div>
+                    </ul>
+                </div>
+                <div>
+                    <div>
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                        &nbsp;
+                        <button type="submit" class="btn btn-default btn-primary" href="#"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
                     </div>
                 </div>
             </form>
