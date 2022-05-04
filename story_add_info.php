@@ -2,22 +2,6 @@
 <?php include("includes/connect.php") ?>
 
 <?php
-
-//Se connecte à la base de données
-function getDb()
-{
-    $server = "localhost";
-    $username = "ClaraValentine";
-    $password = "ensc*2024";
-    $db = "mystories";
-
-    return new PDO(
-        "mysql:host=$server;dbname=$db;charset=utf8",
-        "$username",
-        "$password",
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-    );
-}
 // Rediriger vers un URL
 function redirect($url)
 {
@@ -41,11 +25,18 @@ if (isset($_SESSION['login'])) {
         $date = date('y-m-d');
 
         //insérer l'histoire à la base de données
-        $stmt = getDb()->prepare('insert into stories
+        $stmt = $bdd->prepare('insert into stories
         (title, summary, author, nbChapters, finished, date)
         values (?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date));
-        redirect("story_add_chapter.php");
+
+        $req = "SELECT * FROM stories WHERE title=:titre";
+        $res = $bdd->prepare($req);
+        $res->execute(array("titre"=>$title));
+        $ligne = $res->fetch();
+        $id=$ligne['id_story'];
+
+        redirect("story_add_chapter.php?id=$id");
     }
 }
 
