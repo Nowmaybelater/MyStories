@@ -66,7 +66,9 @@
             </p>
         </div>
         <div>
+            
             <?php 
+            //affichage du contenu du choix 1 dans un bouton cliquable
             if(!empty($chapter['choice1'])){
                 $requete2 = "SELECT * FROM links WHERE id_story = :id AND Previous_Chapter = :previous_chap AND Previous_Choice = :previous_choice ";
                 $req2 = $bdd->prepare($requete2);
@@ -81,6 +83,7 @@
                 &nbsp;
                 <?php
             }
+            //affichage du contenu du choix 2 dans un bouton cliquable
             if(!empty($chapter['choice2'])){
                 $requete3 = "SELECT * FROM links WHERE id_story = :id AND Previous_Chapter = :previous_chap AND Previous_Choice = :previous_choice ";
                 $req3 = $bdd->prepare($requete3);
@@ -95,6 +98,7 @@
                 &nbsp;
                 <?php
             }
+            //affichage du contenu du choix 3 dans un bouton cliquable
             if(!empty($chapter['choice3'])){
                 $requete4 = "SELECT * FROM links WHERE id_story = :id AND Previous_Chapter = :previous_chap AND Previous_Choice = :previous_choice ";
                 $req4 = $bdd->prepare($requete4);
@@ -113,6 +117,7 @@
         </div>
         <br/>
         <div>
+            <!--bouton d'enregistrement de l'avancée de la partie-->
             <a class="btn btn-outline-dark" href="advancement.php?story_id=<?= $_GET['story_id']?>&chapter_num=<?= $_GET['chapter_num']?>" role="button">Enregistrer mon avancée</a>
         </div>
 
