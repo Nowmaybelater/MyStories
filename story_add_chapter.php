@@ -21,9 +21,9 @@ if (isset($_SESSION['login'])) {
         $id_story = $_POST['id'];
         $num = escape($_POST['numero']);
         $contenu = escape($_POST['contenu']);
-        $choice1 = escape($POST_['choice1']);
-        $choice2 = escape($POST_['choice2']);
-        $choice3 = escape($POST_['choice3']);
+        $choice1 = escape($_POST['choice1']);
+        $choice2 = escape($_POST['choice2']);
+        $choice3 = escape($_POST['choice3']);
         echo $choice3;
         echo $id_story;
         //insérer le chapitre à la table chapters de la base de données

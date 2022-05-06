@@ -23,12 +23,13 @@ if (isset($_SESSION['login'])) {
         $nbChapters = 0;
         $finished = 0;
         $date = date('y-m-d');
+        $points = escape($_POST['points']);
 
         //insérer l'histoire à la base de données
         $stmt = $bdd->prepare('insert into stories
-        (title, summary, author, nbChapters, finished, date)
-        values (?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date));
+        (title, summary, author, nbChapters, finished, date, nbrPoints)
+        values (?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, $points));
 
         $req = "SELECT * FROM stories WHERE title=:titre";
         $res = $bdd->prepare($req);
