@@ -14,7 +14,9 @@
             $login = $_SESSION['login'];
             $requete = "SELECT * FROM stories WHERE author='$login'";
             $resultat = $bdd->query($requete);
+            $compteur=0;
             while ($histoire = $resultat->fetch()) {
+                $comtpeur = $compteur +1;
                 $valeur = $histoire["id_story"];
             ?>
                 <div>
@@ -42,6 +44,10 @@
                 </div>
                 <hr />
             <?php
+            }
+            if ($compteur ==0)
+            {
+                echo "Vous n'avez encore rien écrit !"
             }
             ?>
         </div>
