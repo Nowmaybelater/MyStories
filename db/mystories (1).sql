@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mar. 03 mai 2022 à 17:38
--- Version du serveur : 10.4.19-MariaDB
--- Version de PHP : 7.4.20
+-- Host: 127.0.0.1
+-- Generation Time: May 06, 2022 at 01:30 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `mystories`
+-- Database: `mystories`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `advancement`
+-- Table structure for table `advancement`
 --
 
 CREATE TABLE `advancement` (
   `id_usr` int(11) NOT NULL,
   `id_story` int(11) NOT NULL,
   `numChapter` int(11) NOT NULL,
-  `date` date NOT NULL
+  `jour` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chapters`
+-- Table structure for table `chapters`
 --
 
 CREATE TABLE `chapters` (
@@ -51,7 +51,7 @@ CREATE TABLE `chapters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `chapters`
+-- Dumping data for table `chapters`
 --
 
 INSERT INTO `chapters` (`id_chapter`, `id_story`, `numChapter`, `chapterContent`, `choice1`, `choice2`, `choice3`) VALUES
@@ -81,7 +81,20 @@ INSERT INTO `chapters` (`id_chapter`, `id_story`, `numChapter`, `chapterContent`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `links`
+-- Table structure for table `choices`
+--
+
+CREATE TABLE `choices` (
+  `id_usr` int(11) NOT NULL,
+  `id_story` int(11) NOT NULL,
+  `numChapter` int(11) NOT NULL,
+  `choice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `links`
 --
 
 CREATE TABLE `links` (
@@ -92,7 +105,7 @@ CREATE TABLE `links` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `links`
+-- Dumping data for table `links`
 --
 
 INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice`) VALUES
@@ -130,7 +143,7 @@ INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice
 -- --------------------------------------------------------
 
 --
--- Structure de la table `points`
+-- Table structure for table `points`
 --
 
 CREATE TABLE `points` (
@@ -141,10 +154,24 @@ CREATE TABLE `points` (
   `death` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `points`
+--
+
+INSERT INTO `points` (`id_story`, `chapter`, `numChoice`, `points`, `death`) VALUES
+(1, 2, 2, 1, 0),
+(1, 8, 1, 0, 1),
+(1, 9, 2, 1, 0),
+(1, 10, 2, 1, 0),
+(1, 11, 1, 0, 1),
+(1, 17, 2, 1, 0),
+(1, 18, 1, 0, 1),
+(1, 19, 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `stats`
+-- Table structure for table `stats`
 --
 
 CREATE TABLE `stats` (
@@ -154,18 +181,10 @@ CREATE TABLE `stats` (
   `points` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Déchargement des données de la table `stats`
---
-
-INSERT INTO `stats` (`id_story`, `played`, `death`, `points`) VALUES
-(1, 4, 1, 50),
-(1, 4, 12, 1);
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `stories`
+-- Table structure for table `stories`
 --
 
 CREATE TABLE `stories` (
@@ -176,20 +195,21 @@ CREATE TABLE `stories` (
   `finished` tinyint(1) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `hide` tinyint(1) NOT NULL,
-  `summary` mediumtext NOT NULL
+  `summary` mediumtext NOT NULL,
+  `nbrPoints` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `stories`
+-- Dumping data for table `stories`
 --
 
-INSERT INTO `stories` (`id_story`, `title`, `author`, `nbChapters`, `finished`, `date`, `hide`, `summary`) VALUES
-(1, 'Les détectives', 'correcteur_admin', 22, 0, '2022-05-03', 0, '');
+INSERT INTO `stories` (`id_story`, `title`, `author`, `nbChapters`, `finished`, `date`, `hide`, `summary`, `nbrPoints`) VALUES
+(1, 'Les détectives', 'correcteur_admin', 22, 0, '2022-05-03', 0, 'Comme tous les lundis après les cours, vous et vos amis courrez en direction du parc pour y retrouver Monsieur Charles, un vieil homme qui n’est jamais à court d’histoires. Comme tous les lundis, vous pourrez prendre votre goûter en écoutant les aventures décrites par ce conteur hors-pair. Mais aujourd’hui, on a beau être lundi, Monsieur Charles n’est pas là. A vous d’élucider le mystère entourant la disparition du vieil homme…', 5);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -200,7 +220,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_usr`, `login_usr`, `password_usr`, `acces`) VALUES
@@ -208,70 +228,68 @@ INSERT INTO `user` (`id_usr`, `login_usr`, `password_usr`, `acces`) VALUES
 (2, 'correcteur_admin', 'mdp_correcteur_1234', 'admin');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `advancement`
+-- Indexes for table `advancement`
 --
 ALTER TABLE `advancement`
-  ADD KEY `id_usr` (`id_usr`),
   ADD KEY `id_story` (`id_story`);
 
 --
--- Index pour la table `chapters`
+-- Indexes for table `chapters`
 --
 ALTER TABLE `chapters`
   ADD PRIMARY KEY (`id_chapter`),
   ADD KEY `id_story` (`id_story`);
 
 --
--- Index pour la table `stories`
+-- Indexes for table `stories`
 --
 ALTER TABLE `stories`
   ADD PRIMARY KEY (`id_story`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_usr`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `chapters`
+-- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
   MODIFY `id_chapter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT pour la table `stories`
+-- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
   MODIFY `id_story` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_usr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `advancement`
+-- Constraints for table `advancement`
 --
 ALTER TABLE `advancement`
-  ADD CONSTRAINT `advancement_ibfk_1` FOREIGN KEY (`id_usr`) REFERENCES `user` (`id_usr`),
   ADD CONSTRAINT `advancement_ibfk_2` FOREIGN KEY (`id_story`) REFERENCES `stories` (`id_story`);
 
 --
--- Contraintes pour la table `chapters`
+-- Constraints for table `chapters`
 --
 ALTER TABLE `chapters`
   ADD CONSTRAINT `chapters_ibfk_1` FOREIGN KEY (`id_story`) REFERENCES `stories` (`id_story`);
