@@ -4,15 +4,29 @@
 <main>
     <div id=backgroundConnexion>
     <?php
+
+        //récupération de l'id_user
+        $requete = "SELECT * FROM user WHERE login_usr = :usr_login";
+        $req = $bdd->prepare($requete);
+        $req->execute(array(
+            'usr_login' => $_SESSION['login'],
+        ));
+        $ligne = $req->fetch();  
+        $id_user = $ligne['id_usr'];
+
+        //récupération de l'id_story
         $requete = "SELECT * FROM stories WHERE id_story = :id";
         $req = $bdd->prepare($requete);
         $req->execute(array('id' => $_GET['story_id']));
 
         $histoire = $req->fetch();
-        ?> <h1 id="centre"><?php echo $histoire['title']; ?></h2>
+    ?> 
+        <!--affichage du titre et numéro de chapitre-->
+        <h1 id="centre"><?php echo $histoire['title']; ?></h2>
         <h6 id="donneesHistoire">Chapitre <?= $_GET['chapter_num']?></h6>
 
         <?php
+        //récupération du chapitre
         $requete = "SELECT * FROM chapters WHERE id_story = :id AND numChapter = :chap";
         $req = $bdd->prepare($requete);
         $req->execute(array(
@@ -21,8 +35,33 @@
         ));
         $chapter = $req->fetch();
         ?>
+
+        <?php
+            //enregistre le choix du joueur dans la bdd pour le résumé de la partie à la fin
+            if($_GET['choice_num']!=0)
+            {
+                $requete5 = "SELECT * FROM links WHERE id_story = :id AND Chapter = :chapter AND Previous_Choice = :previous_choice ";
+                $req5 = $bdd->prepare($requete5);
+                $req5->execute(array(
+                    'id' => $_GET['story_id'],
+                    'chapter'=> $_GET['chapter_num'],
+                    'previous_choice'=>$_GET['choice_num']
+                ));
+                $previous_chap = $req5->fetch(); 
+
+                $req6 = $bdd->prepare('INSERT INTO choices (id_usr, id_story, numChapter,choice) VALUES (:usr_id, :id_story, :numChap, :choice)');
+                $req6->execute(array(
+                    'usr_id' => $id_user,
+                    'id_story' => $_GET['story_id'],
+                    'numChap' => $previous_chap['Previous_Chapter'],
+                    'choice'=>$_GET['choice_num']
+                ));
+            }
+        ?>
+
         <div>
             <p>
+                <!--affichage du contenu du chapitre-->
                 <?= $chapter['chapterContent']?>
             </p>
         </div>
@@ -38,7 +77,7 @@
                 ));
                 $choix1 = $req2->fetch();                
                 ?>
-                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>" role="button"><?= $chapter['choice1']?></a>
+                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
                 &nbsp;
                 <?php
             }
@@ -52,7 +91,7 @@
                 ));
                 $choix2 = $req3->fetch(); 
                 ?>
-                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix2['id_story']?>&chapter_num=<?= $choix2['Chapter']?>" role="button"><?= $chapter['choice2']?></a>
+                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix2['id_story']?>&chapter_num=<?= $choix2['Chapter']?>&choice_num=2" role="button"><?= $chapter['choice2']?></a>
                 &nbsp;
                 <?php
             }
@@ -66,7 +105,7 @@
                 ));
                 $choix3 = $req4->fetch();
                 ?>
-                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix3['id_story']?>&chapter_num=<?= $choix3['Chapter']?>" role="button"><?= $chapter['choice3']?></a>
+                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix3['id_story']?>&chapter_num=<?= $choix3['Chapter']?>&choice_num=3" role="button"><?= $chapter['choice3']?></a>
                 &nbsp;
                 <?php
             }
