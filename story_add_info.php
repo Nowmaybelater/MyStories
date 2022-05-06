@@ -62,6 +62,12 @@ if (isset($_SESSION['login'])) {
                     </div>
                 </div>
                 <br />
+                <div>
+                    <div>
+                        <input type="number" name="numero" class="form-control" placeholder="Entrez le nombre total de points dont dispose le lecteur au début de l'histoire" required autofocus>
+                    </div>
+                </div>
+                <br/>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>

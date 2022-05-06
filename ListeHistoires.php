@@ -47,7 +47,7 @@
             }
             if ($compteur ==0)
             {
-                echo "Vous n'avez encore rien écrit !"
+                echo "Vous n'avez encore rien écrit !";
             }
             ?>
         </div>
