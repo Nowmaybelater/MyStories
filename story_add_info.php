@@ -63,8 +63,9 @@ if (isset($_SESSION['login'])) {
                 </div>
                 <br />
                 <div>
+                <label class="col-sm-4 control-label">Nombre de points de vie</label>
                     <div>
-                        <input type="number" name="numero" class="form-control" placeholder="Entrez le nombre total de points dont dispose le lecteur au début de l'histoire" required autofocus>
+                        <input type="number" name="points" class="form-control" placeholder="Entrez le nombre total de points dont dispose le lecteur au début de l'histoire" required autofocus>
                     </div>
                 </div>
                 <br/>
