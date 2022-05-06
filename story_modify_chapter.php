@@ -97,7 +97,7 @@ if (isset($_SESSION['login'])) {
 
 <main>
     <div id="backgroundConnexion">
-        <p class="titre_petit">Ajout d'un chapitre</p>
+        <p class="titre_petit">Modification du chapitre</p>
         <div id="centre">
             <form method="post">
                 <input type="hidden" name="id" value="<?= $_GET["id"] ?>">

@@ -16,7 +16,7 @@
             $resultat = $bdd->query($requete);
             $compteur=0;
             while ($histoire = $resultat->fetch()) {
-                $comtpeur = $compteur +1;
+                $compteur = $compteur +1;
                 $valeur = $histoire["id_story"];
             ?>
                 <div>
@@ -29,7 +29,7 @@
                     <p><?= $histoire['summary'] ?></p>
                 </div>
                 <div id="btn-lecture">
-                    <a class="btn btn-outline-dark" href="story_modify.php?id=<?= $histoire['id_story'] ?>" role="button">Modifier</a>
+                    <a class="btn btn-outline-dark" href="story_modify_info.php?id=<?= $histoire['id_story'] ?>" role="button">Modifier</a>
                     &nbsp;
                     <a class="btn btn-outline-dark" href="story_delete.php?id=<?= $histoire['id_story'] ?>" role="button">Supprimer</a>
                     &nbsp;
@@ -45,7 +45,7 @@
                 <hr />
             <?php
             }
-            if ($compteur ==0)
+            if ($compteur == 0)
             {
                 echo "Vous n'avez encore rien écrit !";
             }
