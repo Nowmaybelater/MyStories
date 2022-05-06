@@ -190,7 +190,7 @@ if (isset($_SESSION['login'])) {
                 <br />
                 <div>
                     <div>
-                        <button type="submit"  formaction="story_add_chapter.php" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                        <button type="submit"  formaction="story_add_chapter.php?id=<?=$id_story?>" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
                         &nbsp;
                         <button type="submit" class="btn btn-default btn-primary" formaction="ConfirmationTerminee.php"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
                     </div>
