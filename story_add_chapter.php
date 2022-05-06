@@ -79,7 +79,7 @@ if (isset($_SESSION['login'])) {
     <div id="backgroundConnexion">
         <p class="titre_petit">Ajout d'un chapitre</p>
         <div id="centre">
-            <form action="story_add_chapter.php" method="post">
+            <form method="post">
                 <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
                 <div>
                     <div>
@@ -134,12 +134,12 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice2" class="form-control" placeholder="Intitulé" required autofocus>
+                                <input type="text" name="choice2" class="form-control" placeholder="Intitulé" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice2" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                                <input type="number" name="refChoice2" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -152,7 +152,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points2" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" required autofocus>
+                                <input type="number" name="points2" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
                         </div>
                         <br />
@@ -164,12 +164,12 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice3" class="form-control" placeholder="Intitulé" required autofocus>
+                                <input type="text" name="choice3" class="form-control" placeholder="Intitulé" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice3" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                                <input type="number" name="refChoice3" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -182,7 +182,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points3" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" required autofocus>
+                                <input type="number" name="points3" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
                         </div>
                     </ul>
@@ -190,9 +190,9 @@ if (isset($_SESSION['login'])) {
                 <br />
                 <div>
                     <div>
-                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                        <button type="submit"  formaction="story_add_chapter.php" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
                         &nbsp;
-                        <button type="submit" class="btn btn-default btn-primary" href="ConfirmationTerminee.php"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
+                        <button type="submit" class="btn btn-default btn-primary" formaction="ConfirmationTerminee.php"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
                     </div>
                 </div>
             </form>
