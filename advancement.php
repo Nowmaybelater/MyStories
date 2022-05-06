@@ -40,4 +40,4 @@
         ));
     }
 
-    header("Location: Index.php");?>
+    header("Location: index.php");?>
