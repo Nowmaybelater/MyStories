@@ -5,7 +5,7 @@
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container-fluid">
-      <a class="navbar-brand" href="Index.php">
+      <a class="navbar-brand" href="index.php">
         <h2><i class="bi bi-vector-pen"></i> MyStories</h2>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color:black">

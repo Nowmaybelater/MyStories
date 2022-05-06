@@ -26,7 +26,7 @@
                         'acces' => $acces,
                     ));
                     $_SESSION['login'] = $login;
-                    header("Location: Index.php");
+                    header("Location: index.php");
                 }
             }
         }
