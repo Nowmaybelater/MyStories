@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 01:30 PM
+-- Generation Time: May 06, 2022 at 02:58 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -139,6 +139,19 @@ INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice
 (1, 21, 19, 1),
 (1, 20, 19, 2),
 (1, 22, 20, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `player_points`
+--
+
+CREATE TABLE `player_points` (
+  `id_user` int(11) NOT NULL,
+  `id_story` int(11) NOT NULL,
+  `points` int(11) DEFAULT NULL,
+  `death` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
