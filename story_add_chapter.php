@@ -21,9 +21,10 @@ if (isset($_SESSION['login'])) {
         $id_story = $_POST['id'];
         $num = escape($_POST['numero']);
         $contenu = escape($_POST['contenu']);
-        $choice1 = escape($POST_['choice1']);
-        $choice2 = escape($POST_['choice2']);
-        $choice3 = escape($POST_['choice3']);
+        $choice1 = escape($_POST['choice1']);
+        $choice2 = escape($_POST['choice2']);
+        $choice3 = escape($_POST['choice3']);
+
         //insérer le chapitre à la table chapters de la base de données
         $stmt = $bdd->prepare('insert into chapters
         (id_story,numChapter, chapterContent, choice1, choice2, choice3)
@@ -48,6 +49,25 @@ if (isset($_SESSION['login'])) {
         (id_story,Chapter, Previous_Chapter, Previous_Choice)
         values (?, ?, ?, ?)');
         $stmt->execute(array($id_story, $refChoice3, $num, 3));
+
+        //compléter la table points de la base de données
+        $points1 = escape($_POST['points1']);
+        $stmt = $bdd->prepare('insert into points
+                (id_story,chapter, numChoice, points, death)
+                values (?, ?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $num, 1, $points1, 0));
+
+        $points2 = escape($_POST['points2']);
+        $stmt = $bdd->prepare('insert into points
+                (id_story,chapter, numChoice, points, death)
+                values (?, ?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $num, 2, $points2, 0));
+
+        $points3 = escape($_POST['points3']);
+        $stmt = $bdd->prepare('insert into points
+                (id_story,chapter, numChoice, points, death)
+                values (?, ?, ?, ?, ?)');
+        $stmt->execute(array($id_story, $num, 3, $points3, 0));
 
         redirect("story_add_chapter.php?id=$id_story");
     }
@@ -167,7 +187,7 @@ if (isset($_SESSION['login'])) {
                         </div>
                     </ul>
                 </div>
-                <br/>
+                <br />
                 <div>
                     <div>
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
