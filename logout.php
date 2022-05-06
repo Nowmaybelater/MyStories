@@ -1,3 +1,3 @@
 <?php session_start();?>
 <?php session_unset();
-header("Location: Index.php");?>
+header("Location: index.php");?>

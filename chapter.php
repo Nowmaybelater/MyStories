@@ -66,7 +66,6 @@
             </p>
         </div>
         <div>
-            
             <?php 
             //affichage du contenu du choix 1 dans un bouton cliquable
             if(!empty($chapter['choice1'])){
