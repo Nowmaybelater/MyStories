@@ -15,6 +15,7 @@ function escape($value)
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
 }
 
+$chapterId = $_GET["id"];
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
         //on récupère les données du formulaire 
@@ -89,27 +90,47 @@ if (isset($_SESSION['login'])) {
                 values (?, ?, ?, ?, ?)');
         $stmt->execute(array($id_story, $num, 3, $points3, $echec3));
 
-        redirect("story_add_chapter.php?id=$id_story");
+        redirect("story_modify.php?id=$id_story");
     }
 }
 
 ?>
 
-<main>
+<main> 
     <div id="backgroundConnexion">
-        <p class="titre_petit">Modification du chapitre</p>
+        <p class="titre_petit">Modifier un chapitre</p>
+        <div>
+        <?php
+            $requete = "SELECT * FROM chapters WHERE id_chapter = :id_chapter";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_chapter" => $_GET['id']));
+            $chapitre = $resultat->fetch();
+            $valeur = $chapitre["id_chapter"];
+            $num = $chapitre["numChapter"];
+            $contenu = $chapitre["chapterContent"];
+            $choice1 = $chapitre["choice1"]; 
+            $choice2 = $chapitre["choice2"]; 
+            $choice3 = $chapitre["choice3"];  
+
+            $requete = "SELECT * FROM links WHERE numChapter = :numChapter";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("numChapter" => $num));
+            $links = $resultat->fetch();
+            $refChoice1 = $links["Chapter"];           
+            ?>
+        </div>
         <div id="centre">
             <form method="post">
-                <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
+                <input type="hidden" name="id" value="<?= $chapterId ?>">
                 <div>
                     <div>
-                        <input type="number" name="numero" class="form-control" placeholder="Entrez le numéro du chapitre" required autofocus>
+                        <input type="number" name="numero" class="form-control" value="<?= $num ?>" required autofocus>
                     </div>
                 </div>
                 <br />
                 <div>
                     <div>
-                        <textarea name="contenu" class="form-control" placeholder="Entrez le contenu du chapitre" required></textarea>
+                        <textarea name="contenu" class="form-control" required><?= $contenu ?></textarea>
                     </div>
                 </div>
                 <br />
@@ -124,12 +145,12 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice1" class="form-control" placeholder="Intitulé" required autofocus>
+                                <input type="text" name="choice1" class="form-control" value="<?=$choice1?>" required autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                                <input type="number" name="refChoice1" class="form-control" required autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -142,7 +163,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" required autofocus>
+                                <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
                         </div>
                         <br />
@@ -154,7 +175,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice2" class="form-control" placeholder="Intitulé" autofocus>
+                                <input type="text" name="choice2" class="form-control" value="<?=$choice2?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
@@ -184,7 +205,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice3" class="form-control" placeholder="Intitulé" autofocus>
+                                <input type="text" name="choice3" class="form-control" value="<?=$choice3?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>

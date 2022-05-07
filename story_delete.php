@@ -5,7 +5,7 @@
 
         <?php
             $storyId=$_GET['id'];
-            //on suprime toutes les lignes faisant référence à cette histoire
+            //on supprime toutes les lignes faisant référence à cette histoire
             $requete1 = $bdd->prepare('SELECT * FROM chapters WHERE id_story=?');
             $requete1->execute(array($storyId));
             $requete2 = $bdd->prepare('DELETE FROM chapters WHERE id_story=?');

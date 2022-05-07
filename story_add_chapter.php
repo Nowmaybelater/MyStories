@@ -15,6 +15,7 @@ function escape($value)
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
 }
 
+$chapterId = $_GET["id"];
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
         //on récupère les données du formulaire 
@@ -100,7 +101,7 @@ if (isset($_SESSION['login'])) {
         <p class="titre_petit">Ajout d'un chapitre</p>
         <div id="centre">
             <form method="post">
-                <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
+                <input type="hidden" name="id" value="<?= $chapterId ?>">
                 <div>
                     <div>
                         <input type="number" name="numero" class="form-control" placeholder="Entrez le numéro du chapitre" required autofocus>
@@ -142,7 +143,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" required autofocus>
+                                <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
                         </div>
                         <br />
