@@ -1,13 +1,20 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
+<?php
+// pour se protéger des attaques XSS
+function escape($value)
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+}?>
+
 <main>
     <div id=backgroundConnexion>
         <h2 class="connexion">Connexion</h2>
         <?php
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            $login = $_POST['login'];
-            $mdp = $_POST['password'];
+            $login = escape($_POST['login']);
+            $mdp = escape($_POST['password']);
             $requete = $bdd->prepare('SELECT * FROM user WHERE login_usr=? AND password_usr=?');
             $requete->execute(array($login, $mdp));
             if ($requete->rowCount() == 1) {
