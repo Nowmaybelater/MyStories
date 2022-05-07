@@ -111,12 +111,7 @@ if (isset($_SESSION['login'])) {
             $choice1 = $chapitre["choice1"]; 
             $choice2 = $chapitre["choice2"]; 
             $choice3 = $chapitre["choice3"];  
-
-            $requete = "SELECT * FROM links WHERE numChapter = :numChapter";
-            $resultat = $bdd->prepare($requete);
-            $resultat->execute(array("numChapter" => $num));
-            $links = $resultat->fetch();
-            $refChoice1 = $links["Chapter"];           
+          
             ?>
         </div>
         <div id="centre">
@@ -175,7 +170,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice2" class="form-control" value="<?=$choice2?>" autofocus>
+                                <input type="text" name="choice2" class="form-control" value="<?= $choice2?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
