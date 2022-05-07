@@ -17,6 +17,7 @@
             if($req11->rowCount() ==1){
                 $ligne2=$req11->fetch();
                 $pts=$ligne2['points'];
+                echo $pts;
                 $death=$ligne2['death'];
 
                 $requete8 = "SELECT * FROM player_points WHERE id_user = :usr_id AND id_story = :story_id";
@@ -28,7 +29,6 @@
                 if($req8->rowCount() == 1){
                     $ligne=$req8->fetch();
                     $points=$ligne['points'] + $pts;
-                    echo $points;
                     $req9="UPDATE player_points SET points=$points WHERE id_user = :usr_id AND id_story = :story_id";
                     $requete9 = $bdd->prepare($req9);
                     $requete9->execute(array(
@@ -94,9 +94,9 @@
         ?>
 
         <?php
-            //enregistre le choix du joueur dans la bdd pour le résumé de la partie à la fin
             if($_GET['choice_num']!=0)
             {
+                //récupération du numéro du chapitre précédent
                 $requete5 = "SELECT * FROM links WHERE id_story = :id AND Chapter = :chapter AND Previous_Choice = :previous_choice ";
                 $req5 = $bdd->prepare($requete5);
                 $req5->execute(array(
@@ -106,6 +106,14 @@
                 ));
                 $previous_chap = $req5->fetch(); 
 
+                //vérifie que le joueur n'est pas mort et ajoute les points perdu nécessaire
+                $failed=Points($id_user, $bdd, $previous_chap['Previous_Chapter'], $_GET['choice_num']);
+                echo $failed;   
+                if($failed==1){
+                    header("Location: failed.php");
+                }
+                
+                //enregistre le choix du joueur dans la bdd pour le résumé de la partie à la fin
                 $req6 = $bdd->prepare('INSERT INTO choices (id_usr, id_story, numChapter,choice) VALUES (:usr_id, :id_story, :numChap, :choice)');
                 $req6->execute(array(
                     'usr_id' => $id_user,
@@ -133,16 +141,11 @@
                     'previous_chap'=> $_GET['chapter_num'],
                     'previous_choice'=> 1
                 ));
-                $choix1 = $req2->fetch();                
-                $failed1=Points($id_user, $bdd, $_GET['chapter_num'], 1);
-                if($failed1==1){
-                    echo "death";
-                }
-                else{
-                ?>                
+                $choix1 = $req2->fetch();  
+                ?>
                     <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
                     &nbsp;
-                <?php }
+                <?php
             }
             //affichage du contenu du choix 2 dans un bouton cliquable
             if(!empty($chapter['choice2'])){
@@ -154,15 +157,10 @@
                     'previous_choice'=> 2
                 ));
                 $choix2 = $req3->fetch(); 
-                $failed2=Points($id_user, $bdd, $_GET['chapter_num'], 2);
-                if($failed2==1){
-                    echo "death";
-                }
-                else{
                 ?>
                 <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix2['id_story']?>&chapter_num=<?= $choix2['Chapter']?>&choice_num=2" role="button"><?= $chapter['choice2']?></a>
                 &nbsp;
-                <?php }
+                <?php 
             }
             //affichage du contenu du choix 3 dans un bouton cliquable
             if(!empty($chapter['choice3'])){
@@ -174,15 +172,10 @@
                     'previous_choice'=> 3
                 ));
                 $choix3 = $req4->fetch();
-                $failed3=Points($id_user, $bdd, $_GET['chapter_num'], 3);
-                if($failed3==1){
-                    echo "death";
-                }
-                else{
                 ?>
                 <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix3['id_story']?>&chapter_num=<?= $choix3['Chapter']?>&choice_num=3" role="button"><?= $chapter['choice3']?></a>
                 &nbsp;
-                <?php }
+                <?php 
             }
             ?>
         </div>
