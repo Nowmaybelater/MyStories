@@ -2,6 +2,11 @@
 <?php include("includes/connect.php") ?>
 
 <?php
+// Rediriger vers un URL
+function redirect($url)
+{
+    header("Location: $url");
+}
 
 // pour se protéger des attaques XSS
 function escape($value)
@@ -20,17 +25,19 @@ if (isset($_SESSION['login'])) {
         $date = date('y-m-d');
         $points = escape($_POST['points']);
 
-        //insérer l'histoire à la base de données
-        $stmt = $bdd->prepare('insert into stories
-        (title, summary, author, nbChapters, finished, date, nbrPoints)
-        values (?, ?, ?, ?, ?, ?, ?)');
+        //modifier l'histoire dans la base de données
+        $requete = "UPDATE stories SET title =?, summary=?, author=?, nbChapters=?, finished=?, date =?, nbrPoints=?";
+        $stmt = $bdd->prepare($requete);
         $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, $points));
+        $ligne = $stmt->fetch();
 
         $req = "SELECT * FROM stories WHERE title=:titre";
         $res = $bdd->prepare($req);
-        $res->execute(array("titre"=>$title));
+        $res->execute(array("titre" => $title));
         $ligne = $res->fetch();
-        $id=$ligne['id_story'];
+        $id = $ligne['id_story'];
+
+        redirect("story_modify_chapter.php?id=$id");
     }
 }
 
@@ -43,39 +50,39 @@ if (isset($_SESSION['login'])) {
             <?php
             $requete = "SELECT * FROM stories WHERE id_story = :id_story";
             $resultat = $bdd->prepare($requete);
-            $resultat->execute(array("id_story"=>$_GET['id']));
-            $histoire=$resultat->fetch();
+            $resultat->execute(array("id_story" => $_GET['id']));
+            $histoire = $resultat->fetch();
             $valeur = $histoire["id_story"];
             $title = $histoire["title"];
             $summary = $histoire["summary"];
             $points = $histoire["nbrPoints"];
             ?>
-                <div>
-                    <h2><a href="StorySummary.php?id=<?= $valeur ?>" class="listeHistoires"><em id="centre" style="color :grey;"><?= $histoire['title'] ?></em></a></h2>
-                </div>
+            <div>
+                <h2><em id="centre" style="color :grey;"><?= $histoire['title'] ?></em></h2>
+            </div>
         </div>
 
         <div>
-            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="story_modify_info.php" method="post">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id" value="<?= $storyId ?>">
                 <div class="form-group">
                     <label>Titre</label>
                     <div class="col-sm-6">
-                        <input type="text" name="title" class="form-control" value="<?=$title?>" required autofocus>
+                        <input type="text" name="title" class="form-control" value="<?= $title ?>" required autofocus>
                     </div>
                 </div>
                 <br />
                 <div class="form-group">
                     <label>Résumé</label>
                     <div class="col-sm-6">
-                        <textarea name="summary" class="form-control" required><?=$summary?></textarea>
+                        <textarea name="summary" class="form-control" required><?= $summary ?></textarea>
                     </div>
                 </div>
                 <br />
                 <div>
                     <label>Nombre de points de vie</label>
                     <div>
-                        <input type="number" name="points" class="form-control" value="<?=$points?>" required autofocus>
+                        <input type="number" name="points" class="form-control" value="<?= $points ?>" required autofocus>
                     </div>
                 </div>
                 <br />
