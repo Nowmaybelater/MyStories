@@ -1,67 +1,20 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<?php include("includes/functions.php") ?>
 
 <main>
     <div id=backgroundConnexion>
+
+    <!--enregistrement de l'avancée de la partie-->
+    <?php 
+        $id_story=$_GET['story_id'];
+        $num_chapter=$_GET['chapter_num'];
+        $login=$_SESSION['login'];
+        Advancement($id_story, $num_chapter, $login, $bdd);
+    ?>
+
+
     <?php
-        //fonction qui met à jour les point et la mort du joueur au fur et à mesure des choix
-        function Points($id_user, $bdd, $chapter, $choice)
-        {
-            $requete11 = "SELECT * FROM points WHERE id_story = :story_id AND chapter= :chapter AND numChoice= :choice";
-            $req11 = $bdd->prepare($requete11);
-            $req11->execute(array(
-                'story_id'=> $_GET['story_id'],
-                'chapter'=> $chapter,
-                'choice'=>$choice
-            ));
-            if($req11->rowCount() ==1){
-                $ligne2=$req11->fetch();
-                $pts=$ligne2['points'];
-                echo $pts;
-                $death=$ligne2['death'];
-
-                $requete8 = "SELECT * FROM player_points WHERE id_user = :usr_id AND id_story = :story_id";
-                $req8 = $bdd->prepare($requete8);
-                $req8->execute(array(
-                    'usr_id' => $id_user,
-                    'story_id'=> $_GET['story_id']
-                ));
-                if($req8->rowCount() == 1){
-                    $ligne=$req8->fetch();
-                    $points=$ligne['points'] + $pts;
-                    $req9="UPDATE player_points SET points=$points WHERE id_user = :usr_id AND id_story = :story_id";
-                    $requete9 = $bdd->prepare($req9);
-                    $requete9->execute(array(
-                        'usr_id' => $id_user,
-                        'story_id'=> $_GET['story_id']
-                    ));
-                    $req12="UPDATE player_points SET death=$death WHERE id_user = :usr_id AND id_story = :story_id";
-                    $requete12 = $bdd->prepare($req12);
-                    $requete12->execute(array(
-                        'usr_id' => $id_user,
-                        'story_id'=> $_GET['story_id']
-                    ));
-                }
-                else{
-                    $req10= $bdd->prepare('INSERT INTO player_points (id_user, id_story, points,death) VALUES (:usr_id, :id_story, :points, :death)');
-                    $req10->execute(array(
-                        'usr_id' => $id_user,
-                        'id_story' => $_GET['story_id'],
-                        'points' => $pts,
-                        'death'=>$death
-                    ));
-                    
-                }
-                if($death==1){
-                    return 1;
-                }
-                else{
-                    return 0;
-                }
-            }
-            return 0;
-        }
-
         //récupération de l'id_user
         $requete = "SELECT * FROM user WHERE login_usr = :usr_login";
         $req = $bdd->prepare($requete);
@@ -70,6 +23,7 @@
         ));
         $ligne = $req->fetch();  
         $id_user = $ligne['id_usr'];
+        
 
         //récupération de l'id_story
         $requete = "SELECT * FROM stories WHERE id_story = :id";
@@ -77,6 +31,7 @@
         $req->execute(array('id' => $_GET['story_id']));
 
         $histoire = $req->fetch();
+        $points_story=$histoire['nbrPoints'];
     ?> 
         <!--affichage du titre et numéro de chapitre-->
         <h1 id="centre"><?php echo $histoire['title']; ?></h2>
@@ -107,8 +62,7 @@
                 $previous_chap = $req5->fetch(); 
 
                 //vérifie que le joueur n'est pas mort et ajoute les points perdu nécessaire
-                $failed=Points($id_user, $bdd, $previous_chap['Previous_Chapter'], $_GET['choice_num']);
-                echo $failed;   
+                $failed=Points($id_user, $bdd, $previous_chap['Previous_Chapter'], $_GET['choice_num'], $points_story);
                 if($failed==1){
                     header("Location: failed.php");
                 }
@@ -179,12 +133,6 @@
             }
             ?>
         </div>
-        <br/>
-        <div>
-            <!--bouton d'enregistrement de l'avancée de la partie-->
-            <a class="btn btn-outline-dark" href="advancement.php?story_id=<?= $_GET['story_id']?>&chapter_num=<?= $_GET['chapter_num']?>" role="button">Enregistrer mon avancée</a>
-        </div>
-
     </div>
 </main>
 </body>
