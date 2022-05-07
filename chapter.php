@@ -182,7 +182,7 @@
         <br/>
         <div>
             <!--bouton d'enregistrement de l'avancée de la partie-->
-            <a class="btn btn-outline-dark" href="advancement.php?story_id=<?= $_GET['story_id']?>&chapter_num=<?= $_GET['chapter_num']?>" role="button">Enregistrer mon avancée</a>
+            <a class="btn btn-outline-secondary" href="advancement.php?story_id=<?= $_GET['story_id']?>&chapter_num=<?= $_GET['chapter_num']?>" role="button">Enregistrer mon avancée</a>
         </div>
 
     </div>
