@@ -37,7 +37,7 @@ if (isset($_SESSION['login'])) {
         $ligne = $res->fetch();
         $id = $ligne['id_story'];
 
-        redirect("story_modify_chapter.php?id=$id");
+        /*redirect("story_modify.php?id=$id");*/
     }
 }
 
@@ -93,6 +93,5 @@ if (isset($_SESSION['login'])) {
                 </div>
             </form>
         </div>
-
     </div>
 </main>
