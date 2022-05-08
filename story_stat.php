@@ -25,12 +25,13 @@
                 <br/>
                 Nombre de points moyen par parties : 
                 <?php 
-                if(!empty($ligne2['points'])){
-                    echo $ligne2['points'];
+                if(!empty($ligne2['points']) && !empty($ligne2['played']) && $ligne2['played']!=0){
+                    $pts= $ligne2['points']/$ligne2['played'];
                 }
                 else{
-                    echo 0;
+                    $pts=0;
                 }
+                echo $pts;
                 ?>
                 <br/>
 
