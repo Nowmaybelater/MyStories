@@ -28,9 +28,20 @@
                                                 } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <br />
 
+            <!--Possibilité d'ajouter un nouveau chapitre-->
+            <div id="centre">
+                <a class="btn btn-primary" href="story_add_chapter.php" role="button"> <i class="bi bi-plus-circle"></i> Nouveau Chapitre </a>
+            </div>
+            <br />
             <!--possibilité de modifier les infos générales de l'histoire (titre, résumé, nombre de points de vie)-->
 
-
+            <div>
+                        <h2><em>Informations générales</em></h2>
+                    </div>
+            <div id="btn-lecture">
+                <a class="btn btn-outline-dark" href="story_modify_info.php?id=<?= $valeur ?>" role="button">Modifier</a>
+            </div>
+            <hr />
             <!--possibilité de modifier les chapitres existants de l'histoire-->
             <div>
                 <?php
@@ -58,11 +69,7 @@
                 }
                 ?>
             </div>
-            <!--Possibilité d'ajouter un nouveau chapitre-->
-            <div>
-                <a class="btn btn-primary" href="story_add_chapter.php" role="button"> <i class="bi bi-plus-circle"></i> Nouveau Chapitre </a>
-            </div>
-            
+            <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
     </div>
 </main>
 </body>
