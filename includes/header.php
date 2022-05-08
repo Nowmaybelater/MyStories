@@ -41,7 +41,7 @@
             $requete->execute(array($login, $access));
             if ($requete->rowCount() == 1) {
           ?>
-              <a class="nav-link active" aria-current="page" href="ListeHistoires.php"><i class="bi bi-plus-circle"></i> Édition</a>
+              <a class="nav-link active" aria-current="page" href="ListeHistoires.php" id="edition"><i class="bi bi-plus-circle"></i> Édition</a>
 
           <?php
             }
