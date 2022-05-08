@@ -25,14 +25,16 @@
         $id_user = $ligne['id_usr'];
         
 
-        //récupération de l'id_story
+        //récupération des données de l'histoire
         $requete = "SELECT * FROM stories WHERE id_story = :id";
         $req = $bdd->prepare($requete);
         $req->execute(array('id' => $_GET['story_id']));
 
         $histoire = $req->fetch();
         $points_story=$histoire['nbrPoints'];
-    ?> 
+
+        ?> 
+
         <!--affichage du titre et numéro de chapitre-->
         <h1 id="centre"><?php echo $histoire['title']; ?></h2>
         <h6 id="donneesHistoire">Chapitre <?= $_GET['chapter_num']?></h6>
@@ -64,7 +66,9 @@
                 //vérifie que le joueur n'est pas mort et ajoute les points perdu nécessaire
                 $failed=Points($id_user, $bdd, $previous_chap['Previous_Chapter'], $_GET['choice_num'], $points_story);
                 if($failed==1){
-                    header("Location: failed.php");
+                    $id=$_GET['story_id'];
+                    $link="failed.php?id_story=$id";
+                    header("Location: $link");
                 }
                 
                 //enregistre le choix du joueur dans la bdd pour le résumé de la partie à la fin
@@ -96,10 +100,19 @@
                     'previous_choice'=> 1
                 ));
                 $choix1 = $req2->fetch();  
-                ?>
-                    <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
-                    &nbsp;
-                <?php
+                if($_GET['chapter_num']!=$histoire['nbChapters']){
+                    ?>
+                        <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
+                        &nbsp;
+                    <?php
+                }
+                else{
+                    $id=$_GET['story_id'];
+                    ?>
+                        <a class="btn btn-outline-dark" href="end.php?id=<?= $id?>" role="button"><?= $chapter['choice1']?></a>
+                        &nbsp;
+                    <?php
+                }
             }
             //affichage du contenu du choix 2 dans un bouton cliquable
             if(!empty($chapter['choice2'])){
@@ -131,7 +144,7 @@
                 &nbsp;
                 <?php 
             }
-            ?>
+        ?>
         </div>
     </div>
 </main>

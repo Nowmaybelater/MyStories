@@ -100,6 +100,54 @@
                 ));
             }
         }
+
+        function Resume($id_user, $id_story, $bdd){
+            $requete1 = $bdd->prepare('SELECT * FROM player_points WHERE id_user=? AND id_story=?');
+            $requete1->execute(array($id_user, $id_story));
+            $ligne1=$requete1->fetch();
+
+            $requete2 = $bdd->prepare('SELECT * FROM stories WHERE id_story=?');
+            $requete2->execute(array($id_story));
+            $ligne2=$requete2->fetch();
+
+            $nbPoints=$ligne2['nbrPoints']-$ligne1['points'];
+            echo "Nombre de points restant : " . $nbPoints;
+            ?>
+            <br/><br/>
+            <?php
+            if($ligne1['death']==1){
+                echo "Vous avez fait une erreur fatale";
+            }
+            else{
+                echo "Vous n'avez pas fait d'erreur fatale";
+            }
+
+            ?> <br/><br/> Résumé de vos choix : <?php
+            $requete3 = $bdd->prepare('SELECT * FROM choices WHERE id_usr=? AND id_story=?');
+            $requete3->execute(array($id_user, $id_story));
+
+            while($ligne3=$requete3->fetch()){
+
+                $requete4 = $bdd->prepare('SELECT * FROM chapters WHERE id_story=? AND numChapter=?');
+                $requete4->execute(array($id_story, $ligne3['numChapter']));
+                $ligne4=$requete4->fetch();
+
+                if($ligne3['choice']==1){
+                    $choice=$ligne4['choice1'];
+                }
+                else{
+                    if($ligne3['choice']==2){
+                        $choice=$ligne4['choice2'];
+                    }
+                    else{
+                        $choice=$ligne4['choice3'];
+                    }
+                }
+                ?> <br/> <?php
+                echo "Au chapitre " . $ligne3['numChapter'] . " vous avez fait le choix : " . $choice;
+            }
+
+        }
 ?>
 
 
