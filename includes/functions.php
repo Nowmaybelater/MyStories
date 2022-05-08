@@ -69,7 +69,6 @@
             ));
             $ligne = $req->fetch();  
             $id_user = $ligne['id_usr'];
-
             $requete2 = "SELECT * FROM advancement WHERE id_usr = :usr_id AND id_story = :story_id";
             $req2 = $bdd->prepare($requete2);
             $req2->execute(array(
@@ -146,6 +145,7 @@
                 ?> <br/> <?php
                 echo "Au chapitre " . $ligne3['numChapter'] . " vous avez fait le choix : " . $choice;
             }
+            return $ligne2['nbrPoints'];
 
         }
 ?>

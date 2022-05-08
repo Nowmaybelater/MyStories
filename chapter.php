@@ -67,7 +67,7 @@
                 $failed=Points($id_user, $bdd, $previous_chap['Previous_Chapter'], $_GET['choice_num'], $points_story);
                 if($failed==1){
                     $id=$_GET['story_id'];
-                    $link="failed.php?id_story=$id";
+                    $link="end.php?id=$id&failed=1";
                     header("Location: $link");
                 }
                 
@@ -101,15 +101,17 @@
                 ));
                 $choix1 = $req2->fetch();  
                 if($_GET['chapter_num']!=$histoire['nbChapters']){
+                    $id=$_GET['story_id'];
+                    $chapterNum=$choix1['Chapter'];
                     ?>
-                        <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $choix1['id_story']?>&chapter_num=<?= $choix1['Chapter']?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
+                        <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chapterNum?>&choice_num=1" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
                     <?php
                 }
                 else{
                     $id=$_GET['story_id'];
                     ?>
-                        <a class="btn btn-outline-dark" href="end.php?id=<?= $id?>" role="button"><?= $chapter['choice1']?></a>
+                        <a class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
                     <?php
                 }

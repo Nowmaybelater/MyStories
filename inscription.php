@@ -30,7 +30,7 @@ function escape($value)
                     $req->execute(array(
                         'usr' => $login,
                         'mdp' => $mdp,
-                        'acces' => $acces,
+                        'acces' => $acces
                     ));
                     $_SESSION['login'] = $login;
                     header("Location: index.php");
