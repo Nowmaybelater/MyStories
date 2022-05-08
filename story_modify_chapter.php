@@ -1,20 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
-<?php
-
-// Rediriger vers un URL
-function redirect($url)
-{
-    header("Location: $url");
-}
-
-// pour se protéger des attaques XSS
-function escape($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}
-
+<?php include("includes/functions.php");
 $chapterId = $_GET["id"];
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
@@ -96,11 +83,11 @@ if (isset($_SESSION['login'])) {
 
 ?>
 
-<main> 
+<main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Modifier un chapitre</p>
         <div>
-        <?php
+            <?php
             $requete = "SELECT * FROM chapters WHERE id_chapter = :id_chapter";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_chapter" => $_GET['id']));
@@ -108,10 +95,10 @@ if (isset($_SESSION['login'])) {
             $valeur = $chapitre["id_chapter"];
             $num = $chapitre["numChapter"];
             $contenu = $chapitre["chapterContent"];
-            $choice1 = $chapitre["choice1"]; 
-            $choice2 = $chapitre["choice2"]; 
-            $choice3 = $chapitre["choice3"];  
-          
+            $choice1 = $chapitre["choice1"];
+            $choice2 = $chapitre["choice2"];
+            $choice3 = $chapitre["choice3"];
+
             ?>
         </div>
         <div id="centre">
@@ -140,7 +127,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice1" class="form-control" value="<?=$choice1?>" required autofocus>
+                                <input type="text" name="choice1" class="form-control" value="<?= $choice1 ?>" required autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
@@ -170,7 +157,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice2" class="form-control" value="<?= $choice2?>" autofocus>
+                                <input type="text" name="choice2" class="form-control" value="<?= $choice2 ?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
@@ -200,7 +187,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Quel est l'intitulé de ce choix ? </h6>
                                 </li>
-                                <input type="text" name="choice3" class="form-control" value="<?=$choice3?>" autofocus>
+                                <input type="text" name="choice3" class="form-control" value="<?= $choice3 ?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
@@ -227,8 +214,7 @@ if (isset($_SESSION['login'])) {
                 <div>
                     <div>
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
-                        &nbsp;
-                        <button type="submit" class="btn btn-default btn-primary" formaction="ConfirmationTerminee.php"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
+                        <a class="btn btn-outline-primary" href="ListeHistoires.php" role="button"> Retour sans sauvegarder</a>
                     </div>
                 </div>
             </form>

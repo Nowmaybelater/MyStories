@@ -1,18 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
-<?php
-// Rediriger vers un URL
-function redirect($url)
-{
-    header("Location: $url");
-}
-
-// pour se protéger des attaques XSS
-function escape($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}
+<?php include("includes/functions.php");
 
 if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
@@ -37,7 +26,7 @@ if (isset($_SESSION['login'])) {
         $ligne = $res->fetch();
         $id = $ligne['id_story'];
 
-        /*redirect("story_modify.php?id=$id");*/
+        redirect("story_modify.php?id=$id");
     }
 }
 
@@ -87,8 +76,9 @@ if (isset($_SESSION['login'])) {
                 </div>
                 <br />
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-4">
+                    <div>
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder les changements </button>
+                        <a class="btn btn-outline-primary" href="ListeHistoires.php" role="button"> Retour sans sauvegarder</a>
                     </div>
                 </div>
             </form>

@@ -20,7 +20,7 @@
         $histoire = $req->fetch();
         ?> <h1 id="centre"><?php echo $histoire['title']; ?></h2>
             <h3 id="centre"><?php echo $histoire['author']; ?></h3>
-            <h6 id="donneesHistoire">Statut : <?php if ($histoire['finished'] = 0) {
+            <h6 id="donneesHistoire">Statut : <?php if ($histoire['finished'] == 0) {
                                                     echo "En cours";
                                                 } else {
                                                     echo "Terminée";
@@ -33,7 +33,7 @@
             <h5>Vous commencez cette histoire avec un total de <?=$histoire['nbrPoints']?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</h5> 
             <br/>
             <div id="btn-lecture">
-                <a class="btn btn-outline-secondary" href="ListeHistoires.php" role="button">Retour à l'accueil</a>
+                <a class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
                 &nbsp;
                 <?php
                 $id_story = $_GET['id'];

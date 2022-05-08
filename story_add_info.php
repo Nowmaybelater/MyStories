@@ -1,19 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
-<?php
-// Rediriger vers un URL
-function redirect($url)
-{
-    header("Location: $url");
-}
-
-// pour se protéger des attaques XSS
-function escape($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}
-
+<?php include("includes/functions.php");
 if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
         //on récupère les données du formulaire

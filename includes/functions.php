@@ -142,13 +142,27 @@
                         $choice=$ligne4['choice3'];
                     }
                 }
-                ?> <br/> <?php
+                ?> <br/> 
+                <?php
                 echo "Au chapitre " . $ligne3['numChapter'] . " vous avez fait le choix : " . $choice;
             }
             return $ligne2['nbrPoints'];
 
         }
+        ?>
+
+<?php
+// Rediriger vers un URL
+function redirect($url)
+{
+    header("Location: $url");
+}
 ?>
 
-
-
+<?php
+// pour se protéger des attaques XSS
+function escape($value)
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+}
+?>

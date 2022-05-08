@@ -21,7 +21,7 @@
             ?>
                 <div>
                     <h2><em><?= $histoire['title'] ?></em></h2>
-                    <h6 style="color:grey">Statut : <?php if ($histoire['finished'] = 0) {
+                    <h6 style="color:grey">Statut : <?php if ($histoire['finished'] == 0) {
                                         echo "En cours";
                                     } else {
                                         echo "Terminée";

@@ -1,20 +1,8 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<?php include("includes/functions.php") ?>
 
 <?php
-
-// Rediriger vers un URL
-function redirect($url)
-{
-    header("Location: $url");
-}
-
-// pour se protéger des attaques XSS
-function escape($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}
-
 $chapterId = $_GET["id"];
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
@@ -210,11 +198,9 @@ if (isset($_SESSION['login'])) {
                 </div>
                 <br />
                 <div>
-                    <div>
-                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
-                        &nbsp;
-                        <button type="submit" class="btn btn-default btn-primary" formaction="ConfirmationTerminee.php"><span class="glyphicon glyphicon-save"></span> Terminer l'histoire</button>
-                    </div>
+                    <div id="centre">
+                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
+                        </div>
                 </div>
             </form>
         </div>
