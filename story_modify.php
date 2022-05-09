@@ -61,7 +61,7 @@
                         <h2><em>Chapitre <?= $chapitre['numChapter'] ?></em></h2>
                     </div>
                     <div id="btn-lecture">
-                        <a class="btn btn-outline-dark" href="story_modify_chapter.php?id=<?= $valeur ?>" role="button">Modifier</a>
+                        <a class="btn btn-outline-dark" href="story_modify_chapter.php?id_chapter=<?= $valeur ?>&id_story=<?= $id_story?>" role="button">Modifier</a>
                         &nbsp;
                         <a class="btn btn-outline-dark" href="story_delete_chapter.php?id=<?= $valeur ?>" role="button">Supprimer</a>
                     </div>

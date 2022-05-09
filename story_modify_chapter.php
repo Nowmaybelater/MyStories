@@ -2,83 +2,59 @@
 <?php include("includes/connect.php") ?>
 
 <?php include("includes/functions.php");
-$chapterId = $_GET["id"];
-if (isset($_SESSION['login'])) {
-    if (isset($_POST['numero'])) {
-        //on récupère les données du formulaire 
-        $id_story = $_POST['id'];
-        $num = escape($_POST['numero']);
-        $contenu = escape($_POST['contenu']);
-        $choice1 = escape($_POST['choice1']);
-        $choice2 = escape($_POST['choice2']);
-        $choice3 = escape($_POST['choice3']);
+$chapterId = $_GET["id_chapter"];
+$id_story = $_GET['id_story'];
 
-        //insérer le chapitre à la table chapters de la base de données
-        $stmt = $bdd->prepare('insert into chapters
-        (id_story,numChapter, chapterContent, choice1, choice2, choice3)
-        values (?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2, $choice3));
+if (isset($_POST['numero'])) {
+    //on récupère les données du formulaire 
+    $newNum = escape($_POST['numero']);
+    $newContenu = escape($_POST['contenu']);
+    $newChoice1 = escape($_POST['choice1']);
+    $newChoice2 = escape($_POST['choice2']);
+    $newChoice3 = escape($_POST['choice3']);
+    $newRefChoice1 = escape($_POST['refChoice1']);
+    $newRefChoice2 = escape($_POST['refChoice2']);
+    $newRefChoice3 = escape($_POST['refChoice3']);
 
-        //compléter la table links de la base de données
-        $refChoice1 = escape($_POST['refChoice1']);
-        $stmt = $bdd->prepare('insert into links
-        (id_story,Chapter, Previous_Chapter, Previous_Choice)
-        values (?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $refChoice1, $num, 1));
+    //mettre à jour le numéro du chapitre
+    $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id";
+    $stmt = $bdd->prepare($requete1);
+    $stmt->execute(array('id' => $id_story));
 
-        $refChoice2 = escape($_POST['refChoice2']);
-        $stmt = $bdd->prepare('insert into links
-        (id_story,Chapter, Previous_Chapter, Previous_Choice)
-        values (?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $refChoice2, $num, 2));
+    //mettre à jour le contenu du chapitre
+    $requete2 = "UPDATE chapters SET chapterContent=$newContenu WHERE id_story=:id";
+    $stmt = $bdd->prepare($requete2);
+    $stmt->execute(array('id' => $id_story));
 
-        $refChoice3 = escape($_POST['refChoice3']);
-        $stmt = $bdd->prepare('insert into links
-        (id_story,Chapter, Previous_Chapter, Previous_Choice)
-        values (?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $refChoice3, $num, 3));
+    //mettre à jour l'intitulé du choix 1 du chapitre
+    $requete3 = "UPDATE chapters SET choice1=$newChoice1 WHERE id_story=:id";
+    $stmt = $bdd->prepare($requete3);
+    $stmt->execute(array('id' => $id_story));
 
-        //compléter la table points de la base de données
-        $echec1 = escape($_POST['echec1']);
-        if ($echec1 == "oui") {
-            $echec1 = 1;
-        } else {
-            $echec1 = 0;
-        }
-        $points1 = escape($_POST['points1']);
-        $stmt = $bdd->prepare('insert into points
-                (id_story,chapter, numChoice, points, death)
-                values (?, ?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $num, 1, $points1, $echec1));
+    //mettre à jour l'intitulé du choix 2 du chapitre
+    $requete4 = "UPDATE chapters SET choice2=$newChoice2 WHERE id_story=:id";
+    $stmt = $bdd->prepare($requete4);
+    $stmt->execute(array('id' => $id_story));
 
+    //mettre à jour l'intitulé du choix 3 du chapitre
+    $requete5 = "UPDATE chapters SET choice3=$newChoice3 WHERE id_story=:id";
+    $stmt = $bdd->prepare($requete5);
+    $stmt->execute(array('id' => $id_story));
 
-        $echec2 = escape($_POST['echec2']);
-        if ($echec2 == "oui") {
-            $echec2 = 1;
-        } else {
-            $echec2 = 0;
-        }
-        $points2 = escape($_POST['points2']);
-        $stmt = $bdd->prepare('insert into points
-                (id_story,chapter, numChoice, points, death)
-                values (?, ?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $num, 2, $points2, $echec2));
+    /*//mettre à jour le chapitre vers lequel renvoie le choix 1 
+    $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    $stmt = $bdd->prepare($requete6);
+    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 1));
 
+    //mettre à jour le chapitre vers lequel renvoie le choix 2
+    $requete7 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    $stmt = $bdd->prepare($requete7);
+    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 2));
 
-        $echec3 = escape($_POST['echec3']);
-        if ($echec3 == "oui") {
-            $echec3 = 1;
-        } else {
-            $echec3 = 0;
-        }
-        $points3 = escape($_POST['points3']);
-        $stmt = $bdd->prepare('insert into points
-                (id_story,chapter, numChoice, points, death)
-                values (?, ?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $num, 3, $points3, $echec3));
-
-        redirect("story_modify.php?id=$id_story");
-    }
+    //mettre à jour le chapitre vers lequel renvoie le choix 3 
+    $requete8 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    $stmt = $bdd->prepare($requete8);
+    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 3));*/
 }
 
 ?>
@@ -88,9 +64,11 @@ if (isset($_SESSION['login'])) {
         <p class="titre_petit">Modifier un chapitre</p>
         <div>
             <?php
+
+            //on récupère les "anciennes" données de la table chapters pour qu'elles s'affichent dans le form et soient modifiables
             $requete = "SELECT * FROM chapters WHERE id_chapter = :id_chapter";
             $resultat = $bdd->prepare($requete);
-            $resultat->execute(array("id_chapter" => $_GET['id']));
+            $resultat->execute(array("id_chapter" => $chapterId));
             $chapitre = $resultat->fetch();
             $valeur = $chapitre["id_chapter"];
             $num = $chapitre["numChapter"];
@@ -98,6 +76,32 @@ if (isset($_SESSION['login'])) {
             $choice1 = $chapitre["choice1"];
             $choice2 = $chapitre["choice2"];
             $choice3 = $chapitre["choice3"];
+
+            //recuperer le numero de chapitre
+            $requete = "SELECT * FROM chapters WHERE id_chapter = :id_chapter";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_chapter" => $chapterId));
+            $chapitre = $resultat->fetch();
+            $numChap = $chapitre["numChapter"];
+
+            //on récupère les "anciennes" données de la table links pour qu'elles s'affichent dans le form et soient modifiables
+            $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array('id_story' => $id_story, 'previous' => $numChap, 'choice' => 1)); 
+            $links = $resultat->fetch();
+            $refChoice1 = $links["Chapter"];
+
+            $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "previous" => $numChap, "choice" => 2));
+            $links = $resultat->fetch();
+            $refChoice2 = $links["Chapter"];
+
+            $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "previous" => $numChap, "choice" => 3));
+            $links = $resultat->fetch();
+            $refChoice3 = $links["Chapter"];
 
             ?>
         </div>
@@ -132,7 +136,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice1" class="form-control" required autofocus>
+                                <input type="number" name="refChoice1" class="form-control" value ="<?=$refChoice1?>" required autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -162,7 +166,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice2" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
+                                <input type="number" name="refChoice2" class="form-control" value ="<?=$refChoice2?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -192,7 +196,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice3" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
+                                <input type="number" name="refChoice3" class="form-control" value ="<?=$refChoice3?>" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>

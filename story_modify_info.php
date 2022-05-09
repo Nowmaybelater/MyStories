@@ -1,7 +1,21 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<?php
+// Rediriger vers un URL
+function redirect($url)
+{
+    header("Location: $url");
+}
+?>
 
-<?php include("includes/functions.php");
+<?php
+// pour se protéger des attaques XSS
+function escape($value)
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+}
+?>
+<?php 
     if (isset($_POST['title'])) {
         $id_story = $_GET['id'];
         //on récupère les données du formulaire
