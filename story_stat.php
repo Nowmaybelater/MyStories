@@ -25,7 +25,7 @@
                     ?>
                     <br/>
                     <br/>
-                    Nombre de points moyen par parties : 
+                    Nombre de points perdus en moyenne par partie : 
                     <?php 
                     if(!empty($ligne2['points']) && !empty($ligne2['played']) && $ligne2['played']!=0){
                         $pts= $ligne2['points']/$ligne2['played'];
@@ -47,7 +47,7 @@
                     }
                     ?>
                     <br/>
-                    Pourcentage de morts : <?= $pourcentageMort?> %
+                    Pourcentage d'échec : <?= $pourcentageMort?> %
 
                 </div>
             <?php }

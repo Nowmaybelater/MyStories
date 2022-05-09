@@ -45,7 +45,6 @@
                 $req4->execute(array("id"=>$storyId));
             }
             $pts=$ligne2['points']+$ligne3['points'];
-            $pts=$pts_story-$pts;
             $req5 = "UPDATE stats SET points=$pts WHERE id_story=:id";
             $req5 = $bdd->prepare($req5);
             $req5->execute(array("id"=>$storyId));
@@ -56,7 +55,7 @@
                 'id_story' => $storyId,
                 'played' => 1,
                 'death' => $ligne2['death'],
-                'points' => $pts_story-$ligne2['points']
+                'points' => $ligne2['points']
             ));
         }
 

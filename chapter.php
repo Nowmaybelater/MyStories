@@ -114,6 +114,15 @@
                         <a class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
                     <?php
+                    $req4 = "SELECT * FROM stats WHERE id_story=:id";
+                    $req4 = $bdd->prepare($req5);
+                    $req4->execute(array("id"=>$id));
+                    $ligne2=$req4->fetch();
+                    $nbfailed=$ligne2['death']+1;
+
+                    $req5 = "UPDATE stats SET death=$nbfailed WHERE id_story=:id";
+                    $req5 = $bdd->prepare($req5);
+                    $req5->execute(array("id"=>$id));
                 }
             }
             //affichage du contenu du choix 2 dans un bouton cliquable
