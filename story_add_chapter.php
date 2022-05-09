@@ -77,8 +77,16 @@ if (isset($_SESSION['login'])) {
                 (id_story,chapter, numChoice, points, death)
                 values (?, ?, ?, ?, ?)');
         $stmt->execute(array($id_story, $num, 3, $points3, $echec3));
+        
+        //on augmente le nombre de chapitres de l'histoire
+        $requete1 = $bdd->prepare('SELECT * FROM stories WHERE id_story =?');
+        $requete1->execute(array($id_story));
+        $story=$requete1->fetch();
+        $nbChapter=$story['nbChapters']+1;
+        $requete2 = $bdd->prepare("UPDATE stories SET nbChapters=$nbChapter WHERE id_story=:id");
+        $requete2->execute(array("id"=>$id_story));
 
-        redirect("story_add_chapter.php?id=$id_story");
+        redirect("story_modify.php?id=$id_story");
     }
 }
 

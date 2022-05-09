@@ -2,16 +2,12 @@
 <?php include("includes/connect.php") ?>
 
 <?php
-$finished = 1;
-if (isset($_SESSION['login'])) {
-    if (isset($_POST['title'])) {
-        //modifier le statut de l'histoire dans la base de données
-        $requete = "UPDATE stories SET finished=?";
-        $stmt = $bdd->prepare($requete);
-        $stmt->execute(array($finished));
-        $ligne = $stmt->fetch();
-    }
-}
+    //modifier le statut de l'histoire dans la base de données
+    $id=$_GET["id"];
+    $requete = "UPDATE stories SET finished='1' WHERE id_story=?";
+    $stmt = $bdd->prepare($requete);
+    $stmt->execute(array($id));
+    $ligne = $stmt->fetch();
 ?>
 
 <main>

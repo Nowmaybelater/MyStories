@@ -2,33 +2,33 @@
 <?php include("includes/connect.php") ?>
 
 <?php include("includes/functions.php");
-
-if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
+        $id_story = $_GET['id'];
         //on récupère les données du formulaire
-        $title = escape($_POST['title']);
-        $summary = escape($_POST['summary']);
-        $author = $_SESSION['login'];
-        $nbChapters = 0;
-        $finished = 0;
-        $date = date('y-m-d');
-        $points = escape($_POST['points']);
+        $newTitle = escape($_POST['title']);
+        $newSummary = escape($_POST['summary']);
+        $newPoints = escape($_POST['points']);
 
-        //modifier l'histoire dans la base de données
-        $requete = "UPDATE stories SET title =?, summary=?, author=?, nbChapters=?, finished=?, date =?, nbrPoints=?";
+        //modifier l'histoire dans la base de données       
+        
+        $requete = "UPDATE stories SET title='$newTitle' WHERE id_story=:id";
         $stmt = $bdd->prepare($requete);
-        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, $points));
-        $ligne = $stmt->fetch();
+        $stmt->execute(array('id'=>$id_story));
+        
+        $requete = "UPDATE stories SET summary='$newSummary' WHERE id_story=:id";
+        $stmt = $bdd->prepare($requete);
+        $stmt->execute(array('id'=>$id_story));
 
-        $req = "SELECT * FROM stories WHERE title=:titre";
-        $res = $bdd->prepare($req);
-        $res->execute(array("titre" => $title));
-        $ligne = $res->fetch();
-        $id = $ligne['id_story'];
+        $requete = "UPDATE stories SET date=NOW() WHERE id_story=:id";
+        $stmt = $bdd->prepare($requete);
+        $stmt->execute(array('id'=>$id_story));
 
-        redirect("story_modify.php?id=$id");
+        $requete = "UPDATE stories SET nbrPoints=$newPoints WHERE id_story=:id";
+        $stmt = $bdd->prepare($requete);
+        $stmt->execute(array('id'=>$id_story));
+
+        redirect("story_modify.php?id=$id_story");
     }
-}
 
 ?>
 
