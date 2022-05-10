@@ -126,7 +126,7 @@ if (isset($_SESSION['login'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                                <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
