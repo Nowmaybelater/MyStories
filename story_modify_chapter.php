@@ -302,10 +302,10 @@ if (isset($_POST['numero'])) {
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
                                 <?php if ($refChoice2 == 0) { ?>
-                                    <input type="number" name="refChoice2" class="form-control" required autofocus>
+                                    <input type="number" name="refChoice2" class="form-control" autofocus>
                                 <?php
                                 } else { ?>
-                                    <input type="number" name="refChoice2" class="form-control" value="<?= $refChoice2 ?>" required autofocus>
+                                    <input type="number" name="refChoice2" class="form-control" value="<?= $refChoice2 ?>" autofocus>
                                 <?php
                                 } ?>
                                 <br />
@@ -347,10 +347,10 @@ if (isset($_POST['numero'])) {
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
                                 <?php if ($refChoice3 == 0) { ?>
-                                    <input type="number" name="refChoice3" class="form-control" required autofocus>
+                                    <input type="number" name="refChoice3" class="form-control" autofocus>
                                 <?php
                                 } else { ?>
-                                    <input type="number" name="refChoice3" class="form-control" value="<?= $refChoice3 ?>" required autofocus>
+                                    <input type="number" name="refChoice3" class="form-control" value="<?= $refChoice3 ?>" autofocus>
                                 <?php
                                 } ?>
                                 <br />
