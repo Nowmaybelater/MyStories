@@ -262,7 +262,7 @@ if (isset($_POST['numero'])) {
                         <div>
                             <ul>
                                 <li>
-                                    <h6> Quel est l'intitulé de ce choix ? </h6>
+                                <h6> Quel est l'intitulé de ce choix ? (FIN ce chapitre est le dernier)</h6>
                                 </li>
                                 <input type="text" name="choice1" class="form-control" value="<?= $choice1 ?>" required autofocus>
                                 <br />
