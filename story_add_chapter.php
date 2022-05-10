@@ -77,14 +77,14 @@ if (isset($_SESSION['login'])) {
                 (id_story,chapter, numChoice, points, death)
                 values (?, ?, ?, ?, ?)');
         $stmt->execute(array($id_story, $num, 3, $points3, $echec3));
-        
+
         //on augmente le nombre de chapitres de l'histoire
         $requete1 = $bdd->prepare('SELECT * FROM stories WHERE id_story =?');
         $requete1->execute(array($id_story));
-        $story=$requete1->fetch();
-        $nbChapter=$story['nbChapters']+1;
+        $story = $requete1->fetch();
+        $nbChapter = $story['nbChapters'] + 1;
         $requete2 = $bdd->prepare("UPDATE stories SET nbChapters=$nbChapter WHERE id_story=:id");
-        $requete2->execute(array("id"=>$id_story));
+        $requete2->execute(array("id" => $id_story));
 
         redirect("story_modify.php?id=$id_story");
     }
@@ -119,14 +119,14 @@ if (isset($_SESSION['login'])) {
                         <div>
                             <ul>
                                 <li>
-                                    <h6> Quel est l'intitulé de ce choix ? </h6>
+                                    <h6> Quel est l'intitulé de ce choix ? (FIN ce chapitre est le dernier)</h6>
                                 </li>
                                 <input type="text" name="choice1" class="form-control" placeholder="Intitulé" required autofocus>
                                 <br />
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" required autofocus>
+                                <input type="number" name="refChoice1" class="form-control" placeholder="Chapitre vers lequel ce choix renvoie" autofocus>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
@@ -137,7 +137,7 @@ if (isset($_SESSION['login'])) {
                                 <label style="font-size:medium" for="oui">Non</label>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
@@ -167,7 +167,7 @@ if (isset($_SESSION['login'])) {
                                 <label style="font-size:medium" for="oui">Non</label>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points2" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
@@ -197,7 +197,7 @@ if (isset($_SESSION['login'])) {
                                 <label style="font-size:medium" for="oui">Non</label>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points3" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
                             </ul>
@@ -208,7 +208,7 @@ if (isset($_SESSION['login'])) {
                 <div>
                     <div id="centre">
                         <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
-                        </div>
+                    </div>
                 </div>
             </form>
         </div>
