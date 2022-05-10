@@ -20,7 +20,6 @@ body {
     text-align: center;
 }
 
-
 /*pour avoir une couleur différente au survol dans la barre de recherche*/
 li a:hover {
     background-color: grey;
@@ -41,6 +40,13 @@ main {
     font-size: 0.6cm;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+/* //Ces éléments de style vont s'appliquer lorsque la taille de l'écran fera entre 0 et 900px de largeur) 
+@media only screen and (max-width: 900px) {
+    main{
+        font-size:2cm;
+    }
+}*/
 
 #btn-lecture {
     display: flex;
