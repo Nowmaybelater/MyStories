@@ -40,7 +40,7 @@
                     <?php 
                     $pourcentageMort=0;
                     if(!empty($ligne2['played']) && $ligne2['played']!=0){
-                        $pourcentageMort = $ligne2['death']*100/$ligne2['played'];
+                        $pourcentageMort = ($ligne2['death']*100)/$ligne2['played'];
                     }
                     else{
                         $pourcentageMort = 0;
