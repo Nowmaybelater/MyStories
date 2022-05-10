@@ -105,7 +105,6 @@ if (isset($_POST['numero'])) {
     $stmt = $bdd->prepare($requete14);
     $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
     redirect("story_modify.php?id=$id_story");
-
 }
 
 ?>
@@ -168,42 +167,30 @@ if (isset($_POST['numero'])) {
 
             //on récupère les "anciennes" données de la table points pour qu'elles s'affichent dans le form et soient modifiables
 
-            //IL NE FAUT PAS OUBLIER DE FAIRE LES CHECKBOX
+            //pour récupérer le contenu des checkbox
             $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 1));
             //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
             //chose avant de récupérer le résultat et de poser la variable $echec1
-            if ($resultat->rowCount() == 0) {
-                $echec1 = 2;
-            } else {
-                $Echec = $resultat->fetch();
-                $echec1 = $Echec["death"];
-            }
+            $Echec = $resultat->fetch();
+            $echec1 = $Echec["death"];
 
             $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 2));
             //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
             //chose avant de récupérer le résultat et de poser la variable $echec1
-            if ($resultat->rowCount() == 0) {
-                $echec2 = 2;
-            } else {
-                $Echec = $resultat->fetch();
-                $echec2 = $Echec["death"];
-            }
+            $Echec = $resultat->fetch();
+            $echec2 = $Echec["death"];
 
             $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 3));
             //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
             //chose avant de récupérer le résultat et de poser la variable $echec1
-            if ($resultat->rowCount() == 0) {
-                $echec3 = 2;
-            } else {
-                $Echec = $resultat->fetch();
-                $echec3 = $Echec["death"];
-            }
+            $Echec = $resultat->fetch();
+            $echec3 = $Echec["death"];
 
             //on récupère les points associés à chaque chapitre
             $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
@@ -262,7 +249,7 @@ if (isset($_POST['numero'])) {
                         <div>
                             <ul>
                                 <li>
-                                <h6> Quel est l'intitulé de ce choix ? (FIN ce chapitre est le dernier)</h6>
+                                    <h6> Quel est l'intitulé de ce choix ? (FIN ce chapitre est le dernier)</h6>
                                 </li>
                                 <input type="text" name="choice1" class="form-control" value="<?= $choice1 ?>" required autofocus>
                                 <br />
@@ -286,14 +273,8 @@ if (isset($_POST['numero'])) {
                                     <input type="radio" name="echec1" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
-                                } else if ($echec1 == 1) { ?>
-                                    <input type="radio" name="echec1" id="oui" value="oui" checked>
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec1" id="non" value="non">
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
                                 } else { ?>
-                                    <input type="radio" name="echec1" id="oui" value="oui">
+                                    <input type="radio" name="echec1" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec1" id="non" value="non">
                                     <label style="font-size:medium" for="oui">Non</label>
@@ -337,14 +318,8 @@ if (isset($_POST['numero'])) {
                                     <input type="radio" name="echec2" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
-                                } else if ($echec2 == 1) { ?>
-                                    <input type="radio" name="echec2" id="oui" value="oui" checked>
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec2" id="non" value="non">
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
                                 } else { ?>
-                                    <input type="radio" name="echec2" id="oui" value="oui">
+                                    <input type="radio" name="echec2" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec2" id="non" value="non">
                                     <label style="font-size:medium" for="oui">Non</label>
@@ -352,7 +327,7 @@ if (isset($_POST['numero'])) {
                                 } ?>
                                 <br />
                                 <li>
-                                <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points2" class="form-control" value="<?= $points2 ?>" autofocus>
                             </ul>
@@ -388,14 +363,8 @@ if (isset($_POST['numero'])) {
                                     <input type="radio" name="echec3" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
-                                } else if ($echec3 == 1) { ?>
-                                    <input type="radio" name="echec3" id="oui" value="oui" checked>
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec3" id="non" value="non">
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
                                 } else { ?>
-                                    <input type="radio" name="echec3" id="oui" value="oui">
+                                    <input type="radio" name="echec3" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec3" id="non" value="non">
                                     <label style="font-size:medium" for="oui">Non</label>
@@ -403,7 +372,7 @@ if (isset($_POST['numero'])) {
                                 } ?>
                                 <br />
                                 <li>
-                                <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points3" class="form-control" value="<?= $points3 ?>" autofocus>
                             </ul>
