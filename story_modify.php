@@ -35,7 +35,7 @@
                 &nbsp;
                 <!--Possibilité de marquer l'histoire comme terminée ou de revenir vers un statut "en cours" si on veut modifier l'histoire terminée -->
                 <?php if ($histoire['finished'] == 0) { ?>
-                    <a class="btn btn-primary" href="ConfirmationTerminee.php?id=<?= $id_story ?>" role="button"> <i class="bi bi-check-circle"></i>Terminer l'histoire</a>
+                    <a class="btn btn-primary" href="ConfirmationTerminee.php?id=<?= $id_story ?>" role="button">Terminer l'histoire</a>
                 <?php
                 } else { ?>
                     <a class="btn btn-primary" href="EnCours.php?id=<?= $id_story ?>" role="button">Marquer comme "En Cours"</a>

@@ -25,7 +25,7 @@ if (isset($_SESSION['login'])) {
         $ligne = $res->fetch();
         $id=$ligne['id_story'];
 
-        redirect("story_add_chapter.php?id=$id");
+        redirect("story_modify.php?id=$id");
     }
 }
 
