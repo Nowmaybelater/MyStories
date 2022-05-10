@@ -44,11 +44,11 @@
                 if ($req2->rowCount() == 1) {
                     $ligne = $req2->fetch();
                     $chapter = $ligne['numChapter'];
-                    $link = "chapter.php?story_id=$id_story&chapter_num=$chapter&choice_num=0"; ?>
+                    $link = "chapter.php?story_id=$id_story&chapter_num=$chapter&choice_num=0&prev_chap=0"; ?>
                     <a class="btn btn-outline-dark" href=<?= $link ?> role="button">Reprendre la lecture !</a><?php
                     }
                     else {
-                        $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0"; ?>
+                        $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
                         <a class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
                     }
                         ?>
