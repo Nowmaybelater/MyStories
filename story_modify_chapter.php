@@ -222,7 +222,6 @@ if (isset($_POST['numero'])) {
                 $tablePoints = $resultat->fetch();
                 $points3 = $tablePoints["points"];
             }
-
             ?>
         </div>
         <div id="centre">
