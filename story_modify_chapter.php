@@ -83,7 +83,7 @@ if (isset($_POST['numero'])) {
     //mettre à jour le nombre de points perdus si on effectue le choix 2
     $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
     $stmt = $bdd->prepare($requete10);
-    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => '2'));
 
     //mettre à jour le nombre de points perdus si on effectue le choix 3
     $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
@@ -301,7 +301,7 @@ if (isset($_POST['numero'])) {
                                 } ?>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                    <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points1" class="form-control" value="<?= $points1 ?>" autofocus>
                             </ul>
@@ -352,7 +352,7 @@ if (isset($_POST['numero'])) {
                                 } ?>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points2" class="form-control" value="<?= $points2 ?>" autofocus>
                             </ul>
@@ -403,7 +403,7 @@ if (isset($_POST['numero'])) {
                                 } ?>
                                 <br />
                                 <li>
-                                    <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
+                                <h6> Points de vie perdus pour ce choix (0 si aucun point perdu ou que vous avez coché oui précédemment)</h6>
                                 </li>
                                 <input type="number" name="points3" class="form-control" value="<?= $points3 ?>" autofocus>
                             </ul>
