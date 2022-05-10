@@ -1,7 +1,8 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
-<?php include("includes/functions.php");
+<?php include("includes/functions.php"); ?>
+<?php
 $chapterId = $_GET["id_chapter"];
 $id_story = $_GET['id_story'];
 
@@ -15,6 +16,24 @@ if (isset($_POST['numero'])) {
     $newRefChoice1 = escape($_POST['refChoice1']);
     $newRefChoice2 = escape($_POST['refChoice2']);
     $newRefChoice3 = escape($_POST['refChoice3']);
+    $newPoints1 = escape($_POST['points1']);
+    $newPoints2 = escape($_POST['points2']);
+    $newPoints3 = escape($_POST['points3']);
+    if ($_POST['echec1'] == "non") {
+        $newEchec1 = 0;
+    } else {
+        $newEchec1 = 1;
+    }
+    if ($_POST['echec2'] == "non") {
+        $newEchec2 = 0;
+    } else {
+        $newEchec2 = 1;
+    }
+    if ($_POST['echec3'] == "non") {
+        $newEchec3 = 0;
+    } else {
+        $newEchec3 = 1;
+    }
 
     //mettre à jour le numéro du chapitre
     $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id";
@@ -41,21 +60,52 @@ if (isset($_POST['numero'])) {
     $stmt = $bdd->prepare($requete5);
     $stmt->execute(array('id' => $id_story));
 
-    /*//mettre à jour le chapitre vers lequel renvoie le choix 1 
-    $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    //mettre à jour le chapitre vers lequel renvoie le choix 1 
+    $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
     $stmt = $bdd->prepare($requete6);
-    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 1));
+    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
 
     //mettre à jour le chapitre vers lequel renvoie le choix 2
-    $requete7 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    $requete7 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
     $stmt = $bdd->prepare($requete7);
-    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 2));
+    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
 
     //mettre à jour le chapitre vers lequel renvoie le choix 3 
-    $requete8 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+    $requete8 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
     $stmt = $bdd->prepare($requete8);
-    $stmt->execute(array('id' => $id_story, "previous" => $_GET['id'], "choice" => 3));*/
+    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+
+    //mettre à jour le nombre de points perdus si on effectue le choix 1 
+    $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete9);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+
+    //mettre à jour le nombre de points perdus si on effectue le choix 2
+    $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete10);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+
+    //mettre à jour le nombre de points perdus si on effectue le choix 3
+    $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete11);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+
+    //mettre à jour la valeur de death si on effectue le choix 1
+    $requete12 = "UPDATE points SET death=$newEchec1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete12);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+
+    //mettre à jour la valeur de death si on effectue le choix 2
+    $requete13 = "UPDATE points SET death=$newEchec2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete13);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+
+    //mettre à jour la valeur de death si on effectue le choix 3
+    $requete14 = "UPDATE points SET death=$newEchec3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+    $stmt = $bdd->prepare($requete14);
+    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
 }
+redirect("story_modify.php?id=$id_story");
 
 ?>
 
@@ -87,21 +137,103 @@ if (isset($_POST['numero'])) {
             //on récupère les "anciennes" données de la table links pour qu'elles s'affichent dans le form et soient modifiables
             $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
             $resultat = $bdd->prepare($requete);
-            $resultat->execute(array('id_story' => $id_story, 'previous' => $numChap, 'choice' => 1)); 
+            $resultat->execute(array('id_story' => $id_story, 'previous' => $numChap, 'choice' => 1));
             $links = $resultat->fetch();
             $refChoice1 = $links["Chapter"];
 
             $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "previous" => $numChap, "choice" => 2));
-            $links = $resultat->fetch();
-            $refChoice2 = $links["Chapter"];
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $refChoice2
+            if ($resultat->rowCount() == 0) {
+                $refChoice2 = 0;
+            } else {
+                $links = $resultat->fetch();
+                $refChoice2 = $links["Chapter"];
+            }
 
             $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "previous" => $numChap, "choice" => 3));
-            $links = $resultat->fetch();
-            $refChoice3 = $links["Chapter"];
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $refChoice3
+            if ($resultat->rowCount() == 0) {
+                $refChoice3 = 0;
+            } else {
+                $links = $resultat->fetch();
+                $refChoice3 = $links["Chapter"];
+            }
+
+            //on récupère les "anciennes" données de la table points pour qu'elles s'affichent dans le form et soient modifiables
+
+            //IL NE FAUT PAS OUBLIER DE FAIRE LES CHECKBOX
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 1));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $echec1
+            if ($resultat->rowCount() == 0) {
+                $echec1 = 2;
+            } else {
+                $Echec = $resultat->fetch();
+                $echec1 = $Echec["death"];
+            }
+
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 2));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $echec1
+            if ($resultat->rowCount() == 0) {
+                $echec2 = 2;
+            } else {
+                $Echec = $resultat->fetch();
+                $echec2 = $Echec["death"];
+            }
+
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 3));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $echec1
+            if ($resultat->rowCount() == 0) {
+                $echec3 = 2;
+            } else {
+                $Echec = $resultat->fetch();
+                $echec3 = $Echec["death"];
+            }
+
+            //on récupère les points associés à chaque chapitre
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 1));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $points1
+            if ($resultat->rowCount() != 0) {
+                $tablePoints = $resultat->fetch();
+                $points1 = $tablePoints["points"];
+            }
+
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 2));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $points2
+            if ($resultat->rowCount() != 0) {
+                $tablePoints = $resultat->fetch();
+                $points2 = $tablePoints["points"];
+            }
+
+            $requete = "SELECT * FROM points WHERE id_story= :id_story AND chapter = :chapter AND numChoice= :choice";
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 3));
+            //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
+            //chose avant de récupérer le résultat et de poser la variable $points3
+            if ($resultat->rowCount() != 0) {
+                $tablePoints = $resultat->fetch();
+                $points3 = $tablePoints["points"];
+            }
 
             ?>
         </div>
@@ -136,20 +268,41 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice1" class="form-control" value ="<?=$refChoice1?>" required autofocus>
+                                <?php if ($refChoice1 == 0) { ?>
+                                    <input type="number" name="refChoice1" class="form-control" required autofocus>
+                                <?php
+                                } else { ?>
+                                    <input type="number" name="refChoice1" class="form-control" value="<?= $refChoice1 ?>" required autofocus>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <input type="radio" name="echec1" id="oui" value="oui">
-                                <label style="font-size:medium" for="oui">Oui</label>
-                                <input type="radio" name="echec1" id="non" value="non">
-                                <label style="font-size:medium" for="oui">Non</label>
+                                <?php if ($echec1 == 0) { ?>
+                                    <input type="radio" name="echec1" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec1" id="non" value="non" checked>
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else if ($echec1 == 1) { ?>
+                                    <input type="radio" name="echec1" id="oui" value="oui" checked>
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec1" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else { ?>
+                                    <input type="radio" name="echec1" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec1" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points1" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
+                                <input type="number" name="points1" class="form-control" value="<?= $points1 ?>" autofocus>
                             </ul>
                         </div>
                         <br />
@@ -166,20 +319,41 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice2" class="form-control" value ="<?=$refChoice2?>" autofocus>
+                                <?php if ($refChoice2 == 0) { ?>
+                                    <input type="number" name="refChoice2" class="form-control" required autofocus>
+                                <?php
+                                } else { ?>
+                                    <input type="number" name="refChoice2" class="form-control" value="<?= $refChoice2 ?>" required autofocus>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <input type="radio" name="echec2" id="oui" value="oui">
-                                <label style="font-size:medium" for="oui">Oui</label>
-                                <input type="radio" name="echec2" id="non" value="non">
-                                <label style="font-size:medium" for="oui">Non</label>
+                                <?php if ($echec2 == 0) { ?>
+                                    <input type="radio" name="echec2" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec2" id="non" value="non" checked>
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else if ($echec2 == 1) { ?>
+                                    <input type="radio" name="echec2" id="oui" value="oui" checked>
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec2" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else { ?>
+                                    <input type="radio" name="echec2" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec2" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points2" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
+                                <input type="number" name="points2" class="form-control" value="<?= $points2 ?>" autofocus>
                             </ul>
                         </div>
                         <br />
@@ -196,20 +370,41 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Vers quel chapitre ce choix renvoie-t-il ? </h6>
                                 </li>
-                                <input type="number" name="refChoice3" class="form-control" value ="<?=$refChoice3?>" autofocus>
+                                <?php if ($refChoice3 == 0) { ?>
+                                    <input type="number" name="refChoice3" class="form-control" required autofocus>
+                                <?php
+                                } else { ?>
+                                    <input type="number" name="refChoice3" class="form-control" value="<?= $refChoice3 ?>" required autofocus>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <input type="radio" name="echec3" id="oui" value="oui">
-                                <label style="font-size:medium" for="oui">Oui</label>
-                                <input type="radio" name="echec3" id="non" value="non">
-                                <label style="font-size:medium" for="oui">Non</label>
+                                <?php if ($echec3 == 0) { ?>
+                                    <input type="radio" name="echec3" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec3" id="non" value="non" checked>
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else if ($echec3 == 1) { ?>
+                                    <input type="radio" name="echec3" id="oui" value="oui" checked>
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec3" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } else { ?>
+                                    <input type="radio" name="echec3" id="oui" value="oui">
+                                    <label style="font-size:medium" for="oui">Oui</label>
+                                    <input type="radio" name="echec3" id="non" value="non">
+                                    <label style="font-size:medium" for="oui">Non</label>
+                                <?php
+                                } ?>
                                 <br />
                                 <li>
                                     <h6> Si non, combien de points de vie sont perdus si le lecteur fait ce choix ? (0 si aucun point perdu)</h6>
                                 </li>
-                                <input type="number" name="points3" class="form-control" placeholder="Nombre de points de vie perdus si on fait ce choix" autofocus>
+                                <input type="number" name="points3" class="form-control" value="<?= $points3 ?>" autofocus>
                             </ul>
                         </div>
                     </ul>

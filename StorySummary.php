@@ -28,13 +28,11 @@
             <br />
             <h4 id="centre">Résumé</h4>
             <h5> <?php echo $histoire['summary']; ?> </h5>
-            <hr/>
+            <hr />
             <h4 id="centre">Modalités</h4>
-            <h5>Vous commencez cette histoire avec un total de <?=$histoire['nbrPoints']?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</h5> 
-            <br/>
+            <h5>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</h5>
+            <br />
             <div id="btn-lecture">
-                <a class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
-                &nbsp;
                 <?php
                 $id_story = $_GET['id'];
                 $requete2 = "SELECT * FROM advancement WHERE id_story = :id_story AND id_usr = :id_usr";
@@ -48,12 +46,13 @@
                     $chapter = $ligne['numChapter'];
                     $link = "chapter.php?story_id=$id_story&chapter_num=$chapter&choice_num=0"; ?>
                     <a class="btn btn-outline-dark" href=<?= $link ?> role="button">Reprendre la lecture !</a><?php
-                    } 
-                    else {
-                    $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0"; ?>
+                                                                                                            } else {
+                                                                                                                $link = "chapter.php?story_id=1&chapter_num=1&choice_num=0"; ?>
                     <a class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
-                    }
-                    ?>
+                                                                                                            }
+                                                                                                                ?>
+                &nbsp;
+                <a class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
 
             </div>
 
