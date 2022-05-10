@@ -1,30 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 02:58 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 7.4.20
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 10 mai 2022 à 13:21
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Database: `mystories`
+-- Base de données : `mystories`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `advancement`
+-- Structure de la table `advancement`
 --
 
 CREATE TABLE `advancement` (
@@ -34,10 +28,17 @@ CREATE TABLE `advancement` (
   `jour` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `advancement`
+--
+
+INSERT INTO `advancement` (`id_usr`, `id_story`, `numChapter`, `jour`) VALUES
+(2, 1, 1, '2022-05-10');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chapters`
+-- Structure de la table `chapters`
 --
 
 CREATE TABLE `chapters` (
@@ -51,7 +52,7 @@ CREATE TABLE `chapters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `chapters`
+-- Déchargement des données de la table `chapters`
 --
 
 INSERT INTO `chapters` (`id_chapter`, `id_story`, `numChapter`, `chapterContent`, `choice1`, `choice2`, `choice3`) VALUES
@@ -76,12 +77,13 @@ INSERT INTO `chapters` (`id_chapter`, `id_story`, `numChapter`, `chapterContent`
 (19, 1, 19, 'Cachés derrière un poteau, nous pouvons apercevoir la dame bizarre sur un palier. Avant de sortir, nous l’entendons dire : « Ne bougez pas monsieur Charles !!! Je reviens tout de suite ». La dame sort de l’immeuble.', 'Nous allons chercher un policier pour qu’il arrête la dame. ', 'Nous allons vite voir d’où venait la voix de Monsieur Charles. ', NULL),
 (20, 1, 20, 'Nous montons les escaliers à toute vitesse.', 'Page suivante', NULL, NULL),
 (21, 1, 21, 'Nous trouvons un policier dans la rue qui nous dit : « Voyons les enfants, restons sérieux... Je ne mets pas les gens en prison comme ça... ». Nous retournons dans les escaliers.', 'Page suivante', NULL, NULL),
-(22, 1, 22, 'Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire :\n« Mais Rose est mon aide-ménagère ! quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. »\nNous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soir.', NULL, NULL, NULL);
+(22, 1, 22, 'Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire :\n« Mais Rose est mon aide-ménagère ! quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. »\nNous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soir.', 'FIN', NULL, NULL),
+(23, 2, 6, 'sxkq,xk', 'dc,s', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `choices`
+-- Structure de la table `choices`
 --
 
 CREATE TABLE `choices` (
@@ -91,10 +93,20 @@ CREATE TABLE `choices` (
   `choice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `choices`
+--
+
+INSERT INTO `choices` (`id_usr`, `id_story`, `numChapter`, `choice`) VALUES
+(2, 1, 1, 1),
+(2, 1, 2, 1),
+(2, 1, 2, 1),
+(2, 1, 3, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `links`
+-- Structure de la table `links`
 --
 
 CREATE TABLE `links` (
@@ -105,7 +117,7 @@ CREATE TABLE `links` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `links`
+-- Déchargement des données de la table `links`
 --
 
 INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice`) VALUES
@@ -124,7 +136,7 @@ INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice
 (1, 10, 9, 1),
 (1, 11, 9, 2),
 (1, 12, 10, 1),
-(1, 13, 10, 2),
+(1, 13, 10, 1),
 (1, 1, 11, 1),
 (1, 14, 12, 1),
 (1, 15, 12, 2),
@@ -134,16 +146,20 @@ INSERT INTO `links` (`id_story`, `Chapter`, `Previous_Chapter`, `Previous_Choice
 (1, 12, 15, 1),
 (1, 17, 16, 1),
 (1, 19, 17, 1),
-(1, 18, 19, 2),
-(1, 19, 18, 1),
+(1, 18, 17, 2),
+(1, 1, 18, 1),
 (1, 21, 19, 1),
 (1, 20, 19, 2),
-(1, 22, 20, 1);
+(1, 22, 20, 1),
+(1, 22, 21, 1),
+(2, 2, 6, 1),
+(2, 0, 6, 2),
+(2, 0, 6, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `player_points`
+-- Structure de la table `player_points`
 --
 
 CREATE TABLE `player_points` (
@@ -156,7 +172,7 @@ CREATE TABLE `player_points` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `points`
+-- Structure de la table `points`
 --
 
 CREATE TABLE `points` (
@@ -168,7 +184,7 @@ CREATE TABLE `points` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `points`
+-- Déchargement des données de la table `points`
 --
 
 INSERT INTO `points` (`id_story`, `chapter`, `numChoice`, `points`, `death`) VALUES
@@ -179,12 +195,15 @@ INSERT INTO `points` (`id_story`, `chapter`, `numChoice`, `points`, `death`) VAL
 (1, 11, 1, 0, 1),
 (1, 17, 2, 1, 0),
 (1, 18, 1, 0, 1),
-(1, 19, 1, 1, 0);
+(1, 19, 1, 1, 0),
+(2, 6, 1, 0, 0),
+(2, 6, 2, 0, 0),
+(2, 6, 3, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stats`
+-- Structure de la table `stats`
 --
 
 CREATE TABLE `stats` (
@@ -197,7 +216,7 @@ CREATE TABLE `stats` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stories`
+-- Structure de la table `stories`
 --
 
 CREATE TABLE `stories` (
@@ -213,16 +232,17 @@ CREATE TABLE `stories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `stories`
+-- Déchargement des données de la table `stories`
 --
 
 INSERT INTO `stories` (`id_story`, `title`, `author`, `nbChapters`, `finished`, `date`, `hide`, `summary`, `nbrPoints`) VALUES
-(1, 'Les détectives', 'correcteur_admin', 22, 0, '2022-05-03', 0, 'Comme tous les lundis après les cours, vous et vos amis courrez en direction du parc pour y retrouver Monsieur Charles, un vieil homme qui n’est jamais à court d’histoires. Comme tous les lundis, vous pourrez prendre votre goûter en écoutant les aventures décrites par ce conteur hors-pair. Mais aujourd’hui, on a beau être lundi, Monsieur Charles n’est pas là. A vous d’élucider le mystère entourant la disparition du vieil homme…', 5);
+(1, 'Les détectives', 'correcteur_admin', 22, 0, '2022-05-03', 0, 'Comme tous les lundis après les cours, vous et vos amis courrez en direction du parc pour y retrouver Monsieur Charles, un vieil homme qui n’est jamais à court d’histoires. Comme tous les lundis, vous pourrez prendre votre goûter en écoutant les aventures décrites par ce conteur hors-pair. Mais aujourd’hui, on a beau être lundi, Monsieur Charles n’est pas là. A vous d’élucider le mystère entourant la disparition du vieil homme…', 5),
+(2, 'xsz', 'correcteur_admin', 1, 0, '2022-05-10', 0, 'csz', 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -233,7 +253,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id_usr`, `login_usr`, `password_usr`, `acces`) VALUES
@@ -241,73 +261,57 @@ INSERT INTO `user` (`id_usr`, `login_usr`, `password_usr`, `acces`) VALUES
 (2, 'correcteur_admin', 'mdp_correcteur_1234', 'admin');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `advancement`
---
-ALTER TABLE `advancement`
-  ADD KEY `id_story` (`id_story`);
-
---
--- Indexes for table `chapters`
+-- Index pour la table `chapters`
 --
 ALTER TABLE `chapters`
   ADD PRIMARY KEY (`id_chapter`),
   ADD KEY `id_story` (`id_story`);
 
 --
--- Indexes for table `stories`
+-- Index pour la table `stories`
 --
 ALTER TABLE `stories`
   ADD PRIMARY KEY (`id_story`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_usr`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `chapters`
+-- AUTO_INCREMENT pour la table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id_chapter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_chapter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `stories`
+-- AUTO_INCREMENT pour la table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id_story` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_story` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_usr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `advancement`
---
-ALTER TABLE `advancement`
-  ADD CONSTRAINT `advancement_ibfk_2` FOREIGN KEY (`id_story`) REFERENCES `stories` (`id_story`);
-
---
--- Constraints for table `chapters`
+-- Contraintes pour la table `chapters`
 --
 ALTER TABLE `chapters`
   ADD CONSTRAINT `chapters_ibfk_1` FOREIGN KEY (`id_story`) REFERENCES `stories` (`id_story`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
