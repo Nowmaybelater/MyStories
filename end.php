@@ -28,7 +28,16 @@
         $req3 = "SELECT * FROM player_points WHERE id_story=:id AND id_user=:id_user";
         $req3 = $bdd->prepare($req3);
         $req3->execute(array("id" => $storyId, "id_user" => $id_usr));
-        $ligne2 = $req3->fetch();
+        if($req3->rowCount()==1){
+            $ligne2 = $req3->fetch();
+            $death=$ligne2['death'];
+            $pts=$ligne2['points'];
+        }
+        else{
+            $death=0;
+            $pts=0;
+        }
+        
 
         if ($res->rowCount() == 1) {
             $ligne3 = $res->fetch();
@@ -37,13 +46,13 @@
             $res2 = $bdd->prepare($req2);
             $res2->execute(array("id" => $storyId));
 
-            if ($ligne2['death'] == 1) {
+            if ($death == 1) {
                 $dead = $ligne3['death'] + 1;
                 $req4 = "UPDATE stats SET death=$dead WHERE id_story=:id";
                 $req4 = $bdd->prepare($req4);
                 $req4->execute(array("id" => $storyId));
             }
-            $pts = $ligne2['points'] + $ligne3['points'];
+            $pts = $pts + $ligne3['points'];
             $req5 = "UPDATE stats SET points=$pts WHERE id_story=:id";
             $req5 = $bdd->prepare($req5);
             $req5->execute(array("id" => $storyId));

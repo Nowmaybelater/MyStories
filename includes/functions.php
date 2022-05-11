@@ -103,18 +103,26 @@
         function Resume($id_user, $id_story, $bdd){
             $requete1 = $bdd->prepare('SELECT * FROM player_points WHERE id_user=? AND id_story=?');
             $requete1->execute(array($id_user, $id_story));
-            $ligne1=$requete1->fetch();
 
             $requete2 = $bdd->prepare('SELECT * FROM stories WHERE id_story=?');
             $requete2->execute(array($id_story));
             $ligne2=$requete2->fetch();
 
-            $nbPoints=$ligne2['nbrPoints']-$ligne1['points'];
+            if($requete1->rowCount()==1){
+                $ligne1=$requete1->fetch();
+                $nbPoints=$ligne2['nbrPoints']-$ligne1['points'];
+                $death=$ligne1['death'];
+            }
+            else{
+                $nbPoints=$ligne2['nbrPoints'];
+                $death=0;
+            }
+
             echo "Nombre de points restant : " . $nbPoints;
             ?>
             <br/><br/>
             <?php
-            if($ligne1['death']==1){
+            if($death==1){
                 echo "Vous avez fait une erreur fatale";
             }
             else{
