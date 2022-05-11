@@ -25,7 +25,7 @@
             $link = "StorySummary.php?id=$valeur.php";
           } else {
             $link = "NonConnecte.php";
-          }?>
+          } ?>
           <a id="size-btn" class="btn btn-outline-dark" href="<?= $link ?>" role="button">Découvrir l'histoire</a>
         </div>
         <hr />
@@ -38,6 +38,10 @@
     <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
   </div>
 </main>
+<footer id="centre">
+  &copy 2022 par Clara Courtois et Valentine Lorsery
+  <br />
+</footer>
 </body>
 
 </html>

@@ -8,6 +8,10 @@ body {
     color: white;
 }
 
+footer{
+    margin-bottom:10px;
+}
+
 .titre {
     font-size: 4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
