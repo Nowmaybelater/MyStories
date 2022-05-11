@@ -38,30 +38,38 @@ if (isset($_POST['numero'])) {
     //mettre à jour le numéro du chapitre
     $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete1);
-    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
+    $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
 
     //mettre à jour le contenu du chapitre
     $requete2 = "UPDATE chapters SET chapterContent=$newContenu WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete2);
-    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
+    $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
 
     //mettre à jour l'intitulé du choix 1 du chapitre
     $requete3 = "UPDATE chapters SET choice1=$newChoice1 WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete3);
-    $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
+    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
 
     //mettre à jour l'intitulé du choix 2 du chapitre
-    if($newChoice2 != ''){
+    if ($newChoice2 != '') {
         $requete4 = "UPDATE chapters SET choice2=$newChoice2 WHERE id_story=:id AND id_chapter=:idChap";
         $stmt = $bdd->prepare($requete4);
-        $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
+        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+    } else {
+        $requete4 = "UPDATE chapters SET choice2=null WHERE id_story=:id AND id_chapter=:idChap";
+        $stmt = $bdd->prepare($requete4);
+        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
     }
 
     //mettre à jour l'intitulé du choix 3 du chapitre
-    if ($nexChoice3 != ''){
+    if ($newChoice3 != '') {
         $requete5 = "UPDATE chapters SET choice3=$newChoice3 WHERE id_story=:id AND id_chapter=:idChap";
         $stmt = $bdd->prepare($requete5);
-        $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
+        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+    } else {
+        $requete5 = "UPDATE chapters SET choice3=null WHERE id_story=:id AND id_chapter=:idChap";
+        $stmt = $bdd->prepare($requete5);
+        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
     }
 
     //mettre à jour le chapitre vers lequel renvoie le choix 1 
@@ -70,14 +78,28 @@ if (isset($_POST['numero'])) {
     $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
 
     //mettre à jour le chapitre vers lequel renvoie le choix 2
-    $requete7 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-    $stmt = $bdd->prepare($requete7);
-    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+    if ($refChoice2 != '') {
+        $requete7 = "UPDATE links SET Chapter=$newRefChoice2 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete7);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+    } else {
+        $requete7 = "UPDATE links SET Chapter=null WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete7);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+    }
 
-    //mettre à jour le chapitre vers lequel renvoie le choix 3 
-    $requete8 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-    $stmt = $bdd->prepare($requete8);
-    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+    //mettre à jour le chapitre vers lequel renvoie le choix 3
+    if ($refChoice3 != '') {
+        $requete8 = "UPDATE links SET Chapter=$newRefChoice3 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete8);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+    }
+    else{
+        $requete8 = "UPDATE links SET Chapter=null WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete8);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+    }
+
 
     //mettre à jour le nombre de points perdus si on effectue le choix 1 
     $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
@@ -418,14 +440,14 @@ if (isset($_POST['numero'])) {
                 <div>
                     <div>
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
-                        <a id="size-btn" class="btn btn-outline-primary" href="story_modify.php?id=<?=$id_story?>" role="button"> Retour sans sauvegarder</a>
+                        <a id="size-btn" class="btn btn-outline-primary" href="story_modify.php?id=<?= $id_story ?>" role="button"> Retour sans sauvegarder</a>
                     </div>
                 </div>
             </form>
         </div>
         <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
     </div>
-    </main>
+</main>
 </body>
 
 </html>
