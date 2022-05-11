@@ -15,11 +15,32 @@ if (isset($_SESSION['login'])) {
         $choice3 = escape($_POST['choice3']);
 
         //insérer le chapitre à la table chapters de la base de données
-        $stmt = $bdd->prepare('insert into chapters
-        (id_story,numChapter, chapterContent, choice1, choice2, choice3)
-        values (?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2, $choice3));
-
+        if ($choice2 != '') {
+            if ($choice3 != '') {
+                $stmt = $bdd->prepare('insert into chapters
+                (id_story,numChapter, chapterContent, choice1, choice2, choice3)
+                values (?, ?, ?, ?, ?, ?)');
+                $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2, $choice3));
+            } else {
+                $stmt = $bdd->prepare('insert into chapters
+                (id_story,numChapter, chapterContent, choice1, choice2)
+                values (?, ?, ?, ?, ?)');
+                $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2));
+            }
+        } else {
+            if ($choice3!=''){
+                $stmt = $bdd->prepare('insert into chapters
+                (id_story,numChapter, chapterContent, choice1, choice3)
+                values (?, ?, ?, ?, ?)');
+                $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice3));
+            }
+            else{
+                $stmt = $bdd->prepare('insert into chapters
+                (id_story,numChapter, chapterContent, choice1)
+                values (?, ?, ?, ?)');
+                $stmt->execute(array($id_story, $num, $contenu, $choice1));
+            }
+        }
         //compléter la table links de la base de données
         $refChoice1 = escape($_POST['refChoice1']);
         $stmt = $bdd->prepare('insert into links
@@ -214,7 +235,7 @@ if (isset($_SESSION['login'])) {
         </div>
         <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
     </div>
-    </main>
+</main>
 </body>
 
 </html>
