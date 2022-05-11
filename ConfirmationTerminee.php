@@ -12,17 +12,18 @@
 
 <main>
     <div id="backgroundConnexion">
+    <br />
         <br />
         <br />
         <br />
-        <h1 id="centre">
-            Félicitations !
-        </h1>
-        <h2 id="centre">
-            Vous histoire est désormais marquée comme "Terminée"
-        </h2>
+        <div id="centre" class="alert alert-success" role="alert">
+            <h3>Félicitations ! Votre histoire est à présent marquée comme terminée</h3>
+        </div>
+        <br />
+        <br />
+        <br />
         <div id="btn-lecture">
-            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour </a>
+            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour à la page précédente </a>
         </div>
     </div>
     </main>

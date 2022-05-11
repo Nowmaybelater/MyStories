@@ -4,9 +4,8 @@
 <main>
   <div id="backgroundConnexion">
     <p class="titre"> Bibliothèque </p>
-    <br />
-    <p>Vous trouverez ici la liste des histoires que vous avez déjà commencé</p>
-    <br />
+    <p id="centre">Vous trouverez ici la liste des histoires que vous avez déjà commencées</p>
+    <br/>
     <hr />
     <div>
       <?php
@@ -62,7 +61,7 @@
                 <?php
                 $link = "chapter.php?story_id=$histEnCours&chapter_num=$num&choice_num=0&prev_chap=0";
                 ?>
-                <a id="size-btn" class="btn btn-outline-dark" href="<?= $link ?>" role="button">Reprendre la lecture</a>
+                <a id="size-btn" class="btn btn-outline-dark" href="<?= $link ?>" role="button">Reprendre la lecture !</a>
               </div>
               <hr />
             <?php

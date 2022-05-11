@@ -38,8 +38,8 @@
     <a class="btn btn-success" id="btnHautPage" href="#top" role="button" title="Haut de page"> <i class="bi bi-caret-up-fill"></i> </a>
   </div>
 </main>
-<footer id="centre">
-  &copy 2022 par Clara Courtois et Valentine Lorsery
+<footer id="footer">
+    &copy 2022 par Clara Courtois et Valentine Lorsery
   <br />
 </footer>
 </body>

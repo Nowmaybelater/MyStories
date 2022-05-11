@@ -4,17 +4,27 @@
     <div id="backgroundConnexion">
 
         <?php
-            $storyId=$_GET['id'];
-            //on suprime toutes les lignes faisant référence à cette histoire
-            $req="UPDATE stories SET hide='1' WHERE id_story=?";
-            $requete = $bdd->prepare($req);
-            $requete->execute(array($storyId));
+        $storyId = $_GET['id'];
+        //on suprime toutes les lignes faisant référence à cette histoire
+        $req = "UPDATE stories SET hide='1' WHERE id_story=?";
+        $requete = $bdd->prepare($req);
+        $requete->execute(array($storyId));
         ?>
-        <div class="alert alert-success" role="alert">
-            L'histoire est à présent cachée !
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="centre" class="alert alert-success" role="alert">
+            <h3>L'histoire est à présent cachée !</h3>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div id="btn-lecture">
+            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour à la page précédente </a>
         </div>
     </div>
-    </main>
+</main>
 </body>
 
 </html>

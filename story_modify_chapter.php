@@ -414,7 +414,7 @@ if (isset($_POST['numero'])) {
                 <div>
                     <div>
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
-                        <a id="size-btn" class="btn btn-outline-primary" href="ListeHistoires.php" role="button"> Retour sans sauvegarder</a>
+                        <a id="size-btn" class="btn btn-outline-primary" href="story_modify.php?id=<?=$id_story?>" role="button"> Retour sans sauvegarder</a>
                     </div>
                 </div>
             </form>

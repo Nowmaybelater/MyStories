@@ -30,7 +30,7 @@
             <p> <?php echo $histoire['summary']; ?> </p>
             <hr />
             <h4 id="centre">Modalités</h4>
-            <p>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</p>
+            <p>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage échoue et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à l'échec immédiat de votre personnage et donc à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure !</p>
             <br />
             <div id="btn-lecture">
                 <?php
