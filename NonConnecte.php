@@ -9,10 +9,10 @@
       </p>
       <br />
       <div id="btn-lecture">
-        <a class="btn btn-outline-dark" href="login.php" role="button">Se connecter</a>
+        <a id="size-btn" class="btn btn-outline-dark" href="login.php" role="button">Se connecter</a>
         &nbsp;
         <!--cette instruction permet d'ajouter un espace entre les deux boutons-->
-        <a class="btn btn-outline-secondary" href="inscription.php" role="button">S'inscrire</a>
+        <a id="size-btn" class="btn btn-outline-secondary" href="inscription.php" role="button">S'inscrire</a>
       </div>
       <br />
     </div>

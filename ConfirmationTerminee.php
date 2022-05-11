@@ -22,7 +22,7 @@
             Vous histoire est désormais marquée comme "Terminée"
         </h2>
         <div id="btn-lecture">
-            <a class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour </a>
+            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour </a>
         </div>
     </div>
     </main>

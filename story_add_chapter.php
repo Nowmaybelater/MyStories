@@ -207,7 +207,7 @@ if (isset($_SESSION['login'])) {
                 <br />
                 <div>
                     <div id="centre">
-                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
+                        <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
                     </div>
                 </div>
             </form>

@@ -26,7 +26,7 @@
           } else {
             $link = "NonConnecte.php";
           }?>
-          <a class="btn btn-outline-dark" href="<?= $link ?>" role="button">Découvrir l'histoire</a>
+          <a id="size-btn" class="btn btn-outline-dark" href="<?= $link ?>" role="button">Découvrir l'histoire</a>
         </div>
         <hr />
       <?php

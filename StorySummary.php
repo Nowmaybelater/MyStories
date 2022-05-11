@@ -49,11 +49,11 @@
                     }
                     else {
                         $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
-                        <a class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
+                        <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
                     }
                         ?>
                 &nbsp;
-                <a class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
+                <a id="size-btn" class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
 
             </div>
 

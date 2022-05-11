@@ -59,7 +59,7 @@ function escape($value)
             <br />
             <div class="form-group" id="centre">
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <button type="submit" class="btn btn-default btn-primary" pb-role="submit"><span class="glyphicon glyphicon-log-in"></span> S'inscrire</button>
+                    <button id="size-btn" type="submit" class="btn btn-default btn-primary" pb-role="submit"><span class="glyphicon glyphicon-log-in"></span> S'inscrire</button>
                 </div>
             </div>
         </form>

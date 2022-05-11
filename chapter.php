@@ -109,7 +109,7 @@
                     $id=$id;
                     $chapterNum=$choix1['Chapter'];
                     ?>
-                        <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chapterNum?>&choice_num=1&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice1']?></a>
+                        <a id="size-btn" class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chapterNum?>&choice_num=1&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
                     <?php
                 }
@@ -117,7 +117,7 @@
                 else{
                     $id=$id;
                     ?>
-                        <a class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
+                        <a id="size-btn" class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
                     <?php
                                         
@@ -135,7 +135,7 @@
                 $choix2 = $req3->fetch(); 
                 $chap=$choix2['Chapter'];
                 ?>
-                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chap?>&choice_num=2&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice2']?></a>
+                <a id="size-btn" class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chap?>&choice_num=2&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice2']?></a>
                 &nbsp;
                 <?php 
             }
@@ -150,7 +150,7 @@
                 ));
                 $choix3 = $req4->fetch();
                 ?>
-                <a class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $choix3['Chapter']?>&choice_num=3&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice3']?></a>
+                <a id="size-btn" class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $choix3['Chapter']?>&choice_num=3&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice3']?></a>
                 &nbsp;
                 <?php 
             }

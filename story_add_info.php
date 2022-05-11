@@ -60,7 +60,7 @@ if (isset($_SESSION['login'])) {
                 <br/>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
+                        <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
                     </div>
                 </div>
             </form>

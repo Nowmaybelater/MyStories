@@ -9,13 +9,13 @@ body {
 }
 
 .titre {
-    font-size: 2cm;
+    font-size: 4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
-.titre_petit{
-    font-size :1.5cm;
+.titre_petit {
+    font-size: 1.5em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
@@ -25,7 +25,7 @@ li a:hover {
     background-color: grey;
 }
 
-#edition:hover{
+#edition:hover {
     background-color: grey;
 }
 
@@ -37,16 +37,9 @@ main {
     background-size: cover;
     background-attachment: fixed;
     width: 80vw;
-    font-size: 0.6cm;
+    font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
-/* //Ces éléments de style vont s'appliquer lorsque la taille de l'écran fera entre 0 et 900px de largeur) 
-@media only screen and (max-width: 900px) {
-    main{
-        font-size:2cm;
-    }
-}*/
 
 #btn-lecture {
     display: flex;
@@ -90,17 +83,36 @@ main {
     text-align: center;
 }
 
-.listeHistoires{
-    text-decoration:none;
-    color:black;
+.listeHistoires {
+    text-decoration: none;
+    color: black;
 }
 
-a:hover{
-    color:grey;
+a:hover {
+    color: grey;
 }
 
-#btnHautPage{
+#btnHautPage {
     position: fixed;
     bottom: 50px;
     right: 30px;
+}
+
+/*Ces éléments de style vont s'appliquer lorsque la taille de l'écran fera entre 0 et 900px de largeur) */
+@media only screen and (orientation : portrait) {
+    main {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .titre {
+        font-size: 2.7em;
+    }
+
+    #size-btn{
+        font-size:0.9em;
+    }
 }

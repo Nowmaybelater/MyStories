@@ -31,14 +31,14 @@
 
             <!--Possibilité d'ajouter un nouveau chapitre-->
             <div id="centre">
-                <a class="btn btn-primary" href="story_add_chapter.php?id=<?= $id_story ?>" role="button"> <i class="bi bi-plus-circle"></i> Nouveau Chapitre </a>
+                <a id="size-btn" id="size-btn" class="btn btn-primary" href="story_add_chapter.php?id=<?= $id_story ?>" role="button"> <i class="bi bi-plus-circle"></i> Nouveau Chapitre </a>
                 &nbsp;
                 <!--Possibilité de marquer l'histoire comme terminée ou de revenir vers un statut "en cours" si on veut modifier l'histoire terminée -->
                 <?php if ($histoire['finished'] == 0) { ?>
-                    <a class="btn btn-primary" href="ConfirmationTerminee.php?id=<?= $id_story ?>" role="button">Terminer l'histoire</a>
+                    <a id="size-btn" class="btn btn-primary" href="ConfirmationTerminee.php?id=<?= $id_story ?>" role="button">Terminer l'histoire</a>
                 <?php
                 } else { ?>
-                    <a class="btn btn-primary" href="EnCours.php?id=<?= $id_story ?>" role="button">Marquer comme "En Cours"</a>
+                    <a id="size-btn" class="btn btn-primary" href="EnCours.php?id=<?= $id_story ?>" role="button">Marquer comme "En Cours"</a>
                 <?php
                 } ?>
             </div>
@@ -49,7 +49,7 @@
                 <h2><em>Informations générales</em></h2>
             </div>
             <div id="btn-lecture">
-                <a class="btn btn-outline-dark" href="story_modify_info.php?id=<?= $id_story ?>" role="button">Modifier</a>
+                <a id="size-btn" class="btn btn-outline-dark" href="story_modify_info.php?id=<?= $id_story ?>" role="button">Modifier</a>
             </div>
             <hr />
             <!--possibilité de modifier les chapitres existants de l'histoire-->
@@ -67,9 +67,9 @@
                         <h2><em>Chapitre <?= $chapitre['numChapter'] ?></em></h2>
                     </div>
                     <div id="btn-lecture">
-                        <a class="btn btn-outline-dark" href="story_modify_chapter.php?id_chapter=<?= $valeur ?>&id_story=<?= $id_story ?>" role="button">Modifier</a>
+                        <a id="size-btn" class="btn btn-outline-dark" href="story_modify_chapter.php?id_chapter=<?= $valeur ?>&id_story=<?= $id_story ?>" role="button">Modifier</a>
                         &nbsp;
-                        <a class="btn btn-outline-dark" href="story_delete_chapter.php?id=<?= $valeur ?>" role="button">Supprimer</a>
+                        <a id="size-btn" class="btn btn-outline-dark" href="story_delete_chapter.php?id=<?= $valeur ?>" role="button">Supprimer</a>
                     </div>
                     <hr />
                 <?php
