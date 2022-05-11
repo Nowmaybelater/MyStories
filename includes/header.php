@@ -6,7 +6,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-        <h2><i class="bi bi-vector-pen"></i> MyStories</h2>
+        <h2 id="responsive-size-title"><i class="bi bi-vector-pen"></i> MyStories</h2>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color:black">
         <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
                 }
 
               ?>
-                <li><a class="dropdown-item" href=<?= $link ?>><?= $ligne['title'] ?></a></li>
+                <li><a id="responsive-size" class="dropdown-item" href=<?= $link ?>><?= $ligne['title'] ?></a></li>
               <?php } ?>
             </ul>
           </li>
@@ -52,13 +52,13 @@
             ?>
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-check-fill"></i> Mon profil </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="biblio.php">Bibliothèque</a></li>
-                <li><a class="dropdown-item" href="logout.php">Se déconnecter</a></li>
+                <li><a id="responsive-size" class="dropdown-item" href="biblio.php">Bibliothèque</a></li>
+                <li><a id="responsive-size" class="dropdown-item" href="logout.php">Se déconnecter</a></li>
               </ul>
             <?php
             } else {
             ?>
-              <a class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
+              <a id="responsive-size" class="nav-link active" aria-current="page" href="login.php"><i class="bi bi-person-fill"></i> Se connecter</a>
             <?php
             }
             ?>

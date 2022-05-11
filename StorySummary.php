@@ -27,10 +27,10 @@
                                                 } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <br />
             <h4 id="centre">Résumé</h4>
-            <h5> <?php echo $histoire['summary']; ?> </h5>
+            <p> <?php echo $histoire['summary']; ?> </p>
             <hr />
             <h4 id="centre">Modalités</h4>
-            <h5>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</h5>
+            <p>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage meurt et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à la mort immédiate de votre personnage ou bien à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure.</p>
             <br />
             <div id="btn-lecture">
                 <?php

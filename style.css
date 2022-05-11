@@ -108,11 +108,30 @@ a:hover {
         font-size: 1.5em;
     }
 
+    h6{
+        font-size:1em;
+    }
     .titre {
         font-size: 2.7em;
     }
 
-    #size-btn{
-        font-size:0.9em;
+    #size-btn {
+        font-size: 0.8em;
+    }
+
+    #responsive-size-title {
+        font-size: 2.5em;
+    }
+
+    #responsive-size {
+        font-size: 2em;
+    }
+
+    #edition {
+        font-size: 2em;
+    }
+
+    #navbarDropdown {
+        font-size: 2em;
     }
 }
