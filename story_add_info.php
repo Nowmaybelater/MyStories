@@ -66,4 +66,7 @@ if (isset($_SESSION['login'])) {
             </form>
         </div>
     </div>
-</main>
+    </main>
+</body>
+
+</html>

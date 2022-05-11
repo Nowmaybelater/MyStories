@@ -48,4 +48,7 @@
             Supression du chapitre réussie !
         </div>
     </div>
-</main>
+    </main>
+</body>
+
+</html>

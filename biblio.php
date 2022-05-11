@@ -5,7 +5,7 @@
   <div id="backgroundConnexion">
     <p class="titre"> Bibliothèque </p>
     <br />
-    <p>Vous trouverez ici la liste des histories que vous avez déjà commencé</p>
+    <p>Vous trouverez ici la liste des histoires que vous avez déjà commencé</p>
     <br />
     <hr />
     <div>
@@ -30,16 +30,37 @@
             while ($histoire = $requete3->fetch()) {
               $num = $advancmt["numChapter"];
               $date = $advancmt['jour'];
+              $ptsStories=$histoire['nbrPoints'];
+
+              $requete4 = "SELECT * FROM player_points WHERE id_story=:id_story AND id_user=:id_usr";
+              $requete4 = $bdd->prepare($requete4);
+              $requete4->execute(array(
+                'id_story'=>$histEnCours,
+                 'id_usr'=>$id_user
+                ));
+              if($requete4->rowCount()==1){
+                $player=$requete4->fetch();
+                $ptsJoueur=$player['points'];
+              }
+              else{
+                $ptsJoueur=0;
+              }
+              $points=$ptsStories-$ptsJoueur;
             ?>
               <div>
                 <h2><em><?= $histoire['title'] ?></em> par <?= $histoire['author'] ?></h2>
-                <p>Dernière lecture : chapitre <?= $num?>,  le <?= $date?></p>
+                <p>
+                  <ul>
+                    <li> Chapitre en cours : <?= $num?> </li>
+                    <li> Dernière visite le <?= $date?></li>
+                    <li> Vous avez actuellement <?= $points?> points sur les <?= $ptsStories?> accordés en début d'histoire.</li>
+                  </ul> 
+                </p> 
                 <p><?= $histoire['summary'] ?></p>
               </div>
               <div id="btn-lecture">
                 <?php
-                //$link = "chapter.php?story_id=$histEnCours&chapter_num=$num&choice_num=0&prev_chap=0";
-                  $link = "StorySummary.php?id=$histEnCours.php";
+                $link = "chapter.php?story_id=$histEnCours&chapter_num=$num&choice_num=0&prev_chap=0";
                 ?>
                 <a class="btn btn-outline-dark" href="<?= $link ?>" role="button">Reprendre la lecture</a>
               </div>

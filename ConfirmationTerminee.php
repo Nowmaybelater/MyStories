@@ -25,4 +25,7 @@
             <a class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour </a>
         </div>
     </div>
-</main>
+    </main>
+</body>
+
+</html>

@@ -14,4 +14,7 @@
             L'histoire est à présent cachée !
         </div>
     </div>
-</main>
+    </main>
+</body>
+
+</html>

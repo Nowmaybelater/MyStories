@@ -6,4 +6,7 @@
             Supression de l'histoire réussie !
         </div>
     </div>
-</main>
+    </main>
+</body>
+
+</html>

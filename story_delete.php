@@ -23,3 +23,7 @@
     $requete9->execute(array($storyId));
 
     header("Location: story_deleted.php");?>
+</main>
+</body>
+
+</html>
