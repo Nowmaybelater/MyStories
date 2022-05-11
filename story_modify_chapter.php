@@ -19,6 +19,7 @@ if (isset($_POST['numero'])) {
     $newPoints1 = escape($_POST['points1']);
     $newPoints2 = escape($_POST['points2']);
     $newPoints3 = escape($_POST['points3']);
+
     if ($_POST['echec1'] == "oui") {
         $newEchec1 = 1;
     } else {
@@ -41,18 +42,18 @@ if (isset($_POST['numero'])) {
     $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
 
     //mettre à jour le contenu du chapitre
-    $requete2 = "UPDATE chapters SET chapterContent=$newContenu WHERE id_story=:id AND id_chapter=:idChap";
+    $requete2 = "UPDATE chapters SET chapterContent='$newContenu' WHERE id_story= :id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete2);
-    $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
+    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
 
     //mettre à jour l'intitulé du choix 1 du chapitre
-    $requete3 = "UPDATE chapters SET choice1=$newChoice1 WHERE id_story=:id AND id_chapter=:idChap";
+    $requete3 = "UPDATE chapters SET choice1='$newChoice1' WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete3);
     $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
 
     //mettre à jour l'intitulé du choix 2 du chapitre
     if ($newChoice2 != '') {
-        $requete4 = "UPDATE chapters SET choice2=$newChoice2 WHERE id_story=:id AND id_chapter=:idChap";
+        $requete4 = "UPDATE chapters SET choice2='$newChoice2' WHERE id_story=:id AND id_chapter=:idChap";
         $stmt = $bdd->prepare($requete4);
         $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
     } else {
@@ -63,7 +64,7 @@ if (isset($_POST['numero'])) {
 
     //mettre à jour l'intitulé du choix 3 du chapitre
     if ($newChoice3 != '') {
-        $requete5 = "UPDATE chapters SET choice3=$newChoice3 WHERE id_story=:id AND id_chapter=:idChap";
+        $requete5 = "UPDATE chapters SET choice3='$newChoice3' WHERE id_story=:id AND id_chapter=:idChap";
         $stmt = $bdd->prepare($requete5);
         $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
     } else {
@@ -215,7 +216,7 @@ if (isset($_POST['numero'])) {
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 2));
             //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
-            //chose avant de récupérer le résultat et de poser la variable $echec1
+            //chose avant de récupérer le résultat et de poser la variable $echec2
             if ($resultat->rowCount() == 0) {
                 $echec2 = 2;
             } else {
@@ -227,7 +228,7 @@ if (isset($_POST['numero'])) {
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array("id_story" => $id_story, "chapter" => $numChap, "choice" => 3));
             //il n'est pas requis d'avoir trois choix possibles pour chaque chapitre, donc on vérifie que la requête retourne quelque 
-            //chose avant de récupérer le résultat et de poser la variable $echec1
+            //chose avant de récupérer le résultat et de poser la variable $echec3
             if ($resultat->rowCount() == 0) {
                 $echec3 = 2;
             } else {
@@ -309,13 +310,7 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <?php if ($echec1 == 0) { ?>
-                                    <input type="radio" name="echec1" id="oui" value="oui">
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec1" id="non" value="non" checked>
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
-                                } else if ($echec1 == 1) { ?>
+                                <?php if ($echec1 == 1) { ?>
                                     <input type="radio" name="echec1" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec1" id="non" value="non">
@@ -324,7 +319,7 @@ if (isset($_POST['numero'])) {
                                 } else { ?>
                                     <input type="radio" name="echec1" id="oui" value="oui">
                                     <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec1" id="non" value="non">
+                                    <input type="radio" name="echec1" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
                                 } ?>
@@ -361,13 +356,7 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <?php if ($echec2 == 0) { ?>
-                                    <input type="radio" name="echec2" id="oui" value="oui">
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec2" id="non" value="non" checked>
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
-                                } else if ($echec2 == 1) { ?>
+                                <?php if ($echec2 == 1) { ?>
                                     <input type="radio" name="echec2" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec2" id="non" value="non">
@@ -376,7 +365,7 @@ if (isset($_POST['numero'])) {
                                 } else { ?>
                                     <input type="radio" name="echec2" id="oui" value="oui">
                                     <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec2" id="non" value="non">
+                                    <input type="radio" name="echec2" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
                                 } ?>
@@ -413,13 +402,7 @@ if (isset($_POST['numero'])) {
                                 <li>
                                     <h6> Ce choix entraîne-t-il l'échec du personnage ? </h6>
                                 </li>
-                                <?php if ($echec3 == 0) { ?>
-                                    <input type="radio" name="echec3" id="oui" value="oui">
-                                    <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec3" id="non" value="non" checked>
-                                    <label style="font-size:medium" for="oui">Non</label>
-                                <?php
-                                } else if ($echec3 == 1) { ?>
+                                <?php if ($echec3 == 1) { ?>
                                     <input type="radio" name="echec3" id="oui" value="oui" checked>
                                     <label style="font-size:medium" for="oui">Oui</label>
                                     <input type="radio" name="echec3" id="non" value="non">
@@ -428,7 +411,7 @@ if (isset($_POST['numero'])) {
                                 } else { ?>
                                     <input type="radio" name="echec3" id="oui" value="oui">
                                     <label style="font-size:medium" for="oui">Oui</label>
-                                    <input type="radio" name="echec3" id="non" value="non">
+                                    <input type="radio" name="echec3" id="non" value="non" checked>
                                     <label style="font-size:medium" for="oui">Non</label>
                                 <?php
                                 } ?>
