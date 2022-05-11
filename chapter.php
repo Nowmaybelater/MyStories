@@ -39,7 +39,7 @@
 
         <!--affichage du titre et numéro de chapitre-->
         <h1 id="centre"><?php echo $histoire['title']; ?></h2>
-        <h6 id="donneesHistoire">Chapitre <?= $_GET['chapter_num']?></h6>
+        <h5 id="donneesHistoire">Chapitre <?= $_GET['chapter_num']?></h5>
 
         <?php
         //récupération du chapitre
@@ -92,7 +92,8 @@
                 <?= $chapter['chapterContent'];?>
             </p>
         </div>
-        <div>
+        <br/>
+        <div id="centre">
             <?php 
             //affichage du contenu du choix 1 dans un bouton cliquable
             if(!empty($chapter['choice1'])){

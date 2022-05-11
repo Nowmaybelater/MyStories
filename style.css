@@ -100,6 +100,8 @@ a:hover {
     position: fixed;
     bottom: 50px;
     right: 30px;
+    width:45px;
+    height:45px;
 }
 
 #footer {
@@ -116,7 +118,9 @@ a:hover {
     main {
         font-size: 2.3em;
     }
-
+    h1 {
+        font-size:1.8em;
+    }
     h2 {
         font-size: 1.5em;
     }
@@ -126,8 +130,12 @@ a:hover {
         text-align:center;
     }
 
+    h4{
+        font-size:1.3em;
+    }
+
     h5 {
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
 
     h6 {

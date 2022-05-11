@@ -1,12 +1,12 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 
-<?php 
+<?php
 // pour se protéger des attaques XSS
 function escape($value)
 {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-}?>
+} ?>
 
 <main>
     <div id=backgroundConnexion>
@@ -46,16 +46,17 @@ function escape($value)
         <form class="form-signin form-horizontal" role="form" action="inscription.php" method="post" pb-autologin="true" autocomplete="off" id="formul">
             <div class="form-group" id="centre">
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <input type="text" name="login" class="form-control" placeholder="Entrez un nom d'utilisateur" required="" autofocus="" pb-role="username">
+                    <input type="text" name="login" class="form-control" placeholder="Entrez un nom d'utilisateur" required autofocus pb-role="username">
                 </div>
             </div>
             <br />
             <div class="form-group" id="centre">
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <input type="password" name="password" class="form-control" placeholder="Entrez un mot de passe" required="" pb-role="password">
-                    <h6>Le mot de passe doit avoir au moins 8 caractères</h6>
+                    <input type="password" name="password" class="form-control" placeholder="Entrez un mot de passe" required pb-role="password">
                 </div>
             </div>
+            <br/>
+            <h6 id="centre">Le mot de passe doit comporter au minimum 8 caractères</h6>
             <br />
             <div class="form-group" id="centre">
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">

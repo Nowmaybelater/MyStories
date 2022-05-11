@@ -28,13 +28,12 @@ if (isset($_SESSION['login'])) {
                 $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice2));
             }
         } else {
-            if ($choice3!=''){
+            if ($choice3 != '') {
                 $stmt = $bdd->prepare('insert into chapters
                 (id_story,numChapter, chapterContent, choice1, choice3)
                 values (?, ?, ?, ?, ?)');
                 $stmt->execute(array($id_story, $num, $contenu, $choice1, $choice3));
-            }
-            else{
+            } else {
                 $stmt = $bdd->prepare('insert into chapters
                 (id_story,numChapter, chapterContent, choice1)
                 values (?, ?, ?, ?)');
@@ -229,7 +228,7 @@ if (isset($_SESSION['login'])) {
                 <div>
                     <div id="centre">
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
-                    </div>
+                        </div>
                 </div>
             </form>
         </div>

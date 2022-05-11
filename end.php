@@ -78,7 +78,7 @@
         <div id="btn-lecture">
             <a id="size-btn" class="btn btn-outline-dark" href="StorySummary.php?id=<?= $storyId ?>" role="button">Réessayer</a>
             &nbsp;
-            <a id="size-btn" class="btn btn-outline-dark" href="index.php" role="button">Retour à la liste d'histoires</a>
+            <a id="size-btn" class="btn btn-outline-dark" href="index.php" role="button">Retour à l'accueil</a>
         </div>
     </div>
 </main>
