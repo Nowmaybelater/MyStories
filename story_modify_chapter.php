@@ -36,29 +36,33 @@ if (isset($_POST['numero'])) {
     }
 
     //mettre à jour le numéro du chapitre
-    $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id";
+    $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete1);
-    $stmt->execute(array('id' => $id_story));
+    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
 
     //mettre à jour le contenu du chapitre
-    $requete2 = "UPDATE chapters SET chapterContent=$newContenu WHERE id_story=:id";
+    $requete2 = "UPDATE chapters SET chapterContent=$newContenu WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete2);
-    $stmt->execute(array('id' => $id_story));
+    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
 
     //mettre à jour l'intitulé du choix 1 du chapitre
     $requete3 = "UPDATE chapters SET choice1=$newChoice1 WHERE id_story=:id AND id_chapter=:idChap";
     $stmt = $bdd->prepare($requete3);
-    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
+    $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
 
     //mettre à jour l'intitulé du choix 2 du chapitre
-    $requete4 = "UPDATE chapters SET choice2=$newChoice2 WHERE id_story=:id AND id_chapter=:idChap";
-    $stmt = $bdd->prepare($requete4);
-    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
+    if($newChoice2 != ''){
+        $requete4 = "UPDATE chapters SET choice2=$newChoice2 WHERE id_story=:id AND id_chapter=:idChap";
+        $stmt = $bdd->prepare($requete4);
+        $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
+    }
 
     //mettre à jour l'intitulé du choix 3 du chapitre
-    $requete5 = "UPDATE chapters SET choice3=$newChoice3 WHERE id_story=:id AND id_chapter=:idChap";
-    $stmt = $bdd->prepare($requete5);
-    $stmt->execute(array('id' => $id_story, 'idChap'=>$chapterId));
+    if ($nexChoice3 != ''){
+        $requete5 = "UPDATE chapters SET choice3=$newChoice3 WHERE id_story=:id AND id_chapter=:idChap";
+        $stmt = $bdd->prepare($requete5);
+        $stmt->execute(array("id" => $id_story, "idChap"=>$chapterId));
+    }
 
     //mettre à jour le chapitre vers lequel renvoie le choix 1 
     $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
