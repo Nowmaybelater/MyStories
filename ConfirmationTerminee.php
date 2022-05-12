@@ -23,7 +23,7 @@
         <br />
         <br />
         <div id="btn-lecture">
-            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour à la page précédente </a>
+            <a id="size-btn" class="btn btn-outline-dark" href="story_modify.php?id=<?=$id?>" role="button"> Retour à la page précédente </a>
         </div>
     </div>
     </main>
