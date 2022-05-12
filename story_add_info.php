@@ -2,6 +2,7 @@
 <?php include("includes/connect.php") ?>
 
 <?php include("includes/functions.php");
+
 if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
         //on récupère les données du formulaire
@@ -14,10 +15,10 @@ if (isset($_SESSION['login'])) {
         $points = escape($_POST['points']);
 
         //insérer l'histoire à la base de données
-        $stmt = $bdd->prepare('insert into stories
-        (title, summary, author, nbChapters, finished, date, nbrPoints)
+        $stmt = $bdd->prepare('INSERT INTO stories
+        (title, summary, author, nbChapters, finished, date, hide, nbrPoints)
         values (?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, $points));
+        $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, 0, $points));
 
         $req = "SELECT * FROM stories WHERE title=:titre";
         $res = $bdd->prepare($req);
