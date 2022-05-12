@@ -1,6 +1,6 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page permet à l'utilisateur de se connecter sur le site en utilisant ses identifiants-->
 <?php
 // pour se protéger des attaques XSS
 function escape($value)
@@ -12,6 +12,8 @@ function escape($value)
     <div id=backgroundConnexion>
         <h2 class="connexion">Connexion</h2>
         <?php
+        //Si les deux champs (login et mot de passe) sont remplis, on effectue les vérifications nécessaires avant de connecter l'utilisateur
+        //il faut que la combinaison login/mot de passe soit la bonne, sinon on affiche un message d'erreur
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             $login = escape($_POST['login']);
             $mdp = escape($_POST['password']);
@@ -20,7 +22,8 @@ function escape($value)
             if ($requete->rowCount() == 1) {
                 $_SESSION['login'] = $login;
                 header("Location: index.php");
-            } else { ?>
+            } 
+            else { ?>
                 <div class="erreurmdp">Mot de passe ou nom d'utilisateur incorrect</div>
         <?php
             }
@@ -33,6 +36,7 @@ function escape($value)
 
         <br />
         <div class="well"></div>
+        <!--L'affichage du formulaire commence ici-->
         <form class="form-signin form-horizontal" role="form" action="login.php" method="post" pb-autologin="true" autocomplete="off" id="formul">
             <div class="form-group" id="centre">
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
@@ -46,6 +50,7 @@ function escape($value)
                 </div>
             </div>
             <br />
+            <!--Si l'utilisateur ne dispose pas de compte, il peut aller sur la page d'inscription pour en créer un-->
             <div id="centre">
                 <a href="inscription.php" style="font-size : 0.5cm"> Pas de compte ? Inscrivez-vous !</a>
 
