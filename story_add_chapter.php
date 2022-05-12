@@ -1,7 +1,8 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
 <?php include("includes/functions.php") ?>
-
+<!--Cette page permet à l'administrateur de remplir les informations relatives à l'un des chapitres de l'une de ses histoires 
+(numéro de chapitre, contenu, choix) via un formulaire-->
 <?php
 $id_story = $_GET["id"];
 
@@ -112,11 +113,12 @@ if (isset($_SESSION['login'])) {
 }
 
 ?>
-
+<!--L'affichage commence ici-->
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Ajout d'un chapitre</p>
         <div id="centre">
+            <!--L'affichage du formulaire commence ici-->
             <form method="post">
                 <input type="hidden" name="id" value="<?= $chapterId ?>">
                 <div>
@@ -231,7 +233,7 @@ if (isset($_SESSION['login'])) {
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
                         &nbsp;
                         <a id="size-btn" class="btn btn-outline-primary" href="story_modify.php?id=<?= $id_story ?>" role="button"> Retour sans sauvegarder</a>
-                        </div>
+                    </div>
                 </div>
             </form>
         </div>

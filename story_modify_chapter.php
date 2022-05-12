@@ -199,6 +199,7 @@
                 $requete14 = "UPDATE points SET death=$newEchec3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
                 $stmt = $bdd->prepare($requete14);
                 $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+                
                 redirect("story_modify.php?id=$id_story");
             }
 
