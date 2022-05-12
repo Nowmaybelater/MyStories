@@ -1,202 +1,208 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
 <?php include("includes/functions.php"); ?>
+<!--Cette page permet à l'administrateur de modifier les informations relatives à l'un des chapitres de l'une de ses histoires 
+(numéro de chapitre, contenu, choix) via un formulaire-->
+
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Modifier un chapitre</p>
         <div>
-<?php
-$chapterId = $_GET["id_chapter"];
-$id_story = $_GET['id_story'];
+            <?php
+            $chapterId = $_GET["id_chapter"];
+            $id_story = $_GET['id_story'];
 
-if (isset($_POST['numero'])) {
-    //on récupère les données du formulaire 
-    $newNum = escape($_POST['numero']);
-    $newContenu = escape($_POST['contenu']);
-    $newChoice1 = escape($_POST['choice1']);
-    $newChoice2 = escape($_POST['choice2']);
-    $newChoice3 = escape($_POST['choice3']);
-    $newRefChoice1 = escape($_POST['refChoice1']);
-    $newRefChoice2 = escape($_POST['refChoice2']);
-    $newRefChoice3 = escape($_POST['refChoice3']);
-    $newPoints1 = escape($_POST['points1']);
-    $newPoints2 = escape($_POST['points2']);
-    $newPoints3 = escape($_POST['points3']);
+            if (isset($_POST['numero'])) {
+                //on récupère les données du formulaire(il s'agit de nouvelles données, ou des anciennes si l'utilisateur n'y a pas touché)
+                $newNum = escape($_POST['numero']);
+                $newContenu = escape($_POST['contenu']);
+                $newChoice1 = escape($_POST['choice1']);
+                $newChoice2 = escape($_POST['choice2']);
+                $newChoice3 = escape($_POST['choice3']);
+                $newRefChoice1 = escape($_POST['refChoice1']);
+                $newRefChoice2 = escape($_POST['refChoice2']);
+                $newRefChoice3 = escape($_POST['refChoice3']);
+                $newPoints1 = escape($_POST['points1']);
+                $newPoints2 = escape($_POST['points2']);
+                $newPoints3 = escape($_POST['points3']);
+//pour la récupération des données des checkbox, que l'on effectue via l'attribut valeur dans le input, on fait le choix de cocher la case 
+//oui si le choix entraîne l'échec et la case non dans tous les autres cas même si elle n'était pas cochée à l'origine (ce choix a permis de 
+//simplifier le code)
+                if ($_POST['echec1'] == "oui") {
+                    $newEchec1 = 1;
+                } else {
+                    $newEchec1 = 0;
+                }
+                if ($_POST['echec2'] == "oui") {
+                    $newEchec2 = 1;
+                } else {
+                    $newEchec2 = 0;
+                }
+                if ($_POST['echec3'] == "oui") {
+                    $newEchec3 = 1;
+                } else {
+                    $newEchec3 = 0;
+                }
 
-    if ($_POST['echec1'] == "oui") {
-        $newEchec1 = 1;
-    } else {
-        $newEchec1 = 0;
-    }
-    if ($_POST['echec2'] == "oui") {
-        $newEchec2 = 1;
-    } else {
-        $newEchec2 = 0;
-    }
-    if ($_POST['echec3'] == "oui") {
-        $newEchec3 = 1;
-    } else {
-        $newEchec3 = 0;
-    }
+                //cette requête permet de mettre à jour le numéro du chapitre
+                $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id AND id_chapter=:idChap";
+                $stmt = $bdd->prepare($requete1);
+                $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
 
-    
+                //cette requête permet de mettre à jour le contenu du chapitre
+                $requete2 = "UPDATE chapters SET chapterContent='$newContenu' WHERE id_story= :id AND id_chapter=:idChap";
+                $stmt = $bdd->prepare($requete2);
+                $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
 
-    //mettre à jour le numéro du chapitre
-    $requete1 = "UPDATE chapters SET numChapter=$newNum WHERE id_story=:id AND id_chapter=:idChap";
-    $stmt = $bdd->prepare($requete1);
-    $stmt->execute(array('id' => $id_story, 'idChap' => $chapterId));
+                //cette requête permet de mettre à jour l'intitulé du choix 1 du chapitre
+                $requete3 = "UPDATE chapters SET choice1='$newChoice1' WHERE id_story=:id AND id_chapter=:idChap";
+                $stmt = $bdd->prepare($requete3);
+                $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
 
-    //mettre à jour le contenu du chapitre
-    $requete2 = "UPDATE chapters SET chapterContent='$newContenu' WHERE id_story= :id AND id_chapter=:idChap";
-    $stmt = $bdd->prepare($requete2);
-    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                //cette requête permet de mettre à jour l'intitulé du choix 2 du chapitre :si celui-ci n'est pas vide dans le formulaire, on lui donne 
+                //sa nouvelle valeur, sinon on lui donne la valeur null
+                if (!empty($newChoice2)) {
+                    $requete4 = "UPDATE chapters SET choice2='$newChoice2' WHERE id_story=:id AND id_chapter=:idChap";
+                    $stmt = $bdd->prepare($requete4);
+                    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                } else {
+                    $requete4 = "UPDATE chapters SET choice2=null WHERE id_story=:id AND id_chapter=:idChap";
+                    $stmt = $bdd->prepare($requete4);
+                    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                }
 
-    //mettre à jour l'intitulé du choix 1 du chapitre
-    $requete3 = "UPDATE chapters SET choice1='$newChoice1' WHERE id_story=:id AND id_chapter=:idChap";
-    $stmt = $bdd->prepare($requete3);
-    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                //cette requête permet de mettre à jour l'intitulé du choix 3 du chapitre :si celui-ci n'est pas vide dans le formulaire, on lui donne 
+                //sa nouvelle valeur, sinon on lui donne la valeur null
+                if (!empty($newChoice3)) {
+                    $requete5 = "UPDATE chapters SET choice3='$newChoice3' WHERE id_story=:id AND id_chapter=:idChap";
+                    $stmt = $bdd->prepare($requete5);
+                    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                } else {
+                    $requete5 = "UPDATE chapters SET choice3=null WHERE id_story=:id AND id_chapter=:idChap";
+                    $stmt = $bdd->prepare($requete5);
+                    $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
+                }
 
-    //mettre à jour l'intitulé du choix 2 du chapitre
-    if (!empty($newChoice2)) {
-        $requete4 = "UPDATE chapters SET choice2='$newChoice2' WHERE id_story=:id AND id_chapter=:idChap";
-        $stmt = $bdd->prepare($requete4);
-        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
-    } else {
-        $requete4 = "UPDATE chapters SET choice2=null WHERE id_story=:id AND id_chapter=:idChap";
-        $stmt = $bdd->prepare($requete4);
-        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
-    }
-
-    //mettre à jour l'intitulé du choix 3 du chapitre
-    if (!empty($newChoice3)) {
-        $requete5 = "UPDATE chapters SET choice3='$newChoice3' WHERE id_story=:id AND id_chapter=:idChap";
-        $stmt = $bdd->prepare($requete5);
-        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
-    } else {
-        $requete5 = "UPDATE chapters SET choice3=null WHERE id_story=:id AND id_chapter=:idChap";
-        $stmt = $bdd->prepare($requete5);
-        $stmt->execute(array("id" => $id_story, "idChap" => $chapterId));
-    }
-
-    //mettre à jour le chapitre vers lequel renvoie le choix 1 
-    if ($newRefChoice1!=''){
-        $requete61 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete61);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
-        if($stmt->rowCount()==1){
-            $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-            $stmt = $bdd->prepare($requete6);
-            $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
-        }
-        else{
-            $requete6 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
-            $stmt = $bdd->prepare($requete6);
-            $stmt->execute(array(
-                'id' => $id_story,
-                'chap'=>$newRefChoice1,
-                "prev_chap" => $newNum,
-                "prev_choice" => 1
-            ));
-        }
-    }
-    else{
-        $requete6 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete6);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
-    }
-
-
-    //mettre à jour le chapitre vers lequel renvoie le choix 2
-    if ($newRefChoice2!='') {
-        $requete71 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete71);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
-        if($stmt->rowCount()==1){
-            $requete7 = "UPDATE links SET Chapter=$newRefChoice2 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-            $stmt = $bdd->prepare($requete7);
-            $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
-        }
-        else{
-            $requete7 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
-            $stmt = $bdd->prepare($requete7);
-            $stmt->execute(array(
-                'id' => $id_story,
-                'chap'=>$newRefChoice1,
-                "prev_chap" => $newNum,
-                "prev_choice" => 2));
-        }
-    } else {
-        $requete7 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete7);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
-    }
-
-    //mettre à jour le chapitre vers lequel renvoie le choix 3
-    if ($newRefChoice3!='') {
-        $requete81 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete81);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
-        if($stmt->rowCount()==1){
-            $requete8 = "UPDATE links SET Chapter=$newRefChoice3 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-            $stmt = $bdd->prepare($requete8);
-            $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
-        }
-        else{
-            $requete8 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
-            $stmt = $bdd->prepare($requete8);
-            $stmt->execute(array(
-                'id' => $id_story,
-                'chap'=>$newRefChoice1,
-                "prev_chap" => $newNum,
-                "prev_choice" => 3));
-        }
-    } else {
-        $requete8 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-        $stmt = $bdd->prepare($requete8);
-        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
-    }
+                //cette requête permet de mettre à jour le chapitre vers lequel renvoie le choix 1.
+                //Si la zone du formulaire n'est pas une chaîne de caractère vide et que le choix existe dans la base de données, on met à jour les infos 
+                //(on les ajoute si la table ne contient pas de ligne associée à ce choix). Sinon (i.e. la zone du formulaire contient une chaîne de 
+                //caractères vides), on supprime les informations relatives à ce choix de la base de données. Le même fonctionnement est appliqué pour
+                //les choix 2 et 3.
+                if ($newRefChoice1 != '') {
+                    $requete61 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete61);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+                    if ($stmt->rowCount() == 1) {
+                        $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                        $stmt = $bdd->prepare($requete6);
+                        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+                    } else {
+                        $requete6 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
+                        $stmt = $bdd->prepare($requete6);
+                        $stmt->execute(array(
+                            'id' => $id_story,
+                            'chap' => $newRefChoice1,
+                            "prev_chap" => $newNum,
+                            "prev_choice" => 1
+                        ));
+                    }
+                } else {
+                    $requete6 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete6);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+                }
 
 
-    //mettre à jour le nombre de points perdus si on effectue le choix 1 
-    if ($newPoints1 != null) {
-        $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-        $stmt = $bdd->prepare($requete9);
-        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
-    }
+                //cette requête permet de mettre à jour le chapitre vers lequel renvoie le choix 2
+                if ($newRefChoice2 != '') {
+                    $requete71 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete71);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+                    if ($stmt->rowCount() == 1) {
+                        $requete7 = "UPDATE links SET Chapter=$newRefChoice2 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                        $stmt = $bdd->prepare($requete7);
+                        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+                    } else {
+                        $requete7 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
+                        $stmt = $bdd->prepare($requete7);
+                        $stmt->execute(array(
+                            'id' => $id_story,
+                            'chap' => $newRefChoice1,
+                            "prev_chap" => $newNum,
+                            "prev_choice" => 2
+                        ));
+                    }
+                } else {
+                    $requete7 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete7);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 2));
+                }
 
-    //mettre à jour le nombre de points perdus si on effectue le choix 2
-    if ($newPoints2 != null) {
-        $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-        $stmt = $bdd->prepare($requete10);
-        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => '2'));
-    }
+                //cette requête permet de mettre à jour le chapitre vers lequel renvoie le choix 3
+                if ($newRefChoice3 != '') {
+                    $requete81 = "SELECT * FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete81);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+                    if ($stmt->rowCount() == 1) {
+                        $requete8 = "UPDATE links SET Chapter=$newRefChoice3 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                        $stmt = $bdd->prepare($requete8);
+                        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+                    } else {
+                        $requete8 = "INSERT INTO links  (id_story, Chapter, Previous_Chapter, Previous_Choice) VALUES (:id, :chap, :prev_chap, :prev_choice)";
+                        $stmt = $bdd->prepare($requete8);
+                        $stmt->execute(array(
+                            'id' => $id_story,
+                            'chap' => $newRefChoice1,
+                            "prev_chap" => $newNum,
+                            "prev_choice" => 3
+                        ));
+                    }
+                } else {
+                    $requete8 = "DELETE FROM links WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+                    $stmt = $bdd->prepare($requete8);
+                    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 3));
+                }
 
-    //mettre à jour le nombre de points perdus si on effectue le choix 3
-    if ($newPoints3 != null) {
-        $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-        $stmt = $bdd->prepare($requete11);
-        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
-    }
 
-    //mettre à jour la valeur de death si on effectue le choix 1
-    $requete12 = "UPDATE points SET death=$newEchec1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-    $stmt = $bdd->prepare($requete12);
-    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+                //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 1 
+                if ($newPoints1 != null) {
+                    $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete9);
+                    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+                }
 
-    //mettre à jour la valeur de death si on effectue le choix 2
-    $requete13 = "UPDATE points SET death=$newEchec2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-    $stmt = $bdd->prepare($requete13);
-    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+                //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 2
+                if ($newPoints2 != null) {
+                    $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete10);
+                    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => '2'));
+                }
 
-    //mettre à jour la valeur de death si on effectue le choix 3
-    $requete14 = "UPDATE points SET death=$newEchec3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-    $stmt = $bdd->prepare($requete14);
-    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
-    redirect("story_modify.php?id=$id_story");
-}
+                //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 3
+                if ($newPoints3 != null) {
+                    $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete11);
+                    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+                }
 
-?>
+                //cette requête permet de mettre à jour la valeur de death si on effectue le choix 1
+                $requete12 = "UPDATE points SET death=$newEchec1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                $stmt = $bdd->prepare($requete12);
+                $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+
+                //cette requête permet de mettre à jour la valeur de death si on effectue le choix 2
+                $requete13 = "UPDATE points SET death=$newEchec2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                $stmt = $bdd->prepare($requete13);
+                $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+
+                //cette requête permet de mettre à jour la valeur de death si on effectue le choix 3
+                $requete14 = "UPDATE points SET death=$newEchec3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                $stmt = $bdd->prepare($requete14);
+                $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+                redirect("story_modify.php?id=$id_story");
+            }
+
+            ?>
 
 
             <?php
@@ -325,6 +331,7 @@ if (isset($_POST['numero'])) {
             }
             ?>
         </div>
+                <!--L'affichage du formulaire commence ici-->
         <div id="centre">
             <form method="post">
                 <input type="hidden" name="id" value="<?= $chapterId ?>">
