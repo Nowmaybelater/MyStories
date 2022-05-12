@@ -18,6 +18,7 @@
         $req->execute(array('id' => $_GET['id']));
 
         $histoire = $req->fetch();
+        $nbrChapitre=$histoire['nbChapters'];
         ?> <h1 id="centre"><?php echo $histoire['title']; ?></h2>
             <h3 id="centre"><?php echo $histoire['author']; ?></h3>
             <h6 id="donneesHistoire">Statut : <?php if ($histoire['finished'] == 0) {
@@ -32,6 +33,13 @@
             <h4 id="centre">Modalités</h4>
             <p>Vous commencez cette histoire avec un total de <?= $histoire['nbrPoints'] ?> points de vie. Vous perdez des points de vie lorsque votre choix est dangereux et/ou blesse votre personnage. Si le nombre de vos points de vie tombe à 0, votre personnage échoue et l’histoire se termine. Attention, il existe également de très mauvais choix, qui peuvent conduire à l'échec immédiat de votre personnage et donc à la fin de l’histoire. Soyez donc bien attentifs aux différentes propositions qui s’offrent à vous, et tentez d’arriver jusqu’au bout de cette aventure !</p>
             <br />
+            <br/>
+            <div id="centre">
+                <?php if($nbrChapitre==0){
+                    echo "Cette histoire n'a pas encore de chapitre";
+                }
+                ?>
+            </div>
             <div id="btn-lecture">
                 <?php
                 $id_story = $_GET['id'];
@@ -41,22 +49,22 @@
                     'id_story' => $id_story,
                     'id_usr' => $id_user
                 ));
-                if ($req2->rowCount() == 1) {
+                if ($req2->rowCount()==1 && $nbrChapitre!=0) {
                     $ligne = $req2->fetch();
                     $chapter = $ligne['numChapter'];
                     $link = "chapter.php?story_id=$id_story&chapter_num=$chapter&choice_num=0&prev_chap=0"; ?>
                     <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Reprendre la lecture !</a><?php
                     }
                     else {
-                        $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
-                        <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
+                        if($nbrChapitre!=0){
+                            $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
+                            <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
+                        }
                     }
                         ?>
                 &nbsp;
                 <a id="size-btn" class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
-
             </div>
-
     </div>
 </main>
 </body>
