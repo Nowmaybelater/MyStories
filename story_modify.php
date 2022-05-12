@@ -60,7 +60,7 @@
                 $id = $_GET['id'];
                 $requete = "SELECT * FROM chapters WHERE id_story='$id'";
                 $resultat = $bdd->query($requete);
-                $compteur = 0;
+                $compteur = 0;//ce compteur permet de savoir s'il existe des chapitres associés à l'histoire sélectionnée
                 while ($chapitre = $resultat->fetch()) {
                     $compteur = $compteur + 1;
                     $valeur = $chapitre["id_chapter"];
@@ -76,6 +76,7 @@
                     <hr />
                 <?php
                 }
+                //si le compteur est nul, on informe l'administrateur qu'il n'a encore écrit aucun chapitre
                 if ($compteur == 0) {
                     echo "Vous n'avez écrit aucun chapitre !";
                 }
