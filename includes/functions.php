@@ -118,7 +118,7 @@
                 $death=0;
             }
 
-            echo "Nombre de points restant : " . $nbPoints;
+            echo "Nombre de points restants : " . $nbPoints;
             ?>
             <br/><br/>
             <?php

@@ -1,5 +1,6 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<!--Cette page contient le php permettant de supprimer un chapitre, et renvoie sur une page qui en confirme la réalisation-->
 <main>
     <div id="backgroundConnexion">
 
