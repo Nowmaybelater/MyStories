@@ -23,10 +23,12 @@
         $requete2 = $bdd->prepare($requete2);
         $requete2->execute(array('id'=>$id_user));
         while ($advancmt = $requete2->fetch()){
+          //pour chaque donnée de la table avancement associé à l'utilisateur connecté on récupère l'histoire correspodante
             $histEnCours=$advancmt['id_story'];
             $requete3 = "SELECT * FROM stories WHERE id_story=$histEnCours";
             $requete3 = $bdd->query($requete3);
             while ($histoire = $requete3->fetch()) {
+              //pour chaque histoire on affiche l'avancement du joueur  ainsi que son nombre de points et la date
               $num = $advancmt["numChapter"];
               $date = $advancmt['jour'];
               $ptsStories=$histoire['nbrPoints'];

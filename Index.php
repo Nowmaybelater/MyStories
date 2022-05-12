@@ -22,7 +22,7 @@
         <div id="btn-lecture">
           <?php
           if (isset($_SESSION['login'])) {
-            $link = "StorySummary.php?id=$valeur.php";
+            $link = "StorySummary.php?id=$valeur";
           } else {
             $link = "NonConnecte.php";
           } ?>

@@ -5,6 +5,7 @@
 <main>
     <div id=backgroundConnexion>
         <?php
+        //affiche le réussite ou l'échec du joueur 
         if ($_GET['failed'] == 1) {
         ?> <h1 class="titre">Perdu ! </h1>
         <?php
@@ -12,12 +13,13 @@
         ?> <h1 class="titre">Gagné ! </h1>
         <?php
         }
-
+        //récupération de l'id_user
         $storyId = $_GET['id'];
         $requete1 = $bdd->prepare('SELECT * FROM user WHERE login_usr=?');
         $requete1->execute(array($_SESSION['login']));
         $ligne1 = $requete1->fetch();
         $id_usr = $ligne1['id_usr'];
+        //récupère les points perdu par le joueur avec la fonction Resume()
         $pts_story = Resume($id_usr, $storyId, $bdd);
 
         //enregistrement dans les stats
@@ -25,6 +27,7 @@
         $res = $bdd->prepare($req);
         $res->execute(array("id" => $storyId));
 
+        //récuparation des données du joueurs dans player_points
         $req3 = "SELECT * FROM player_points WHERE id_story=:id AND id_user=:id_user";
         $req3 = $bdd->prepare($req3);
         $req3->execute(array("id" => $storyId, "id_user" => $id_usr));
@@ -37,8 +40,8 @@
             $death=0;
             $pts=0;
         }
-        
 
+        //si l'histoire a déjà des données dans la table de stats on update les données dnas la table avec les données du joueurs récupérer juste au dessus
         if ($res->rowCount() == 1) {
             $ligne3 = $res->fetch();
             $played = $ligne3['played'] + 1;
@@ -57,6 +60,7 @@
             $req5 = $bdd->prepare($req5);
             $req5->execute(array("id" => $storyId));
         } else {
+            //sinon on insert les nouvelles données dans la table
             $req6 = $bdd->prepare('INSERT INTO stats (id_story, played, death, points) VALUES (:id_story, :played, :death, :points)');
             $req6->execute(array(
                 'id_story' => $storyId,

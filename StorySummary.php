@@ -25,10 +25,10 @@
         <h1 id="centre"><?php echo $histoire['title']; ?></h1>
         <h3 id="centre"><?php echo $histoire['author']; ?></h3>
         <h6 id="donneesHistoire">Statut : <?php if ($histoire['finished'] == 0) {
-                                                echo "En cours";
-                                            } else {
-                                                echo "Terminée";
-                                            } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
+            echo "En cours";
+        } else {
+            echo "Terminée";
+        } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
         <br />
         <h4 id="centre">Résumé</h4>
         <p> <?php echo $histoire['summary']; ?> </p>
@@ -61,13 +61,14 @@
                 $chapter = $ligne['numChapter'];
                 $link = "chapter.php?story_id=$id_story&chapter_num=$chapter&choice_num=0&prev_chap=0"; ?>
                 <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Reprendre la lecture !</a><?php
-                                                                                                                    } else {
-                                                                                                                        if ($nbrChapitre != 0) {
-                                                                                                                            $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
+                } 
+                else {
+                    if ($nbrChapitre != 0) {
+                        $link = "chapter.php?story_id=$id_story&chapter_num=1&choice_num=0&prev_chap=0"; ?>
                     <a id="size-btn" class="btn btn-outline-dark" href=<?= $link ?> role="button">Commencer la lecture !</a> <?php
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                                ?>
+                    }
+                }
+                ?>
             &nbsp;
             <a id="size-btn" class="btn btn-outline-secondary" href="index.php" role="button">Retour à l'accueil</a>
         </div>

@@ -107,7 +107,6 @@
                 $choix1 = $req2->fetch(); 
                 //si ce n'est pas le dernier chapitre 
                 if($_GET['chapter_num']!=$histoire['nbChapters']){
-                    $id=$id;
                     $chapterNum=$choix1['Chapter'];
                     ?>
                         <a id="size-btn" class="btn btn-outline-dark" href="chapter.php?story_id=<?= $id?>&chapter_num=<?= $chapterNum?>&choice_num=1&prev_chap=<?= $num_chapter?>" role="button"><?= $chapter['choice1']?></a>
@@ -116,7 +115,6 @@
                 }
                 //si c'est le dernier chapitre
                 else{
-                    $id=$id;
                     ?>
                         <a id="size-btn" class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
