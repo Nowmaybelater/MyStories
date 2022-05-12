@@ -44,8 +44,18 @@
         $requete10 = $bdd->prepare("UPDATE stories SET nbChapters=$nbChapter WHERE id_story=:id");
         $requete10->execute(array("id"=>$chapter['id_story']));
         ?>
-        <div class="alert alert-success" role="alert">
-            Supression du chapitre réussie !
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="centre" class="alert alert-success" role="alert">
+            <h3>Le chapitre a été modifié avec succès !</h3>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div id="btn-lecture">
+            <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour à la liste de vos histoires </a>
         </div>
     </div>
     </main>
