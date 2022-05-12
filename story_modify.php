@@ -29,10 +29,12 @@
                                                 } ?>, Nombre de Chapitres : <?php echo $histoire['nbChapters']; ?>, Mis à jour le : <?php echo $histoire['date']; ?></h6>
             <br />
 
-            <!--Possibilité d'ajouter un nouveau chapitre-->
+            <!--Possibilité d'ajouter un nouveau chapitre, qui apparaît à condition que l'histoire ne soit pas marquée comme terminée-->
             <div id="centre">
+            <?php if ($histoire['finished'] == 0){?>
                 <a id="size-btn" id="size-btn" class="btn btn-primary" href="story_add_chapter.php?id=<?= $id_story ?>" role="button"> <i class="bi bi-plus-circle"></i> Nouveau Chapitre </a>
-                &nbsp;
+                &nbsp;<?php
+            }?>
                 <!--Possibilité de marquer l'histoire comme terminée ou de revenir vers un statut "en cours" si on veut modifier l'histoire terminée -->
                 <?php if ($histoire['finished'] == 0) { ?>
                     <a id="size-btn" class="btn btn-primary" href="ConfirmationTerminee.php?id=<?= $id_story ?>" role="button">Terminer l'histoire</a>
@@ -43,8 +45,8 @@
                 } ?>
             </div>
             <br />
-            <!--possibilité de modifier les infos générales de l'histoire (titre, résumé, nombre de points de vie)-->
 
+            <!--possibilité de modifier les infos générales de l'histoire (titre, résumé, nombre de points de vie)-->
             <div>
                 <h2><em>Informations générales</em></h2>
             </div>
