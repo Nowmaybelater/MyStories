@@ -1,23 +1,32 @@
-/*Image de fond en page d'accueil*/
+/*Image de fond du site web*/
 .accueil {
     background-image: url("images/fondBois.jpg");
 }
 
+/*permet au texte à l'extérieur du main d'apparaître en blanc (le fond noir est une alternative "sécurisée" à l'image de fonc du site)*/
 body {
     background-color: black;
     color: white;
 }
 
-footer {
-    margin-bottom: 10px;
+/*permet de définir le style et la position du footer contenant les noms et le copyright*/
+#footer {
+    display: flex;
+    justify-content: center;
+    background-color:black;
+    border-radius:15px;
+    text-align:center;
+    margin:5vh 35vw;
 }
 
+/*définir le style du titre de la page d'accueil*/
 .titre {
     font-size: 4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
+/*définir le style des titres moins importants*/
 .titre_petit {
     font-size: 3em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -28,11 +37,11 @@ footer {
 li a:hover {
     background-color: grey;
 }
-
 #edition:hover {
     background-color: grey;
 }
 
+/*définir le style du corps du texte dans la totalité du site, car tout le texte est contenu dans le site*/ 
 main {
     margin: 20px 10%;
     color: black;
@@ -45,21 +54,25 @@ main {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/*permet de positionner les boutons en bas à gauche*/
 #btn-lecture {
     display: flex;
     justify-content: flex-end;
 }
 
+/*permet de définir comme blanc la couleur des en-têtes des menus déroulants de la barre de navigation*/ 
 #navbarDropdown {
     color: white;
 }
 
+/**/
 .connexion {
     font-size: 1.5cm;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
+/*permet de définir le style du rectangle blanc placé derrière le texte, par dessus l'image de fond du site*/
 #backgroundConnexion {
     position: relative;
     top: 0;
@@ -71,46 +84,38 @@ main {
     z-index: 1;
 }
 
+/*cet identifiant est utilisé sur les balises div quand il est nécessaire de centrer les éléments qu'elles contiennent*/
 #centre {
     display: flex;
     justify-content: center;
 }
 
+/*définit le style du message d'erreur qui s'affiche lorsqu'il y a une erreur de saisie du mot de passer*/
 .erreurmdp {
     color: red;
     font-size: small;
     text-align: center;
 }
 
+/*permet de définir le style d'affichage des informations relatives à l'histoire (statut, nombre de chapitre, date (et nom du chapitre en cours de lecture))*/
 #donneesHistoire {
     color: grey;
     text-align: center;
 }
 
+/*permet d'améliorer le style d'affichage des leins correspondant aux titres et auteurs d'une histoire, dans les pages où ceux si sont affichés sous forme de liste*/
 .listeHistoires {
     text-decoration: none;
     color: black;
 }
 
-a:hover {
-    color: grey;
-}
-
+/*permet de définir le style du bouton qui permet de revenir en haut de la page : on définit sa taille de façon à respecter les critères WCAG*/
 #btnHautPage {
     position: fixed;
     bottom: 50px;
     right: 30px;
     width:45px;
     height:45px;
-}
-
-#footer {
-    display: flex;
-    justify-content: center;
-    background-color:black;
-    border-radius:15px;
-    text-align:center;
-    margin:5vh 35vw;
 }
 
 /*Ces éléments de style vont s'appliquer lorsque la taille de l'écran fera entre 0 et 900px de largeur) */
