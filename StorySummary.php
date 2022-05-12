@@ -1,6 +1,6 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page permet l'affichage de toutes les informations relatives à l'histoire sur laquelle l'utilisateur a décidé d'en savoir plus-->
 <main>
     <div id=backgroundConnexion>
         <?php

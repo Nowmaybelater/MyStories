@@ -1,15 +1,18 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<!--Cette page permet à un administrateur de visualiser les statistiques associées à son histoire (nombre de fois que l'histoire a été jouée, 
+nombre de points moyen perdus par partie et pourcentage d'échecs-->
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit"> Statistiques</p>
         <?php $storyId = $_GET['id']; ?>
-
+        <!--la requête permet de récupérer toutes les données de la table statistiques, dans laquelle sont stockées les données nécessaires à 
+l'affichage des statistiques mentionnées plus haut -->
         <?php
         $req = "SELECT * FROM stats WHERE id_story=:id";
         $res = $bdd->prepare($req);
         $res->execute(array("id" => $storyId));
-
+        //Si l'histoire a déjà été jouée, des statistiques sont présentes dans la table et on peut donc les afficher. Sinon, on affiche toutes les statistiques à 0
         if ($res->rowCount() == 1) {
             $ligne2 = $res->fetch();
         ?>
@@ -59,6 +62,7 @@
         }
         ?>
         <br />
+        <!--le bouton permet de revenir à la page précédente, c'est-à-dire la liste des histoires écrites par l'utilisateur et dont il peut consulter les statistiques, etc-->
         <div id="btn-lecture">
             <a id="size-btn" class="btn btn-outline-dark" href="ListeHistoires.php" role="button"> Retour à la page précédente </a>
         </div>
