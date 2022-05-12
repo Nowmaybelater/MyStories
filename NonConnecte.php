@@ -1,5 +1,6 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
+<!--Cette page prévient l'utilisateur qu'il n'est pas connecté et qu'il ne peut donc pas accéder au contenu du site-->
 <div class="accueil">
   <main>
     <div id="backgroundConnexion">
