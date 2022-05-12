@@ -1,6 +1,6 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-<!--Cette page permet de révéler l'histoire quand celle-ci a été cachée, et renvoie sur une page qui confirme qui en confirme la réalisation-->
+<!--Cette page permet de révéler l'histoire quand celle-ci a été cachée, et renvoie sur une page qui en confirme la réalisation-->
 <main>
     <div id="backgroundConnexion">
 
