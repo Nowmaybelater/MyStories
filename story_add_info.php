@@ -1,7 +1,8 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
 <?php include("includes/functions.php");
+//Cette page permet à l'administrateur de saisir les informations générales liées à une nouvelle histoire afin de la créer (titre, résumé, 
+//nombre de points associés) via un formulaire
 
 if (isset($_SESSION['login'])) {
     if (isset($_POST['title'])) {
@@ -22,20 +23,21 @@ if (isset($_SESSION['login'])) {
 
         $req = "SELECT * FROM stories WHERE title=:titre";
         $res = $bdd->prepare($req);
-        $res->execute(array("titre"=>$title));
+        $res->execute(array("titre" => $title));
         $ligne = $res->fetch();
-        $id=$ligne['id_story'];
-
+        $id = $ligne['id_story'];
+        //on redirige vers la page générale qui permet de manager une histoire spécifique (ajout de chapitre, modifications, suppression, etc)
         redirect("story_modify.php?id=$id");
     }
 }
 
 ?>
-
+<!--Début de l'affichage-->
 <main>
     <div id="backgroundConnexion">
         <p class="titre_petit">Informations générales</p>
         <div class="well">
+            <!--L'affichage du formulaire commence ici-->
             <form class="form-horizontal" role="form" enctype="multipart/form-data" action="story_add_info.php" method="post">
                 <input type="hidden" name="id" value="<?= $storyId ?>">
                 <div class="form-group">
@@ -53,12 +55,12 @@ if (isset($_SESSION['login'])) {
                 </div>
                 <br />
                 <div>
-                <label class="col-sm-4 control-label">Nombre de points de vie</label>
+                    <label class="col-sm-4 control-label">Nombre de points de vie</label>
                     <div>
                         <input type="number" name="points" class="form-control" placeholder="Entrez le nombre total de points dont dispose le lecteur au début de l'histoire" required autofocus>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder</button>
@@ -67,7 +69,7 @@ if (isset($_SESSION['login'])) {
             </form>
         </div>
     </div>
-    </main>
+</main>
 </body>
 
 </html>
