@@ -1,6 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page permet à l'utilisateur d'accéder aux histoires qu'il est en train de lire, et dont la progression est sauvegardée. Il peut ainsi
+reprendre la lecture à tout moment, en voyant les points de vie qu'il lui reste-->
 <main>
   <div id="backgroundConnexion">
     <p class="titre"> Bibliothèque </p>

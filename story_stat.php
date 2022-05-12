@@ -35,7 +35,7 @@ l'affichage des statistiques mentionnées plus haut -->
                 } else {
                     $pts = 0;
                 }
-                echo $pts;
+                echo number_format($pts,2);
                 ?>
                 <br />
 

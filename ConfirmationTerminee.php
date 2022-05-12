@@ -1,6 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page permet de donner le statut Terminée à une histoire lorsqu'elle était marquée comme En Cours. Cette page génère un affichage de 
+confirmation-->
 <?php
     //modifier le statut de l'histoire dans la base de données
     $id=$_GET["id"];
@@ -9,7 +10,7 @@
     $stmt->execute(array($id));
     $ligne = $stmt->fetch();
 ?>
-
+<!--Affichage du message de confirmation de modification du statu-->
 <main>
     <div id="backgroundConnexion">
     <br />

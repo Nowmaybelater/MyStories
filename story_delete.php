@@ -21,7 +21,7 @@
     $requete8->execute(array($storyId));
     $requete9 = $bdd->prepare('DELETE FROM stories WHERE id_story=?');
     $requete9->execute(array($storyId));
-
+//redirige vers la page qui confirme la suppression de l'histoire
     header("Location: story_deleted.php");?>
 </main>
 </body>

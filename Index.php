@@ -1,6 +1,7 @@
 <?php include("includes/header.php") ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page correspond à la page d'accueil. On y trouve un message de bienvenue ainsi que la liste des histoires disponibles sur le site 
+(et marquées comme visibles)-->
 <main>
   <div id="backgroundConnexion">
     <p class="titre"> Bienvenue sur MyStories ! </p>
@@ -10,6 +11,7 @@
     <hr />
     <div>
       <?php
+      //cette requête permet de récupérer toute les histoires de la table stories, si celles-ci sont marquées comme visibles
       $requete = "SELECT * FROM stories WHERE hide='0'";
       $resultat = $bdd->query($requete);
       while ($histoire = $resultat->fetch()) {
@@ -26,6 +28,8 @@
           } else {
             $link = "NonConnecte.php";
           } ?>
+          <!--Le bouton permet d'accéder aux informations relatives à l'histoire choisie par lecteur (page StorySummary.php) s'il est connecté
+        et à la page NonConnecté.php sinon-->
           <a id="size-btn" class="btn btn-outline-dark" href="<?= $link ?>" role="button">Découvrir l'histoire</a>
         </div>
         <hr />

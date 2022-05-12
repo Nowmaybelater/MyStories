@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php include("includes/head.php"); ?>
 <?php include("includes/connect.php") ?>
-
+<!--Cette page contient le code relatif à la barre de navigation, écrit en majeure partie à l'aide de Bootstrap-->
 <body class="accueil">
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div class="container-fluid">
