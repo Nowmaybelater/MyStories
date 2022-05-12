@@ -107,7 +107,7 @@ a:hover {
 #footer {
     display: flex;
     justify-content: center;
-    background-color:rgba(70, 66, 66, 0.8);
+    background-color:black;
     border-radius:15px;
     text-align:center;
     margin:5vh 35vw;
