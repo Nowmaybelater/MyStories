@@ -74,9 +74,17 @@ if (isset($_POST['numero'])) {
     }
 
     //mettre à jour le chapitre vers lequel renvoie le choix 1 
-    $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
-    $stmt = $bdd->prepare($requete6);
-    $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+    if ($refChoice1 != ''){
+        $requete6 = "UPDATE links SET Chapter=$newRefChoice1 WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete6);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+    }
+    else{
+        $requete6 = "UPDATE links SET Chapter=null WHERE id_story= :id AND Previous_Chapter = :previous AND Previous_Choice= :choice";
+        $stmt = $bdd->prepare($requete6);
+        $stmt->execute(array('id' => $id_story, "previous" => $newNum, "choice" => 1));
+    }
+
 
     //mettre à jour le chapitre vers lequel renvoie le choix 2
     if ($refChoice2 != '') {
@@ -170,8 +178,13 @@ if (isset($_POST['numero'])) {
             $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
             $resultat = $bdd->prepare($requete);
             $resultat->execute(array('id_story' => $id_story, 'previous' => $numChap, 'choice' => 1));
-            $links = $resultat->fetch();
-            $refChoice1 = $links["Chapter"];
+            if ($resultat->rowCount() == 0) {
+                $refChoice1 = 0;
+            } else {
+                $links = $resultat->fetch();
+                $refChoice1 = $links["Chapter"];
+            }
+
 
             $requete = "SELECT * FROM links WHERE id_story= :id_story AND Previous_Chapter = :previous AND Previous_Choice= :choice";
             $resultat = $bdd->prepare($requete);

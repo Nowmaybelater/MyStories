@@ -3,11 +3,12 @@
 <?php include("includes/functions.php") ?>
 
 <?php
-$chapterId = $_GET["id"];
+$id_story = $_GET["id"];
+
 if (isset($_SESSION['login'])) {
     if (isset($_POST['numero'])) {
         //on récupère les données du formulaire 
-        $id_story = $_POST['id'];
+
         $num = escape($_POST['numero']);
         $contenu = escape($_POST['contenu']);
         $choice1 = escape($_POST['choice1']);
@@ -226,8 +227,10 @@ if (isset($_SESSION['login'])) {
                 </div>
                 <br />
                 <div>
-                    <div id="centre">
+                    <div>
                         <button id="size-btn" type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-save"></span> Sauvegarder </button>
+                        &nbsp;
+                        <a id="size-btn" class="btn btn-outline-primary" href="story_modify.php?id=<?= $id_story ?>" role="button"> Retour sans sauvegarder</a>
                         </div>
                 </div>
             </form>
