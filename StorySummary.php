@@ -4,7 +4,6 @@
 <main>
     <div id=backgroundConnexion>
         <?php
-
         $requete = "SELECT * FROM user WHERE login_usr = :usr_login";
         $req = $bdd->prepare($requete);
         $req->execute(array(
