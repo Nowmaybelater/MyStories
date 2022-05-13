@@ -55,7 +55,7 @@ l'affichage des statistiques mentionnées plus haut -->
         ?>
             Nombre de fois que l'histoire a été jouée : 0
             <br />
-            Nombre de points moyen par parties : 0
+            Nombre de points perdus en moyenne par partie : 0
             <br />
             Pourcentage de morts : 0 %
         <?php
