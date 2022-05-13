@@ -95,6 +95,7 @@
         <br/>
         <div id="centre">
             <?php 
+            $enCoursDeRédaction=0;
             //affichage du contenu du choix 1 dans un bouton cliquable
             if(!empty($chapter['choice1'])){
                 $requete2 = "SELECT * FROM links WHERE id_story = :id AND Previous_Chapter = :previous_chap AND Previous_Choice = :previous_choice ";
@@ -115,11 +116,18 @@
                 }
                 //si c'est le dernier chapitre
                 else{
-                    ?>
+                    if($chapter['choice1']=="FIN"){
+                        ?>
                         <a id="size-btn" class="btn btn-outline-dark" href="end.php?id=<?= $id?>&failed=0" role="button"><?= $chapter['choice1']?></a>
                         &nbsp;
-                    <?php
-                                        
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <a id="size-btn" class="btn btn-outline-dark" href="#" role="button"><?= $chapter['choice1']?></a>
+                        <?php
+                        $enCoursDeRédaction=1;
+                    }               
                 }
             }
             //affichage du contenu du choix 2 dans un bouton cliquable
@@ -154,6 +162,11 @@
                 <?php 
             }
         ?>
+        </div>
+        <div id="centre">
+        <?php if($enCoursDeRédaction==1){
+            echo "La suite n'existe pas encore ! Vous pourrez poursuivre la lecture quand l'auteur(e) aura fini la rédaction :)";
+        }?>
         </div>
     </div>
 </main>
