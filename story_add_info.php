@@ -18,7 +18,7 @@ if (isset($_SESSION['login'])) {
         //insérer l'histoire à la base de données
         $stmt = $bdd->prepare('INSERT INTO stories
         (title, summary, author, nbChapters, finished, date, hide, nbrPoints)
-        values (?, ?, ?, ?, ?, ?, ?)');
+        values (?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute(array($title, $summary, $author, $nbChapters, $finished, $date, 0, $points));
 
         $req = "SELECT * FROM stories WHERE title=:titre";
