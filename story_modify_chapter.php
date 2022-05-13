@@ -166,23 +166,55 @@
 
                 //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 1 
                 if ($newPoints1 != null) {
-                    $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-                    $stmt = $bdd->prepare($requete9);
+                    $requete91="SELECT * FROM points WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete91);
                     $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+                    if($stmt->rowCount()==1){
+                        $requete9 = "UPDATE points SET points=$newPoints1 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                        $stmt = $bdd->prepare($requete9);
+                        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 1));
+                    }
+                    else{
+                        $requete9 = "INSERT INTO points (points, id_story, chapter, numChoice, death) VALUES (?,?,?,?,?)";
+                        $stmt = $bdd->prepare($requete9);
+                        $stmt->execute(array($newPoints1, $id_story, $newNum, 1, 0));
+                    }
                 }
-
+            
                 //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 2
                 if ($newPoints2 != null) {
-                    $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-                    $stmt = $bdd->prepare($requete10);
-                    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => '2'));
+                    $requete101="SELECT * FROM points WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete101);
+                    $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+                    if($stmt->rowCount()==1){
+                        $requete10 = "UPDATE points SET points=$newPoints2 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                        $stmt = $bdd->prepare($requete10);
+                        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 2));
+                    }
+                    else{
+                        $requete10 = "INSERT INTO points (points, id_story, chapter, numChoice, death) VALUES (?,?,?,?,?)";
+                        $stmt = $bdd->prepare($requete10);
+                        $stmt->execute(array($newPoints2, $id_story, $newNum, 2, 0));
+                    }
+            
                 }
-
+            
                 //cette requête permet de mettre à jour le nombre de points perdus si on effectue le choix 3
                 if ($newPoints3 != null) {
-                    $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
-                    $stmt = $bdd->prepare($requete11);
+                    $requete111="SELECT * FROM points WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                    $stmt = $bdd->prepare($requete111);
                     $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+                    if($stmt->rowCount()==1){
+                        $requete11 = "UPDATE points SET points=$newPoints3 WHERE id_story= :id AND chapter = :chapter AND numChoice= :choice";
+                        $stmt = $bdd->prepare($requete11);
+                        $stmt->execute(array('id' => $id_story, "chapter" => $newNum, "choice" => 3));
+                    }
+                    else{
+                        $requete11 = "INSERT INTO points (points, id_story, chapter, numChoice, death) VALUES (?,?,?,?,?)";
+                        $stmt = $bdd->prepare($requete11);
+                        $stmt->execute(array($newPoints3, $id_story, $newNum, 3, 0));
+                    }
+            
                 }
 
                 //cette requête permet de mettre à jour la valeur de death si on effectue le choix 1
